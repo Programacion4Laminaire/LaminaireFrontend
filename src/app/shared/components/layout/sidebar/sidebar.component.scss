@@ -1,0 +1,231 @@
+.sidebar {
+  background-color: #1d3664;
+  transition: all 0.5s ease;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  width: 5rem;
+  height: 100vh;
+  box-shadow: 0.063rem 0 1.25rem 0 #1a294b;
+  color: #fafdff;
+
+  .logo-container {
+    display: none;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.3s ease;
+
+    .head {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+
+      .logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        line-height: 1.1;
+
+        .logo-line-1 {
+          color: #ffffff;
+          font-size: 2.2rem;
+          font-weight: 700;
+          letter-spacing: 0.5px;
+        }
+
+        .logo-line-2 {
+          color: #ffffff;
+          font-size: 1.2rem;
+          font-weight: 300;
+          letter-spacing: 1px;
+        }
+      }
+    }
+
+    .logo-text {
+      margin-left: 1.5rem;
+      font-size: 24px;
+      font-weight: 700;
+      color: #b8bfd0;
+    }
+  }
+
+  &.sidebar-collapsed {
+    width: 16.5625rem;
+
+    .logo-container {
+      display: flex;
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+.menu-btn {
+  position: absolute;
+  right: -14px;
+  top: 3.5%;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #e0e6f0;
+  border: 2px solid #e0e6f0;
+  background-color: #16264a;
+
+  &:hover i {
+    color: #ffffff;
+  }
+}
+
+.sidebar-nav {
+  list-style: none;
+  padding: 0.938rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+
+  .sidebar-nav-item {
+    width: 100%;
+    margin-bottom: 0.625rem;
+
+    .sidebar-nav-link {
+      display: flex;
+      align-items: center;
+      height: 2.5rem;
+      color: #c0c8d6;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+
+      .sidebar-link-icon {
+        font-size: 18px;
+        width: 2rem;
+        min-width: 2rem;
+        margin: 0 0.5rem;
+        text-align: center;
+        padding-top: 3px;
+      }
+
+      .sidebar-link-text {
+        margin-right: 0.5rem;
+        font-size: 14px;
+      }
+    }
+
+    .sidebar-nav-link:hover {
+      background-color: #2b4a8b;
+      color: #ffffff;
+
+      .menu-collapse-icon {
+        color: #ffffff;
+      }
+    }
+  }
+}
+
+.active {
+  background-color: #2a3e6c;
+
+  .menu-collapse-icon,
+  .sidebar-link-icon,
+  .sidebar-link-text {
+    color: #ffffff;
+  }
+}
+
+.active-sublevel {
+  color: #ffffff !important;
+}
+
+.menu-collapse-icon {
+  font-size: 20px;
+  width: 2rem;
+  min-width: 2rem;
+  margin: auto 0.5rem auto auto;
+  text-align: center;
+  color: #fafdff;
+}
+
+.sublevel-nav {
+  list-style: none;
+  margin-left: 10px;
+  border-left: 1px solid #2c3f66;
+
+  .sublevel-nav-item {
+    .sublevel-nav-link {
+      display: flex;
+      align-items: center;
+      height: 2.5rem;
+      color: #b8bfd0;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+
+      .sublevel-link-icon {
+        font-size: 18px;
+        width: 2rem;
+        min-width: 2rem;
+        margin: 0 0.5rem;
+        text-align: center;
+        padding-top: 5px;
+      }
+
+      .sublevel-link-text {
+        font-size: 14px;
+        margin-left: 0.8rem;
+      }
+
+      &:hover {
+        color: #ffffff;
+      }
+    }
+  }
+}
+
+// scroll handling
+.scrollwrap {
+  overflow-y: auto;
+  visibility: hidden;
+  height: calc(100% - 3.65rem);
+}
+
+.sidebar-nav,
+.scrollwrap:hover,
+.scrollwrap:focus {
+  visibility: visible;
+}
+
+.scrollwrap_delayed {
+  transition: visibility 0.5s 0.2s;
+}
+
+.scrollwrap_delayed:hover {
+  transition: visibility 0.2s 0.2s;
+}
+
+.scrollwrap::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollwrap::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollwrap::-webkit-scrollbar-thumb {
+  background-color: #345188;
+  border-radius: 20px;
+}
+
+.scrollwrap {
+  scrollbar-width: thin;
+  scrollbar-color: #345188 transparent;
+}

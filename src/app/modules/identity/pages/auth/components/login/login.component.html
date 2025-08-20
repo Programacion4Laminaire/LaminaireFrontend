@@ -1,0 +1,88 @@
+<div class="flex min-h-screen w-full">
+  <!-- Columna izquierda: Login -->
+  <div class="w-full md:w-1/2 flex items-center justify-center bg-[#f9fafc]">
+    <div class="w-full max-w-md px-6 py-8 bg-white rounded-xl shadow-lg">
+      <div class="text-center mb-6">
+        <img src="public/logo-SIR.png" class="mx-auto w-40 mb-2" />
+        <p class="text-gray-600 mt-2">Inicia sesión para continuar</p>
+      </div>
+
+
+    <form [formGroup]="form" (ngSubmit)="login()" class="space-y-4">
+
+
+  <!-- EMAIL / USUARIO -->
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Email o Usuario</mat-label>
+    <input matInput placeholder="Ingrese el usuario" formControlName="email" />
+    <mat-icon
+      matSuffix
+      [fontIcon]="icUsername"
+      class="text-am-main-blue-dark"
+    ></mat-icon>
+    <mat-error *ngIf="form.get('email')!.hasError('required')">
+      Campo requerido.
+    </mat-error>
+  </mat-form-field>
+  
+
+  <!-- CONTRASEÑA -->
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Contraseña</mat-label>
+    <input
+      [type]="inputType"
+      placeholder="Ingrese la contraseña"
+      formControlName="password"
+      matInput
+    />
+    <button
+      (click)="toggleVisibility()"
+      mat-icon-button
+      matSuffix
+      matTooltip="{{ !visible ? 'Ver contraseña' : 'Ocultar contraseña' }}"
+      type="button"
+    >
+      <mat-icon *ngIf="visible" [fontIcon]="icVisibility" class="text-am-main-blue-dark pr-2"></mat-icon>
+      <mat-icon *ngIf="!visible" [fontIcon]="icVisibilityOff" class="text-am-main-blue-dark pr-2"></mat-icon>
+    </button>
+    <mat-error *ngIf="form.get('password')!.hasError('required')">
+      Campo requerido.
+    </mat-error>
+  </mat-form-field>
+
+  <!-- resto del formulario igual -->
+  <div class="flex items-center justify-between text-sm text-gray-600">
+    <label class="inline-flex items-center space-x-2">
+      <input type="checkbox" class="accent-am-main-blue-dark" />
+      <span>Recuérdame</span>
+    </label>
+    <a [routerLink]="['/reset-password']" class="hover:underline text-am-main-blue-dark">¿Has olvidado tu contraseña?</a>
+  </div>
+
+  <button
+    type="submit"
+    class="w-full rounded-xl h-11 font-medium text-white bg-am-main-blue-dark hover:bg-am-main-blue transition duration-300"
+  >
+    Iniciar Sesión
+  </button>
+  <app-spinner />
+</form>
+
+    </div>
+  </div>
+
+  <!-- Columna derecha: Imagen completa + texto abajo -->
+  <div class="hidden md:flex w-1/2 relative bg-[#0e0e52] text-white">
+    <!-- Imagen central en toda la columna -->
+    <img src="public/fondosir.png" alt="Imagen decorativa" class="object-cover w-full h-full" />
+
+    <!-- Texto institucional en la parte inferior -->
+    <div class="absolute bottom-0 w-full px-10 pb-10 text-center bg-gradient-to-t from-[#0e0e52]/80 via-transparent to-transparent z-10">
+      <p class="text-lg italic">
+        “SIR Enterprise está diseñado para el presente, preparado para el futuro e inspirado en nuestra gente.”
+      </p>
+      <p class="mt-4 font-semibold text-base">Compromiso con la Excelencia</p>
+      <p class="text-sm">Tecnología al servicio del talento Laminaire</p>
+    </div>
+  </div>
+</div>

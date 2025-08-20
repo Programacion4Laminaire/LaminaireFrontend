@@ -1,0 +1,296 @@
+
+
+/* sir-laminaire.component.scss */
+
+/* ============================== */
+/* 1) Wrapper general y grid     */
+/* ============================== */
+
+/* Wrapper general */
+.sir-laminaire-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+/* Grid responsive de tarjetas */
+.sir-laminaire-grid {
+  margin-top: 2rem;
+  display: grid;
+
+  // 1) que las columnas se ajusten al contenido mínimo
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 1rem;
+
+  // 2) y que el grid empiece siempre desde la izquierda
+  justify-content: start;
+}
+
+/* Responsive: ajustar número de columnas */
+@media (max-width: 1200px) {
+  .sir-laminaire-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (max-width: 992px) {
+  .sir-laminaire-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .sir-laminaire-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 576px) {
+  .sir-laminaire-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ============================== */
+/* 2) Estilos de la tarjeta       */
+/* ============================== */
+
+/* Tarjeta */
+.sir-card {
+  display: flex;
+  flex-direction: column;
+  height: 14rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  will-change: transform, box-shadow; // para optimizar la animación
+}
+
+/* Elevación y sombra al hover */
+.sir-card:hover {
+  transform: translateY(-6px);               // desplaza la tarjeta hacia arriba
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18); // sombra más grande y difusa
+}
+
+/* 1) Header centrado */
+.sir-card-header {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem;
+}
+.sir-card-title {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+/* 2) Icono en zona media, ocupa todo el espacio restante */
+.sir-card-icon {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  
+  line-height: 1;
+
+  // opcionalmente ajustas sólo el mat-icon
+  mat-icon {
+    width: 1em;
+    height: 1em;
+    font-size: 4rem !important;  
+  }
+}
+
+.sir-card-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+  overflow: visible;
+}
+
+/* 3) Footer siempre abajo */
+.sir-card-footer {
+  flex: 0 0 auto;
+  padding: 0.5rem 0.75rem 1rem;
+}
+.sir-ver-mas {
+  width: 100%;
+  background-color: #1d3664;
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 0.25rem;
+}
+
+
+/* ============================== */
+/* 3) Espaciado en diálogo modal   */
+/* ============================== */
+
+.custom-dialog-content {
+  padding-top: 1rem;
+  padding-bottom: 0rem;
+}
+::ng-deep .custom-dialog-panel .mat-dialog-content {
+  padding-top: 4rem !important;
+  padding-bottom: 4rem !important;
+}
+
+
+/* ============================== */
+/* 4) Estilos base Mat-Expansion  */
+/* ============================== */
+
+/* 1) Paneles con borde, sin sombra y bordes redondeados */
+::ng-deep .mat-expansion-panel {
+  border: 1px solid #cccccc;      /* Color y grosor del borde */
+  border-radius: 0.5rem;          /* Redondeo en las esquinas */
+  box-shadow: none;               /* Elimina la sombra por defecto */
+  overflow: hidden;               /* Para que el redondeo funcione */
+  margin: 0;                      /* Opcional: ajusta el espaciado si lo deseas */
+}
+
+/* 2) Separación entre paneles */
+::ng-deep .mat-expansion-panel + .mat-expansion-panel {
+  margin-top: 0 !important;
+}
+
+/* 3) Línea divisoria en el header */
+::ng-deep .mat-expansion-panel-header {
+  border-bottom: 0px solid #cccccc;
+}
+
+/* Quitar redondeo de panels y headers */
+::ng-deep .mat-expansion-panel,
+::ng-deep .mat-expansion-panel-header {
+  border-radius: 0 !important;
+}
+
+/* Si requieren que el contenedor interior (content) tampoco lo tenga: */
+::ng-deep .mat-expansion-panel-content {
+  border-radius: 0 !important;
+}
+
+
+/* ============================== */
+/* 5) Acordeón en hasta 3 columnas */
+/* ============================== */
+
+/* 1) Acordeón en hasta 3 columnas con CSS multicolumn */
+::ng-deep .custom-dialog-content .mat-accordion.accordion-grid {
+  column-count: 3;
+  column-gap: 1rem;
+  column-fill: auto;         /* fuerza rellenar vertical antes de saltar columna */
+}
+
+
+/* 2) Cada panel ocupa toda la anchura de su column */
+::ng-deep .custom-dialog-content .mat-accordion.accordion-grid
+  .mat-expansion-panel {
+  display: inline-block;
+  width: 100%;
+  margin: 0 !important;      /* sin gap vertical */
+  break-inside: avoid;
+  vertical-align: top;       /* para que arranque arriba */
+}
+
+
+/* 3) Responsive: 1 columna en móvil */
+@media (max-width: 600px) {
+  ::ng-deep .custom-dialog-content .mat-accordion.accordion-grid {
+    column-count: 1;
+  }
+}
+
+
+/* ============================== */
+/* 6) (Opcional) Grid fallback    */
+/*    – si usas .accordion-grid    */
+/* ============================== */
+
+.accordion-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+
+  /* Evita el estirado vertical de los items */
+  align-items: start;
+
+  /* Opcional: garantizar que las filas se ajusten al contenido más pequeño */
+  grid-auto-rows: min-content;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============ Acordeón en hasta 3 columnas ============ */
+.accordion-grid {
+  column-count: 3;
+  column-gap: 1rem;
+  column-fill: auto;       // rellena vertical antes de saltar de columna
+}
+
+.accordion-grid .accordion-item {
+  display: inline-block;   // para que cada item se ajuste a su columna
+  width: 100%;
+  margin: 0 0 0.5rem;      // pequeño espacio vertical
+  break-inside: avoid;
+  vertical-align: top;
+}
+
+/* Responsive: 1 columna en móvil */
+@media (max-width: 600px) {
+  .accordion-grid {
+    column-count: 1;
+  }
+}
+
+/* Título de sección */
+.section-title {
+  margin: 1rem 0 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.nav-list-columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);  /* ¡exactamente 3! */
+  gap: 1rem;
+  align-items: start;
+}
+
+
+/* En móvil (o pantallas estrechas) una sola columna */
+@media (max-width: 600px) {
+  .nav-list-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Grid de 3 columnas */
+.nav-button-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+/* Cada columna apila sus botones */
+.button-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.menu-btn {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  text-transform: none;
+  font-weight: 500;
+}
+
+/* grid y columnas como antes */
+.nav-button-grid { display: grid; grid-template-columns: repeat(3,1fr); gap:1rem; }
+
+.button-column { display:flex; flex-direction:column; gap:0.70rem; }
+@media(max-width:600px){ .nav-button-grid{grid-template-columns:1fr} }
+ 

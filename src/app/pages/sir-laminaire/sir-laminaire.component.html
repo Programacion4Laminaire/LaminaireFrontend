@@ -1,0 +1,74 @@
+<!-- sir-laminaire.component.html -->
+
+<div class="sir-laminaire-wrapper">
+  <div class="sir-laminaire-grid">
+    <mat-card
+      *ngFor="let card of cards"
+      class="sir-card"
+      appearance="outlined"
+      (click)="openDialog(card)"
+    >
+      <!-- 1) Header centrado arriba -->
+      <mat-card-header class="sir-card-header">
+        <mat-card-title class="sir-card-title">
+          {{ card.title }}
+        </mat-card-title>
+      </mat-card-header>
+
+      <!-- 2) Icono en la zona media, completamente centrado -->
+      <div class="sir-card-icon">
+        <mat-icon
+          [attr.aria-label]="card.title + ' icon'"
+          aria-hidden="false"
+        >
+          {{ card.icon }}
+        </mat-icon>
+      </div>
+
+      <!-- 3) Footer fijo abajo (opcional 'Ver más') -->
+      <mat-card-actions class="sir-card-footer">
+        <button mat-button class="sir-ver-mas" style="color: white;">Ver Lista</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+<!-- Modal template actualizado a 3 columnas -->
+<ng-template #cardDialog let-data>
+  <h2 mat-dialog-title class="flex items-center space-x-2 text-xl font-medium">
+    <mat-icon>{{ data.icon }}</mat-icon>
+    <span>{{ data.title }}</span>
+  </h2>
+
+  <mat-dialog-content class="custom-dialog-content p-6 pb-8">
+    <ng-container *ngFor="let section of data.menuSections">
+      <h3 class="section-title">{{ section.title }}</h3>
+
+      <div class="nav-button-grid">
+        <ng-container *ngFor="let column of getColumns(section.items, 3)">
+          <div class="button-column">
+            <!-- Sólo llaman a onNavigate, NO tienen mat-dialog-close -->
+            <button
+              mat-flat-button
+              color="primary"
+              class="menu-btn"
+              *ngFor="let item of column"
+              (click)="onNavigate(item.link)"
+            >
+              {{ item.label }}
+            </button>
+          </div>
+        </ng-container>
+      </div>
+
+      <br />
+    </ng-container>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="pr-6 pb-3">
+    <!-- Único botón que cierra el modal -->
+    <button mat-button (click)="closeDialog()">Cerrar</button>
+  </mat-dialog-actions>
+</ng-template>
+
+

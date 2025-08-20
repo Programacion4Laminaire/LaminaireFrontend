@@ -1,0 +1,185 @@
+<div class="bg-am-main-body-custom">
+  <div
+    class="max-w-screen-160 mx-auto h-full flex flex-col px-10 py-6 gap-4 mt-6"
+  >
+    <div class="flex justify-between flex-wrap gap-4">
+      <div class="flex items-center">
+        <mat-icon
+          @scaleIn
+          class="text-2xl text-am-main-blue"
+          fontIcon="manage_accounts"
+        >
+        </mat-icon>
+        <div
+          @fadeInRight
+          class="text-3xl font-medium italic text-am-main-blue-dark ml-2"
+        >
+          Acceso de permisos por rol
+        </div>
+      </div>
+      <div
+        class="flex gap-2 items-center w-full smd:w-fit justify-end flex-wrap"
+      >
+        <div>
+    <button
+      mat-flat-button
+      class="mat-elevation-z2"
+      type="button"
+      (click)="back()"
+    >
+      <mat-icon class="mr-1">arrow_back</mat-icon>
+      Regresar
+    </button>
+        </div>
+      </div>
+    </div>
+    <div class="card h-full rounded-3xl flex-auto">
+      <form class="w-full" [formGroup]="form$">
+      <div class="bg-white rounded-lg p-4 shadow">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+  <!-- Rol -->
+   
+  <mat-form-field appearance="outline" class="w-full" >
+    <mat-label>Rol</mat-label>
+    <input
+      matInput
+      formControlName="name"
+      placeholder="Ingrese rol"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      *ngIf="form$.get('name')?.value"
+      aria-label="Limpiar rol"
+      (click)="form$.get('name')?.setValue('')"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-error *ngIf="form$.get('name')?.invalid && form$.get('name')?.touched">
+      El rol es obligatorio
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Descripción -->
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Descripción</mat-label>
+    <input
+      matInput
+      formControlName="description"
+      placeholder="Ingrese descripción"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      *ngIf="form$.get('description')?.value"
+      aria-label="Limpiar descripción"
+      (click)="form$.get('description')?.setValue('')"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-error *ngIf="form$.get('description')?.invalid && form$.get('description')?.touched">
+      La descripción es obligatoria
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Estado -->
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Estado</mat-label>
+    <mat-select formControlName="state" placeholder="Seleccionar estado">
+      <mat-option *ngFor="let s of states$" [value]="s.code">
+        {{ s.description }}
+      </mat-option>
+    </mat-select>
+    <button
+      mat-icon-button
+      matSuffix
+      *ngIf="form$.get('state')?.value"
+      aria-label="Limpiar estado"
+      (click)="form$.get('state')?.setValue(null)"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-error *ngIf="form$.get('state')?.invalid && form$.get('state')?.touched">
+      Seleccione un estado
+    </mat-error>
+  </mat-form-field>
+</div>
+
+
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pl-8 pt-4">
+            <span class="text-base text-am-main-blue-dark font-normal"
+              >Menú</span
+            >
+            <span
+              class="text-base col-span-2 text-am-main-blue-dark font-normal"
+            >
+              Permisos
+            </span>
+          </div>
+          <div
+            class="grid grid-cols-1 sm:grid-cols-3 gap-3 pl-8 pt-4 w-full hRol overflow-auto"
+          >
+            <div>
+              <div *ngFor="let item of menuPermissions; let i = index">
+                <div class="flex my-3 items-center">
+                  <div
+                    class="bg-am-purple-light rounded-full w-10 h-10 flex items-center justify-center"
+                  >
+                    <mat-icon
+                      class="text-am-main-blue-dark"
+                      [fontIcon]="item.icon"
+                    ></mat-icon>
+                  </div>
+                  <div
+                    [class]="
+                      indexMenu == i
+                        ? 'text-am-main-blue-dark font-bold'
+                        : 'text-am-grey-medium font-normal'
+                    "
+                    class="text-sm ml-4 hover:text-am-main-blue-dark cursor-pointer"
+                    (click)="setIndexMenu(i)"
+                  >
+                    {{ item.menu }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-span-2 w-full">
+              <div *ngFor="let option of permissions; let j = index">
+                <div class="w-full">
+                  <app-checkbox
+                    [label]="option.permissionName"
+                    [cssLabel]="['text-sm', 'text-am-bl-dark', 'font-bold']"
+                    [sublabel]="option.permissionDescription"
+                    [positionEnd]="true"
+                    [key]="j"
+                    [check]="option.selected"
+                    (checked)="optionChecked(option)"
+                  />
+                </div>
+              </div>
+            </div>
+            <app-spinner />
+          </div>
+          <div class="flex justify-end">
+<button
+  mat-flat-button
+  color="accent"
+  class="mat-elevation-z2"
+  (click)="roleSave()"
+>
+  <mat-icon>save</mat-icon>
+  Guardar
+</button>
+
+
+
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

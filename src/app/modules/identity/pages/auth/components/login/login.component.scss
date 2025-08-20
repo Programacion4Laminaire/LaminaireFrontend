@@ -1,0 +1,84 @@
+// Fondo general del login
+:host {
+  display: block;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9fafc;
+}
+
+// Imagen institucional animada (Wave.svg)
+.bg-institutional {
+  position: relative;
+  background: linear-gradient(135deg, #007aff, #3b0b82, #0e0e52);
+  color: white;
+  overflow: hidden;
+
+  img.bg-wave {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.1;
+    z-index: 0;
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// Estilo del formulario
+.mat-form-field {
+  font-family: 'Poppins', sans-serif;
+}
+
+// Estilo del botón de login
+button[type='submit'] {
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  &:hover {
+    filter: brightness(1.1);
+  }
+}
+
+// Estilo de íconos dentro del campo
+::ng-deep .mat-icon {
+  font-size: 20px;
+  color: #004a89 !important;
+}
+
+::ng-deep button[mat-icon-button][matSuffix] {
+  padding-right: 12px !important;
+}
+
+
+// Animación de entrada (opcional)
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-card {
+  animation: fadeIn 0.8s ease-out;
+}
+
+  ::ng-deep .mdc-text-field--outlined .mdc-notched-outline .mdc-notched-outline__leading {
+    border-top-left-radius: var(--mat-shape-small, 15px) !important;
+    border-bottom-left-radius: var(--mat-shape-small, 15px) !important;
+  }
+  
+  ::ng-deep .mdc-text-field--outlined .mdc-notched-outline .mdc-notched-outline__trailing {
+    border-top-right-radius: var(--mat-shape-small, 15px) !important;
+    border-bottom-right-radius: var(--mat-shape-small, 15px) !important;
+  }
+

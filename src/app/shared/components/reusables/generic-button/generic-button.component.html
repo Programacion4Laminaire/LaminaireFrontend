@@ -1,0 +1,8 @@
+<button
+  class="flex items-center justify-center gap-2 rounded-lg h-9 px-3 border border-am-main-blue text-am-main-blue hover:bg-am-main-blue hover:text-white transition duration-200 text-sm"
+  [matTooltip]="infoButton.tooltip"
+  (click)="clickButton.emit()"
+>
+  <mat-icon class="text-inherit text-base">{{ infoButton.icon }}</mat-icon>
+  <span>{{ infoButton.label }}</span>
+</button>

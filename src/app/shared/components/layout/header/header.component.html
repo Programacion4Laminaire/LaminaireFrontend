@@ -1,0 +1,31 @@
+<div class="head" [ngClass]="getHeadClass()">
+  <div class="head-content">
+    <div class="head-content-left">
+      <div class="search-container"></div>
+    </div>
+    <div class="head-content-right">
+      <div class="head-user-avatar-container">
+        <div class="head-user-avatar" [cdkMenuTriggerFor]="userOverlay">
+          <img src="public/default-user.png" alt="user" class="user-avatar" />
+          <div class="circle-indicator pulse"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #userOverlay>
+  <div class="overlay overlay-user overlay-fall" cdkMenu>
+    <ul>     
+    
+ 
+      <!-- Botón fijo: Cerrar sesión -->
+      <li cdkMenuItem (click)="logout()">
+        <a>
+          <i class="icon fa fa-sign-out-alt text-red-600"></i>
+          <span class="text-red-600">Cerrar sesión</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</ng-template>

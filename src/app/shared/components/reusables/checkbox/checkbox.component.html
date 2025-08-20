@@ -1,0 +1,21 @@
+<div
+  *ngIf="isLoading && check"
+  class="animate-pulse bg-am-grey-light h-13 rounded mt-1"
+></div>
+<div
+  *ngIf="!isLoading"
+  class="flex items-center p-4 rounded my-1 w-full h-fit"
+  [ngClass]="classSelect"
+  (click)="changeStatus()"
+>
+  <mat-icon
+    [fontIcon]="icon"
+    [ngClass]="classIcon"
+    class="mr-2 flex-none"
+    [class]="positionEnd ? 'order-last' : ''"
+  ></mat-icon>
+  <div class="flex flex-col flex-1">
+    <span [ngClass]="cssLabel">{{ label }}</span>
+    <span *ngIf="sublabel" [ngClass]="cssSublabel">{{ sublabel }}</span>
+  </div>
+</div>

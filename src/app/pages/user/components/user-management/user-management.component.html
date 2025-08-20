@@ -1,0 +1,139 @@
+<!-- Spinner -->
+<ngx-spinner *ngIf="loading" [fullScreen]="true"
+             bdColor="rgba(70,84,153,0.3)" size="medium"
+             name="carga" color="#ffffff" type="ball-atom">
+</ngx-spinner>
+
+<!-- Título -->
+<h2 mat-dialog-title>
+  <strong class="text-am-main-blue-dark">
+    {{ mode === 'create' ? 'Nuevo usuario' : 'Actualizar usuario' }}
+  </strong>
+</h2>
+
+<!-- Contenido -->
+<mat-dialog-content class="dialog-body">
+  <form [formGroup]="user" enctype="multipart/form-data" class="form-container">
+    
+   <!-- 📷 Imagen -->
+<div class="profile-column">
+  <div class="image-container">
+    <img [src]="imagePreview"
+         (error)="setDefaultImage($event)"
+         alt="Imagen de perfil"
+         class="preview-img" />
+
+    <div class="icon-button-overlay">
+      <input #fileInput type="file"
+             (change)="onFileSelected($event)"
+             accept="image/*"
+             hidden />
+      <button mat-mini-fab color="primary" type="button"
+              (click)="fileInput.click()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+    <!-- 🧾 Campos -->
+    <div class="fields-column">
+      <div class="form-fields">
+        <mat-form-field appearance="outline">
+          <mat-label>Identificación</mat-label>
+          <input matInput formControlName="identification" />
+          <mat-error *ngIf="user.get('identification')?.hasError('required')">
+            Campo requerido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha de nacimiento</mat-label>
+          <input matInput type="date" formControlName="birthDate" />
+          <mat-error *ngIf="user.get('birthDate')?.hasError('required')">
+            Campo requerido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nombres</mat-label>
+          <input matInput formControlName="firstName" />
+          <mat-error *ngIf="user.get('firstName')?.hasError('required')">
+            Campo requerido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Apellidos</mat-label>
+          <input matInput formControlName="lastName" />
+          <mat-error *ngIf="user.get('lastName')?.hasError('required')">
+            Campo requerido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Usuario</mat-label>
+          <input matInput formControlName="userName" />
+          <mat-error *ngIf="user.get('userName')?.hasError('required')">
+            Campo requerido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" />
+          <mat-error *ngIf="user.get('email')?.hasError('required')">
+            Campo requerido
+          </mat-error>
+          <mat-error *ngIf="user.get('email')?.hasError('email')">
+            Formato inválido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <input matInput
+                 [type]="inputType"
+                 formControlName="password"
+                 [disabled]="passwordDisabled"
+                 [placeholder]="mode === 'update' ? 'Dejar en blanco si no desea cambiarla' : ''"
+                 autocomplete="new-password"
+                 autocorrect="off"
+                 autocapitalize="off"
+                 spellcheck="false" />
+          <button mat-icon-button matSuffix type="button"
+                  (click)="toggleVisibility()"
+                  matTooltip="{{ visible ? 'Ocultar contraseña' : 'Ver contraseña' }}">
+            <mat-icon class="icon-sm">{{ visible ? icVisibilityOff : icVisibility }}</mat-icon>
+          </button>
+          <mat-hint *ngIf="mode === 'update'">Dejar vacío si no desea cambiar la contraseña</mat-hint>
+          <mat-error *ngIf="user.get('password')?.hasError('required')">
+            Campo requerido
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Estado</mat-label>
+          <mat-select formControlName="state">
+            <mat-option *ngFor="let s of states" [value]="s.id">
+              {{ s.label }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="user.get('state')?.hasError('required')">
+            Campo requerido
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<!-- Botones -->
+<mat-dialog-actions align="end" style="padding: 0 32px 24px;">
+  <button mat-stroked-button mat-dialog-close>Cancelar</button>
+  <button mat-flat-button color="primary"
+          [disabled]="loading"
+          (click)="save()">Guardar</button>
+</mat-dialog-actions>
