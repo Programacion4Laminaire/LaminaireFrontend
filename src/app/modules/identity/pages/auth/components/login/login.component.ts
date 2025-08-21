@@ -21,7 +21,7 @@ import { SpinnerComponent } from '@shared/components/reusables/spinner/spinner.c
 import { BaseApiResponse } from '@shared/models/commons/base-api-response.interface';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from '../../services/auth.service';
-import { AlertService } from '@app/shared/services/alert.service';
+import { AlertService } from '@app/modules/core/services/alert.service';
 
 import { MatSelectModule } from "@angular/material/select";
 

@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment as env } from '@env/environment';
 import { map, Observable } from 'rxjs';
-import { BaseApiResponse } from '../models/commons/base-api-response.interface';
-import { SelectResponse } from '../models/core/selects-response.interface';
-import { endpoint } from '../utils/endpoints.util';
+import { BaseApiResponse } from '@app/shared/models/commons/base-api-response.interface';
+import { SelectResponse } from '@app/shared/models/core/selects-response.interface';
+import { endpoint } from '@app/shared/utils/endpoints.util';
 
 @Injectable({
   providedIn: 'root',

@@ -22,14 +22,14 @@ import { GsSelectComponent } from '@app/shared/components/reusables/form-inputs/
 
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { UserRoleService } from '../../services/user-role.service';
-import { AlertService } from '@app/shared/services/alert.service';
+import { AlertService } from '@app/modules/core/services/alert.service';
 import { statesSelect } from '@app/shared/utils/global-constants.util';
 import {
   UserRoleCreateRequest,
   UserRoleUpdateRequest,
 } from '../../models/user-role-request.interface';
 import { SelectResponse } from '@app/shared/models/core/selects-response.interface';
-import { SelectsService } from '@app/shared/services/selects.service';
+import { SelectsService } from '@app/modules/core/services/selects.service';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core'; // este también es clave
 @Component({

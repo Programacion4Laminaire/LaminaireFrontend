@@ -22,7 +22,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDividerModule } from '@angular/material/divider';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
-import { AlertService } from '@app/shared/services/alert.service';
+import { AlertService } from '@app/modules/core/services/alert.service';
 import { statesSelect } from '@app/shared/utils/global-constants.util';
 import { UserService } from '../../services/user.service';
 import { BaseApiResponse } from '@app/shared/models/commons/base-api-response.interface';

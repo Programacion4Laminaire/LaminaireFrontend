@@ -41,7 +41,7 @@ import {
   TableFooter,
 } from '@shared/models/reusables/list-table.interface';
 import { HourFormatPipe } from '@shared/pipes/hour-format.pipe';
-import { DefaultService } from '@shared/services/default.service';
+import { DefaultService } from '@app/modules/core/services/default.service';
 import { getEsPaginatorIntl } from '@shared/utils/es-paginator-intl.util';
 
 @Component({

@@ -10,7 +10,7 @@ import { NgxSpinnerService }  from 'ngx-spinner';
 
 import { AuthService } from '../../services/auth.service';
 import { ResetPasswordByIdentityRequest } from '../../models/reset-password.interface';
-import { AlertService }   from '@app/shared/services/alert.service';
+import { AlertService } from '@app/modules/core/services/alert.service';
 import { SpinnerComponent } from '@shared/components/reusables/spinner/spinner.component';
 
 @Component({

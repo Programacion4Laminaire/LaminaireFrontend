@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { catchError, from, switchMap, throwError } from 'rxjs';
 import { AuthService } from '@app/modules/identity/pages/auth/services/auth.service';
 import { AlertService } from '../services/alert.service';
-import { errorMessages } from '../utils/global-constants.util';
+import { errorMessages } from '@app/shared/utils/global-constants.util';
 import Swal from 'sweetalert2';
 
 export const apiInterceptor: HttpInterceptorFn = (req, next) => {

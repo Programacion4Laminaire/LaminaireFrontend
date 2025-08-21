@@ -23,7 +23,7 @@ import { GsSelectComponent } from '@app/shared/components/reusables/form-inputs/
 import { GsTextComponent } from '@app/shared/components/reusables/form-inputs/simple/gs-text/gs-text.component';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { RoleService } from '../../services/role.service';
-import { AlertService } from '@app/shared/services/alert.service';
+import { AlertService } from '@app/modules/core/services/alert.service';
 import { statesSelect } from '@app/shared/utils/global-constants.util';
 import {
   RoleCreateRequest,

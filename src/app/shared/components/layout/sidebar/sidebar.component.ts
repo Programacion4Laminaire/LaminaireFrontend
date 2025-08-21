@@ -9,7 +9,7 @@ import {
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { MenuResponse } from '@app/shared/models/layout/menu.interface';
-import { MenuService } from '@app/shared/services/menu.service';
+import { MenuService } from '@app/modules/core/services/menu.service';
 import { fadeInOutAnimation } from '@shared/animations/fade-in-out.animation';
 import { INavbarData } from '@shared/models/layout/navbar-data.interface';
 import { ISidebarToggle } from '@shared/models/layout/sidebar-toggle.interface';

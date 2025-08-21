@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BaseApiResponse } from '@app/shared/models/commons/base-api-response.interface';
-import { AlertService } from '@app/shared/services/alert.service';
+import { AlertService } from '@app/modules/core/services/alert.service';
 import { endpoint } from '@app/shared/utils/endpoints.util';
 import { getIcon, getStateBadge } from '@app/shared/utils/functions.util';
 import { environment as env } from '@env/environment.development';

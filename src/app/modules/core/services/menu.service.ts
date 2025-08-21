@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment as env } from '../../../environments/environment';
-import { BaseApiResponse } from '../models/commons/base-api-response.interface';
-import { endpoint } from '../utils/endpoints.util';
-import { MenuResponse } from '../models/layout/menu.interface';
+import { environment as env } from '@env/environment';
+import { BaseApiResponse } from '@app/shared/models/commons/base-api-response.interface';
+import { endpoint } from '@app/shared/utils/endpoints.util';
+import { MenuResponse } from '@app/shared/models/layout/menu.interface';
 
 @Injectable({
   providedIn: 'root',

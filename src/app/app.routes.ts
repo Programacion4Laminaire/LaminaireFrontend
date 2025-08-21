@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
-import { LayoutComponent } from './modules/core/layout/layout.component';
-import { authGuard } from './shared/guards/auth.guard';
+import { LayoutComponent } from '@app/shared/layout/layout.component';
+import { authGuard } from './modules/core/guards/auth.guard';
 import { RoleManagementComponent } from './modules/identity/pages/role/components/role-management/role-management.component';
+import { from } from 'rxjs';
 
 const childrenRoutes: Routes = [
   {

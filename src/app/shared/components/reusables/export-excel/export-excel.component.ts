@@ -1,7 +1,7 @@
 import { Component, Input, inject } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
-import { DownloadXslxService } from '@shared/services/download-xslx.service';
+import { DownloadXslxService } from '@app/modules/core/services/download-xslx.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 
