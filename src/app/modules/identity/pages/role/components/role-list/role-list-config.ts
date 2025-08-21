@@ -8,8 +8,7 @@ import {
     SPLIT_BUTTON_ACTIONS,
     STATUS
 } from '@app/shared/utils/global-constants.util';
-import { RoleResponse } from '../models/role-response.interface';
-
+import { RoleResponse } from '../../models/role-response.interface';
 const tableColumns: TableColumns<RoleResponse>[] = [
 
   {

@@ -16,6 +16,7 @@ import { Actions } from '@app/shared/models/reusables/split-button.interface';
 import Swal from 'sweetalert2';
 import { RoleResponse } from '../../models/role-response.interface';
 import { RoleService } from '../../services/role.service';
+
 import { componentRoleSetting } from './role-list-config';
 
 @Component({
