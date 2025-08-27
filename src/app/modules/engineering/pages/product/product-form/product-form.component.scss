@@ -1,0 +1,29 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.grid-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.actions {
+  grid-column: span 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+
+  ::ng-deep .mdc-text-field--outlined .mdc-notched-outline .mdc-notched-outline__leading {
+    border-top-left-radius: var(--mat-shape-small, 15px) !important;
+    border-bottom-left-radius: var(--mat-shape-small, 15px) !important;
+  }
+  
+  ::ng-deep .mdc-text-field--outlined .mdc-notched-outline .mdc-notched-outline__trailing {
+    border-top-right-radius: var(--mat-shape-small, 15px) !important;
+    border-bottom-right-radius: var(--mat-shape-small, 15px) !important;
+  }

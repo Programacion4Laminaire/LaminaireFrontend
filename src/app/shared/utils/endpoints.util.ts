@@ -20,6 +20,7 @@ export const endpoint = {
   ROLE_UPDATE: 'Role/Update',
   ROLE_DELETE: 'Role/Delete/',
   PERMISSION_BY_ROLE_ID: "Permission/PermissionByRoleId/",
+  USER_WITH_ROLE_AND_PERMISSIONS: 'User/UserWithRoleAndPermissions/',
 
   LIST_USER_ROLE: 'UserRole',
   USER_ROLE_BY_ID: 'UserRole/',

@@ -32,4 +32,16 @@ export interface UserByIdResponse {
   profileImagePath: string;      // ruta para previsualizar imagen
   state: string;
 }
-
+export interface UserWithRoleAndPermissionsResponse {
+  userId: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  userName: string;
+  profileImagePath: string;
+  role: {
+    roleId: number;
+    name: string;
+    description: string;
+  };
+}

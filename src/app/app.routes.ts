@@ -1,10 +1,13 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from '@app/shared/layout/layout.component';
 import { authGuard } from './modules/core/guards/auth.guard';
-import { RoleManagementComponent } from './modules/identity/pages/role/components/role-management/role-management.component';
-import { from } from 'rxjs';
 
 const childrenRoutes: Routes = [
+  {
+    path: 'home',
+    loadComponent: () =>
+      import('./pages/home/home.component').then((c) => c.HomeComponent),
+  },
   {
     path: 'users',
     loadComponent: () =>
@@ -40,7 +43,6 @@ const childrenRoutes: Routes = [
         './modules/identity/pages/user-role/components/user-role-list/user-role-list.component'
       ).then((c) => c.UserRoleListComponent),
   },
-      // Ruta para Sirlaminaire
   {
     path: 'sir-laminaire',
     loadComponent: () =>
@@ -48,13 +50,19 @@ const childrenRoutes: Routes = [
         (c) => c.SirLaminaireComponent
       ),
   },
-
+  {
+    path: 'product',
+    loadComponent: () =>
+      import('./modules/engineering/pages/product/product-form/product-form.component').then(
+        (c) => c.ProductFormComponent
+      ),
+  },
 ];
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'home', // 👈 ahora home es la ruta inicial
     pathMatch: 'full',
   },
   {

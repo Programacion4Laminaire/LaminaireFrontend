@@ -325,4 +325,13 @@
     transition: background 0s;
   }
   
-  
+  .icon-fix {
+  font-size: 20px !important;   /* tamaño controlado */
+  width: 20px !important;       /* ancho fijo */
+  height: 20px !important;      /* alto fijo */
+  line-height: 20px !important; /* centra vertical */
+  overflow: visible !important; /* evita que se recorte */
+  display: inline-flex;         /* corrige el box-model */
+  align-items: center;
+  justify-content: center;
+}

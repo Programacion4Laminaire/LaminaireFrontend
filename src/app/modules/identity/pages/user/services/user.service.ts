@@ -13,6 +13,7 @@ import {
 import {
   UserByIdResponse,
   UserResponse,
+  UserWithRoleAndPermissionsResponse,
 } from '../models/user-response.interface';
 
 @Injectable({
@@ -99,6 +100,13 @@ export class UserService {
       })
     );
   }
+  
+userWithRoleAndPermissions(userId: number): Observable<UserWithRoleAndPermissionsResponse> {
+  const requestUrl = `${env.apiIdentity}${endpoint.USER_WITH_ROLE_AND_PERMISSIONS}${userId}`;
+  return this.httpClient
+    .get<BaseApiResponse<UserWithRoleAndPermissionsResponse>>(requestUrl)
+    .pipe(map((resp) => resp.data));
+}
 
 
 

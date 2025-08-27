@@ -1,0 +1,128 @@
+<div class="h-screen flex flex-col px-6 py-8 gap-4 overflow-hidden">
+  <!-- Header -->
+  <div class="bg-white rounded-2xl shadow-xl p-6 flex flex-col gap-2">
+    <div class="flex items-center">
+      <mat-icon class="text-xl text-am-main-blue-dark mb-1">inventory</mat-icon>
+      <div class="ml-2 text-xl font-semibold italic text-am-main-blue-dark">
+        Gestión de Productos
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulario -->
+  <div class="bg-white rounded-2xl shadow-xl p-6 flex flex-col gap-2">
+    <form [formGroup]="form" class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
+
+      <!-- Código con autocomplete -->
+      <mat-form-field appearance="outline">
+        <mat-label>Código</mat-label>
+        <input 
+          type="text"
+          matInput
+          formControlName="code"
+          [matAutocomplete]="autoCode"
+          (keyup.enter)="onSelectProduct(form.get('code')?.value)">
+        
+        <button 
+          mat-icon-button 
+          matSuffix 
+          type="button" 
+          (click)="onSelectProduct(form.get('code')?.value)">
+          <mat-icon>search</mat-icon>
+        </button>
+
+        <mat-autocomplete #autoCode="matAutocomplete" (optionSelected)="onSelectProduct($event.option.value)">
+          <mat-option *ngFor="let option of filteredCodes$ | async" [value]="option.code">
+            {{ option.code }} - {{ option.description }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <!-- Nombre con autocomplete -->
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre Producto</mat-label>
+        <input 
+          type="text"
+          matInput
+          formControlName="productName"
+          [matAutocomplete]="autoName"
+          (keyup.enter)="onSelectProduct(form.get('code')?.value)">
+        <mat-autocomplete #autoName="matAutocomplete" autoActiveFirstOption>
+          <mat-option 
+            *ngFor="let option of filteredNames$ | async" 
+            [value]="option.description"
+            (onSelectionChange)="onSelectProduct(option.code)">
+            {{ option.description }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <!-- Sublinea (Editable) -->
+      <mat-form-field appearance="outline" class="editable-field">
+        <mat-label>Código Sublinea</mat-label>
+        <input matInput formControlName="sublineCode">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre Sublinea</mat-label>
+        <input matInput formControlName="sublineName" readonly>
+      </mat-form-field>
+
+      <!-- Costo (Editable) -->
+      <mat-form-field appearance="outline" class="editable-field">
+        <mat-label>Costo</mat-label>
+        <input matInput formControlName="cost" type="number" step="0.01">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Tasa de cambio</mat-label>
+        <input matInput formControlName="exchangeRate" readonly>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Margen</mat-label>
+        <input matInput formControlName="margin" readonly>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Precio Venta COP</mat-label>
+        <input matInput formControlName="salePriceCop" readonly>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Precio Venta USD</mat-label>
+        <input matInput formControlName="salePriceUsd" readonly>
+      </mat-form-field>
+
+      <!-- Multiplicador (Editable) -->
+      <mat-form-field appearance="outline" class="editable-field">
+        <mat-label>Multiplicador</mat-label>
+        <input matInput formControlName="multiplier">
+      </mat-form-field>
+
+      <!-- Multiplicador Distribuidor (Editable) -->
+      <mat-form-field appearance="outline" class="editable-field">
+        <mat-label>Multiplicador Distribuidor</mat-label>
+        <input matInput formControlName="distributorMultiplier">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Precio Base USD</mat-label>
+        <input matInput formControlName="basePriceUsd" readonly>
+      </mat-form-field>
+    </form>
+
+    <!-- Botones de acción -->
+    <div class="flex justify-end mt-4 gap-2">
+      <button mat-raised-button color="warn" type="button" (click)="clearForm()">
+        <mat-icon>clear</mat-icon>
+        Limpiar
+      </button>
+
+      <button mat-raised-button color="primary" type="button" (click)="save()">
+        <mat-icon>save</mat-icon>
+        Guardar
+      </button>
+    </div>
+  </div>
+</div>
