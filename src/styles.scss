@@ -18,8 +18,11 @@ body {
 }
 
 html, body {
-  overflow-y: hidden;
+  overflow-y: auto; /* 🔹 permite scroll vertical */
+  height: 100%;
+    background: #edeaf7;
 }
+
 
 .mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field
   .mdc-notched-outline__notch {
@@ -79,3 +82,7 @@ select {
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+/* Fuerza el modal de SweetAlert2 a estar por encima de cualquier overlay/spinner */
+.swal2-container {
+  z-index: 200000 !important;
+}

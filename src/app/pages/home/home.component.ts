@@ -24,26 +24,22 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     const userId = this.authService.getUserIdFromToken();
     if (userId) {
-      this.userService.userWithRoleAndPermissions(userId).subscribe((user: UserWithRoleAndPermissionsResponse) => {
-        this.fullName = `${user.firstName} ${user.lastName}`;
-        this.role = user.role?.name ?? '';
+      this.userService
+        .userWithRoleAndPermissions(userId)
+        .subscribe((user: UserWithRoleAndPermissionsResponse) => {
+          this.fullName = `${user.firstName} ${user.lastName}`;
+          this.role = user.role?.name ?? '';
 
-        this.welcomeMessage = this.buildWelcomeMessage(this.role);
-        this.greeting = this.getGreetingMessage(user.userId);
-      });
+          // Mensaje genérico
+          this.welcomeMessage = this.buildWelcomeMessage();
+          this.greeting = this.getGreetingMessage(user.userId);
+        });
     }
   }
 
-private buildWelcomeMessage(role: string): string {
-  const roleLower = role.toLowerCase();
-
-  if (roleLower === 'administrador') {
-    return 'Tienes acceso total: puedes gestionar todos los módulos del sistema.';
+  private buildWelcomeMessage(): string {
+    return `Desde aquí puedes gestionar tus módulos y colaborar en el funcionamiento del Sistema.`;
   }
-
-  // Para cualquier otro rol
-  return `Desde aquí puedes gestionar tu módulo asignado y colaborar en el funcionamiento de ${this.companyName}.`;
-}
 
   private getGreetingMessage(userId: number): string {
     const userKey = `hasVisitedHome_${userId}`;

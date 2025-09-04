@@ -4,5 +4,6 @@ export interface ProductUpdateRequest {
   cost: number;
   multiplier: number;
   distributorMultiplier: number;
-  //basePriceUsd: number;
+  margin: number;
+  basePriceUsd: number;
 }

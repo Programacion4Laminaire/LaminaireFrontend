@@ -9,7 +9,9 @@
       <h2 class="text-4xl font-extrabold text-am-main-blue-dark tracking-widest">
         S I R
       </h2>
-      <p class="text-gray-600 text-lg -mt-1 text-am-main-blue-dark">Enterprise</p>
+      <p class="text-gray-600 text-lg -mt-1 text-am-main-blue-dark">
+        Enterprise
+      </p>
     </div>
 
     <!-- Título principal -->
@@ -25,16 +27,10 @@
       {{ fullName }}
     </p>
 
-    <!-- Rol y empresa -->
+    <!-- Empresa -->
     <p class="text-gray-700 text-lg mb-2">
-      Eres un
-      <strong class="text-am-main-blue-dark">{{ role }}</strong>
-      <ng-container *ngIf="role.toLowerCase() === 'administrador'">
-        del <strong class="text-am-main-blue-dark">Sistema</strong>.
-      </ng-container>
-      <ng-container *ngIf="role.toLowerCase() !== 'administrador'">
-        en <strong class="text-am-main-blue-dark">{{ companyName }}</strong>.
-      </ng-container>
+      Empleado de la empresa
+      <strong class="text-am-main-blue-dark">{{ companyName }}</strong>.
     </p>
 
     <!-- Mensaje dinámico -->

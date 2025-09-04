@@ -46,4 +46,18 @@ export class AlertService {
       draggable: true
     });
   }
+
+  info(title: string, message: string) {
+    Swal.fire({
+      title: title,
+      text: message,
+      icon: 'info',
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#0258AF',
+      background: '#ffffff',
+      color: '#1f2937',
+      width: 430,
+      draggable: true
+    });
+  }
 }

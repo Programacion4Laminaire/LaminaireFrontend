@@ -27,6 +27,7 @@ import { statesSelect } from '@app/shared/utils/global-constants.util';
 import { UserService } from '../../services/user.service';
 import { BaseApiResponse } from '@app/shared/models/commons/base-api-response.interface';
 import { environment } from '@env/environment';
+
 @Component({
   standalone: true,
   selector: 'app-user-management',
@@ -38,7 +39,8 @@ import { environment } from '@env/environment';
     MatSelectModule, MatButtonModule, MatIconModule,
     MatTooltipModule, MatDividerModule,
     NgxSpinnerModule,
-  ],
+
+],
 
 })
 export class UserManagementComponent {
@@ -219,6 +221,13 @@ formData.forEach((value, key) => {
   });
 }
 
+toUpperCaseControl(controlName: string, event: Event) {
+  const input = event.target as HTMLInputElement;
+  const control = this.user.get(controlName);
+  if (control) {
+    control.setValue(input.value.toUpperCase(), { emitEvent: false });
+  }
+}
 
 
 }

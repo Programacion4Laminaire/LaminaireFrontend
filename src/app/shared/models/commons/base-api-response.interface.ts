@@ -5,5 +5,6 @@ export interface BaseApiResponse<T> {
   totalRecords: number;
   errors: any;
   accessToken: string;
-  refreshToken: string
+  refreshToken: string;
+  cookieDatos: string;
 }

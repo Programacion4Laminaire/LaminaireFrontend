@@ -1,0 +1,151 @@
+/* ===============================
+   Layout principal
+==================================*/
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row; /* 👉 imagen izquierda + formulario derecha */
+    align-items: flex-start;
+  }
+}
+
+/* ===============================
+   Panel izquierdo (avatar + resumen)
+==================================*/
+.w-72 {
+  flex-shrink: 0;
+}
+
+/* Avatar */
+.image-container {
+  position: relative; /* Muy importante */
+  display: inline-block;
+
+  img {
+    width: 144px;   /* w-36 */
+    height: 144px;  /* h-36 */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #e5e7eb;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    display: block;
+  }
+
+  .avatar-btn {
+    position: absolute;
+    bottom: 4px;   /* pegado abajo */
+    right: 4px;    /* pegado a la derecha */
+    background: #fff;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+
+    mat-icon {
+      font-size: 20px;
+      color: #6b7280;
+    }
+
+    &:hover {
+      background: #f9fafb;
+    }
+  }
+}
+
+
+/* Botón sobre la foto */
+.avatar-btn {
+  position: absolute;
+  bottom: -0.25rem; /* -1 */
+  right: -0.25rem;  /* -1 */
+  background: #fff;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: background 0.2s;
+
+  &:hover {
+    background: #f9fafb; /* gris suave al hover */
+  }
+
+  mat-icon {
+    color: #6b7280; /* gris medio */
+    font-size: 1.5rem; /* text-2xl */
+  }
+}
+
+/* Resumen debajo del avatar */
+.profile-summary {
+  text-align: center;
+
+  @media (min-width: 768px) {
+    text-align: left;
+  }
+
+  .name {
+    font-weight: 600;
+    font-size: 1.125rem; /* text-lg */
+  }
+
+  .email {
+    color: #6b7280; /* text-gray-500 */
+    font-size: 0.875rem;
+  }
+}
+
+/* Tips debajo del avatar */
+.profile-tips {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background-color: #f9fafb; /* bg-gray-50 */
+  font-size: 0.75rem; /* text-xs */
+  line-height: 1.25rem;
+  color: #4b5563; /* text-gray-600 */
+}
+
+/* ===============================
+   Panel derecho (formulario)
+==================================*/
+.form-panel {
+  flex: 1;
+  width: 100%;
+}
+
+/* Secciones del formulario */
+.section-title {
+  font-size: 0.875rem;       /* text-sm */
+  font-weight: 600;          /* font-semibold */
+  color: #6b7280;            /* text-gray-500 */
+  text-transform: uppercase; /* uppercase */
+  letter-spacing: 0.05em;    /* tracking-wide */
+  margin-bottom: 0.5rem;     /* mb-2 */
+}
+
+/* ===============================
+   Ajustes Material Angular
+==================================*/
+::ng-deep .mdc-text-field--outlined .mdc-notched-outline .mdc-notched-outline__leading {
+  border-top-left-radius: var(--mat-shape-small, 15px) !important;
+  border-bottom-left-radius: var(--mat-shape-small, 15px) !important;
+}
+
+::ng-deep .mdc-text-field--outlined .mdc-notched-outline .mdc-notched-outline__trailing {
+  border-top-right-radius: var(--mat-shape-small, 15px) !important;
+  border-bottom-right-radius: var(--mat-shape-small, 15px) !important;
+}
+

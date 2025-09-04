@@ -4,7 +4,6 @@
 
     <div class="head-content-right">
       <div class="head-user-avatar-container flex items-center gap-3">
-
         <!-- Nombre + rol -->
         <div class="text-right text-sm leading-tight hidden md:block">
           <div class="font-semibold">
@@ -16,14 +15,20 @@
         </div>
 
         <!-- Avatar -->
-        <div class="head-user-avatar" [cdkMenuTriggerFor]="userOverlay">
-          <img 
-            [src]="userImage"
-            alt="user"
-            class="user-avatar"
-            (error)="userImage = 'public/default-user.png'" />
-          <div class="circle-indicator pulse"></div>
-        </div>
+        <!-- Avatar -->
+<div
+  class="head-user-avatar"
+  [cdkMenuTriggerFor]="userOverlay"
+>
+  <img
+    [src]="userImage"
+    alt="user"
+    class="user-avatar"
+    (error)="userImage = 'public/default-user.png'"
+  />
+  <div class="circle-indicator pulse"></div>
+</div>
+
       </div>
     </div>
   </div>
@@ -32,14 +37,23 @@
 <ng-template #userOverlay>
   <div class="overlay overlay-user overlay-fall" cdkMenu>
     <ul class="min-w-[200px] py-1">
+      <!-- Perfil -->
       <li>
-        <button class="flex w-full items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 whitespace-nowrap">
+        <button
+          (click)="goToProfile()"
+          class="flex w-full items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 whitespace-nowrap"
+        >
           <mat-icon class="text-gray-600 icon-fix">person</mat-icon>
           <span>Perfil</span>
         </button>
       </li>
+
+      <!-- Cerrar sesión -->
       <li>
-        <button cdkMenuItem (click)="logout()" class="flex w-full items-center gap-3 px-4 py-2 text-sm text-red-600 hover:bg-gray-100 whitespace-nowrap">
+        <button
+          (click)="logout()"
+          class="flex w-full items-center gap-3 px-4 py-2 text-sm text-red-600 hover:bg-gray-100 whitespace-nowrap"
+        >
           <mat-icon class="text-red-600 icon-fix">logout</mat-icon>
           <span>Cerrar sesión</span>
         </button>
@@ -47,7 +61,3 @@
     </ul>
   </div>
 </ng-template>
-
-
-
-

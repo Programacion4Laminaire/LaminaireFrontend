@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, inject } from '@angular/core';
+import { Component, HostListener, Input, ViewChild, inject } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { CdkMenuTrigger } from '@angular/cdk/menu';
 import { MatIconModule } from '@angular/material/icon';
@@ -25,6 +25,9 @@ import { AuthService } from '@app/modules/identity/pages/auth/services/auth.serv
 export class HeaderComponent {
   @Input() collapsed = false;
   @Input() screenWidth = 0;
+
+  // 👈 Ahora capturamos el trigger directamente
+  @ViewChild(CdkMenuTrigger) userMenuTrigger!: CdkMenuTrigger;
 
   canShowSearchAsOverlay = false;
   selectedLanguage: any;
@@ -82,8 +85,15 @@ export class HeaderComponent {
     this.canShowSearchAsOverlay = innerWidth < 845;
   }
 
+  goToProfile(): void {
+    this.router.navigate(['/profile']);
+    this.userMenuTrigger.close(); 
+  }
+
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login'], { replaceUrl: true });
+    this.userMenuTrigger.close(); 
+   
   }
 }

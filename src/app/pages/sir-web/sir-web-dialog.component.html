@@ -1,0 +1,35 @@
+<h2 mat-dialog-title class="dialog-title">
+  <mat-icon>{{ data.icon }}</mat-icon>
+  <span>Menú {{ data.title }}</span>
+</h2>
+
+<mat-dialog-content class="dialog-content">
+  <div class="accordion-grid">
+    <div *ngFor="let column of getColumns(data.menuSections, 3)" class="accordion-column">
+      <mat-accordion multi>
+        <mat-expansion-panel *ngFor="let section of column">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ section.title || 'Opciones' }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div class="accordion-items">
+            <button
+              mat-stroked-button
+              color="primary"
+              *ngFor="let item of section.items"
+              (click)="onNavigate(item.link)"
+            >
+              {{ item.label }}
+            </button>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center" class="dialog-actions">
+  <button mat-flat-button color="warn" (click)="close()">Salir</button>
+</mat-dialog-actions>
