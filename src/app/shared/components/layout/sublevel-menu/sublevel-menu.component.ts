@@ -5,11 +5,12 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { fadeInOutAnimation } from '@shared/animations/fade-in-out.animation';
 import { sublevelMenuAnimation } from '@shared/animations/sublevel-menu.animation';
 import { INavbarData } from '@shared/models/layout/navbar-data.interface';
+import { HighlightPipe } from '@shared/pipes/highlight.pipe';
 
 @Component({
   standalone: true,
   selector: 'app-sublevel-menu',
-  imports: [NgClass, RouterLink, RouterLinkActive, MatIconModule],
+  imports: [NgClass, RouterLink, RouterLinkActive, MatIconModule, HighlightPipe],
   templateUrl: './sublevel-menu.component.html',
   styleUrls: ['./../sidebar/sidebar.component.scss'],
   animations: [fadeInOutAnimation, sublevelMenuAnimation],
@@ -29,12 +30,16 @@ export class SublevelMenuComponent {
   @Input() expanded: boolean | undefined;
   @Input() multiple: boolean = false;
 
+  // === NUEVO: para expansión forzada y resaltado ===
+  @Input() isFiltering: boolean = false;
+  @Input() term: string = '';
+
   handleClick(item: any): void {
     if (!this.multiple) {
       if (this.data.items && this.data.items.length > 0) {
         for (let subItem of this.data.items) {
-          if (item !== subItem && subItem.expanded) {
-            subItem.expanded = false;
+          if (item !== subItem && (subItem as any).expanded) {
+            (subItem as any).expanded = false;
           }
         }
       }
@@ -43,7 +48,7 @@ export class SublevelMenuComponent {
   }
 
   getActiveClass(item: INavbarData): string {
-    return item.expanded && this.router.url.includes(item.route)
+    return (item as any).expanded && this.router.url.includes(item.route ?? '')
       ? 'active-sublevel'
       : '';
   }

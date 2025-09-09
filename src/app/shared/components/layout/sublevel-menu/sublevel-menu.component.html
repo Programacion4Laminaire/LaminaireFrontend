@@ -1,8 +1,7 @@
 @if (collapsed && data.items && data.items.length > 0) {
-
   <ul
     [@submenu]="
-      expanded
+      (expanded || isFiltering)
         ? {
             value: 'visible',
             params: {
@@ -21,52 +20,51 @@
     class="sublevel-nav"
   >
     @for (item of data.items; track $index) {
-  
-    <li class="sublevel-nav-item">
-      @if(item.items && item.items.length > 0){
-  
-      <a
-        class="sublevel-nav-link"
-        (click)="handleClick(item)"
-        [ngClass]="getActiveClass(item)"
-      >
-        <i class="sublevel-link-icon"></i>
-  
-        @if (collapsed) {
-        <span class="sublevel-link-text" @fadeInOut>{{ item.label }}</span>
-        } @if (item.items && collapsed) {
-        <mat-icon
-          class="menu-collapse-icon"
-          [fontIcon]="!item.expanded ? 'chevron_right' : 'expand_more'"
-        >
-        </mat-icon>
+      <li class="sublevel-nav-item">
+        @if(item.items && item.items.length > 0){
+          <a
+            class="sublevel-nav-link"
+            (click)="handleClick(item)"
+            [ngClass]="getActiveClass(item)"
+          >
+            <i class="sublevel-link-icon"></i>
+            @if (collapsed) {
+              <span class="sublevel-link-text" @fadeInOut
+                    [innerHTML]="item.label | hl:term"></span>
+            }
+            @if (item.items && collapsed) {
+              <mat-icon
+                class="menu-collapse-icon"
+                [fontIcon]="!item.expanded ? 'chevron_right' : 'expand_more'">
+              </mat-icon>
+            }
+          </a>
         }
-      </a>
-      } @if (!item.items || (item.items && item.items.length === 0)) {
-      <a
-        class="sublevel-nav-link"
-        [routerLink]="[item.route]"
-        routerLinkActive="active-sublevel"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
-        <!-- <i class="sublevel-link-icon fa fa-users"></i> -->
-        <!--<mat-icon class="sublevel-link-icon" [fontIcon]="item.icon"></mat-icon>-->
-        @if(collapsed){
-        <span class="sublevel-link-text" fadeInOut>{{ item.label }}</span>
+        @if (!item.items || (item.items && item.items.length === 0)) {
+          <a
+            class="sublevel-nav-link"
+            [routerLink]="[item.route]"
+            routerLinkActive="active-sublevel"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            @if(collapsed){
+              <span class="sublevel-link-text" @fadeInOut
+                    [innerHTML]="item.label | hl:term"></span>
+            }
+          </a>
         }
-      </a>
-      } @if (item.items && item.items.length > 0) {
-      <div>
-        <app-sublevel-menu
-          [data]="item"
-          [collapsed]="collapsed"
-          [multiple]="multiple"
-          [expanded]="item.expanded"
-        />
-      </div>
-      }
-    </li>
+        @if (item.items && item.items.length > 0) {
+          <div>
+            <app-sublevel-menu
+              [data]="item"
+              [collapsed]="collapsed"
+              [multiple]="multiple"
+              [expanded]="item.expanded || isFiltering"
+              [isFiltering]="isFiltering"
+              [term]="term" />
+          </div>
+        }
+      </li>
     }
   </ul>
-  }
-  
+}
