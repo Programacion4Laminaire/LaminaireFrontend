@@ -115,7 +115,8 @@ export class AuthService {
   // Asegúrate que el domain y path coincidan exactamente con los usados al crear la cookie
   document.cookie = "Datos=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=web.laminaire.net;";
   document.cookie = "Datos=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; // fallback sin domain
-
+  document.cookie = "DatosPretty=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=web.laminaire.net;";
+  document.cookie = "DatosPretty=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; // fallback sin domain
     window.location.reload();
   }
 }

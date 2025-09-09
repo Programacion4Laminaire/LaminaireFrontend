@@ -1,6 +1,6 @@
 // export const environment = {
 //   production: true,
-//   environment: 'Producttion',
+//   environment: 'Production',
 //   apiIdentity: 'https://web.laminaire.net/SirBackend/api/',
 // };
 

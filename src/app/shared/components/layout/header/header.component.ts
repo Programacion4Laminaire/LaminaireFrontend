@@ -57,8 +57,7 @@ export class HeaderComponent {
         this.userRole = user.role?.name ?? '';
         this.userImage = this.getFullImageUrl(user.profileImagePath);
 
-        console.log('Ruta backend:', user.profileImagePath);
-        console.log('URL final header:', this.userImage);
+       
       });
     }
   }

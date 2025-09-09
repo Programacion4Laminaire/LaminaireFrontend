@@ -4,4 +4,5 @@ export interface MenuResponse {
   icon: string;
   path: string;
   fatherId: number;
+  isNew?: boolean;           
 }

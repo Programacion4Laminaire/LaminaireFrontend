@@ -37,6 +37,11 @@ export class SidebarComponent {
   menu: MenuResponse[] = [];
   menuArray: any[] = [];
 
+
+
+
+
+
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
     this.toggleCollapsed();
@@ -141,4 +146,5 @@ export class SidebarComponent {
       }
     });
   }
+  
 }
