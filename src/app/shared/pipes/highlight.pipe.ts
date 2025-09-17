@@ -4,8 +4,21 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class HighlightPipe implements PipeTransform {
   transform(text: string | null | undefined, term: string | null | undefined): string {
     if (!text || !term?.trim()) return text ?? '';
-    const esc = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+    // función para quitar tildes/acentos
+    const normalize = (str: string) =>
+      str.normalize('NFD').replace(/\p{Diacritic}/gu, '');
+
+    const normText = normalize(text);
+    const normTerm = normalize(term);
+
+    const esc = normTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const re = new RegExp(esc, 'gi');
-    return text.replace(re, (m) => `<mark>${m}</mark>`);
+
+    // Para resaltar, tenemos que mapear al texto original
+    return normText.replace(re, (match, offset) => {
+      // usamos el mismo rango pero en el texto original
+      return `<mark>${text.substring(offset, offset + match.length)}</mark>`;
+    });
   }
 }

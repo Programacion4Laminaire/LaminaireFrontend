@@ -27,13 +27,15 @@
 
       <!-- 3) Footer fijo abajo (opcional 'Ver más') -->
       <mat-card-actions class="sir-card-footer">
-        <button mat-button class="sir-ver-mas" style="color: white;">Ver Lista</button>
+        <!-- antes: mat-button -->
+<button mat-flat-button class="sir-ver-mas">Ver Lista</button>
+
       </mat-card-actions>
     </mat-card>
   </div>
 </div>
 
-<!-- Modal template actualizado a 3 columnas -->
+<!-- Modal: secciones planas (sin título) + acordeón (con título) -->
 <ng-template #cardDialog let-data>
   <h2 mat-dialog-title class="flex items-center space-x-2 text-xl font-medium">
     <mat-icon>{{ data.icon }}</mat-icon>
@@ -41,34 +43,62 @@
   </h2>
 
   <mat-dialog-content class="custom-dialog-content p-6 pb-8">
+    <!-- 1) Secciones SIN grupo (título vacío): layout plano original -->
     <ng-container *ngFor="let section of data.menuSections">
-      <h3 class="section-title">{{ section.title }}</h3>
-
-      <div class="nav-button-grid">
-        <ng-container *ngFor="let column of getColumns(section.items, 3)">
-          <div class="button-column">
-            <!-- Sólo llaman a onNavigate, NO tienen mat-dialog-close -->
-            <button
-              mat-flat-button
-              color="primary"
-              class="menu-btn"
-              *ngFor="let item of column"
-              (click)="onNavigate(item.link)"
-            >
-              {{ item.label }}
-            </button>
-          </div>
-        </ng-container>
-      </div>
-
-      <br />
+      <ng-container *ngIf="!((section.title || '').trim())">
+        <div class="nav-button-grid">
+          <ng-container *ngFor="let column of getColumns(section.items, 3)">
+            <div class="button-column">
+              <button
+                mat-flat-button
+                color="primary"
+                class="menu-btn"
+                *ngFor="let item of column"
+                (click)="onNavigate(item.link)"
+              >
+                {{ item.label }}
+              </button>
+            </div>
+          </ng-container>
+        </div>
+        <br />
+      </ng-container>
     </ng-container>
+
+    <!-- 2) Secciones CON grupo (título con texto): acordeón sin contador -->
+
+<!-- Secciones CON grupo: acordeón en 3 columnas; contenido vertical -->
+<mat-accordion class="accordion-grid-rows" [multi]="false" displayMode="flat">
+
+  <ng-container *ngFor="let section of data.menuSections">
+    <mat-expansion-panel *ngIf="(section.title || '').trim()">
+     <mat-expansion-panel-header
+  [style.--mat-expansion-header-indicator-color]="'#fff'"
+  [style.--mat-expansion-header-indicator-disabled-color]="'rgba(255,255,255,.6)'"
+>
+  <mat-panel-title>{{ section.title }}</mat-panel-title>
+</mat-expansion-panel-header>
+
+      <!-- Botones verticales, uno por fila -->
+      <div class="panel-button-list">
+        <button
+          mat-flat-button
+          color="primary"
+          class="menu-btn"
+          *ngFor="let item of section.items"
+          (click)="onNavigate(item.link)"
+        >
+          {{ item.label }}
+        </button>
+      </div>
+    </mat-expansion-panel>
+  </ng-container>
+</mat-accordion>
+
+
   </mat-dialog-content>
 
   <mat-dialog-actions align="end" class="pr-6 pb-3">
-    <!-- Único botón que cierra el modal -->
     <button mat-button (click)="closeDialog()">Cerrar</button>
   </mat-dialog-actions>
 </ng-template>
-
-

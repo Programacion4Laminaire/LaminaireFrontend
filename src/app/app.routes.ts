@@ -273,7 +273,7 @@ export const routes: Routes = [
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Integracion_Nomina.aspx' }
 },
 {
-  path: 'financiera-compras-tc',
+  path: 'financiera-integracion-compras-tc',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Integracion_Fac_Compras.aspx' }
 },
@@ -302,6 +302,12 @@ export const routes: Routes = [
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Parametros_Simetrica.aspx' }
 },
+{
+  path: 'financiera-perfileria-laminaire',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Financiera/Frm/PERFILERIA.aspx' }
+},
+
 
 // 🔹 RUTAS EXTERNAS — TI | BI
 {
@@ -432,6 +438,11 @@ export const routes: Routes = [
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Control_Estad_Inv_Disfrio.aspx' }
 },
 {
+  path: 'logistica-estadistico-inventario-equipart',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Control_Estad_Inv_Disfrio.aspx' }
+},
+{
   path: 'logistica-lista-precios-stock-equipart',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Lista_Precios_Stock.aspx' }
@@ -507,6 +518,143 @@ export const routes: Routes = [
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Repositorio_Logistica.aspx' }
 },
 
+{
+  path: 'logistica-ingreso-conteo-fisico',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Conteo_fisico.aspx' }
+},
+{
+  path: 'logistica-informes-conteos-fisicos',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Informe_Inventarios.aspx' }
+},
+{
+  path: 'logistica-administrador-conteos-fisicos',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Admin_Conteo.aspx' }
+},
+
+
+{
+  path: 'logistica-informe-salidas-s3',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Informe_Salidas_S3.aspx' }
+},
+{
+  path: 'logistica-informes-vigencia-de-costos',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/vigencia_costos.aspx' }
+},
+{
+  path: 'logistica-consultas-documentos-reservas',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Consultar_Documentos_Reservas.aspx' }
+},
+{
+  path: 'logistica-consulta-oc-pedidos',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Consultar_OC_Pedidos.aspx' }
+},
+{
+  path: 'logistica-consulta-documentos-por-usuarios',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Consultar_Documentos_Usuarios.aspx?proceso=LOGISTICA' }
+},
+
+
+{
+  path: 'logistica-control-estadistico-de-inventario',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Control_Estadist_Invent.aspx' }
+},
+{
+  path: 'logistica-control-estadistico-de-inventario-equipart',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Control_Estad_Inv_Disfrio.aspx' }
+},
+
+
+{
+  path: 'logistica-informe-guias-de-pedidos',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Informe_Guias_Pedidos.aspx' }
+},
+{
+  path: 'logistica-informe-recibo-ordenes-de-compra',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Informe_OrdenesCompra.aspx' }
+},
+{
+  path: 'logistica-informe-traslados-movil',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Informe_Traslados.aspx' }
+},
+{
+  path: 'logistica-informe-alistar-cajas',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Info_AlistarCajas.aspx' }
+},
+{
+  path: 'logistica-informe-ubicaciones-wms-girardota',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Info_Ubicaciones_WMS_Girardota.aspx' }
+},
+{
+  path: 'logistica-informe-log-wms-girardota',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Info_Log_WMS_Girardota.aspx' }
+},
+{
+  path: 'logistica-informe-reservas-pendientes',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Info_Reservas_Pendientes.aspx' }
+},
+{
+  path: 'logistica-informe-cajas-facturadas',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Informe_Cajas_Facturadas.aspx' }
+},
+{
+  path: 'logistica-informe-simulaciones-calma',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Informe_Simulaciones_Calma.aspx' }
+},
+{
+  path: 'logistica-informe-movimientos-wms',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/INF_WMS_LOG.aspx' }
+},
+
+{
+  path: 'logistica-estadistica-para-pedir-contenedor',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component')
+    .then(c => c.ExternalRedirectComponent),
+  
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Estadistica_Contenedor_V2.aspx' }
+},
+{
+  path: 'logistica-parametros-control-inventarios',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component')
+    .then(c => c.ExternalRedirectComponent),
+ 
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Control_Estadist_Invent.aspx' }
+},
+{
+  path: 'logistica-parametros-control-inventarios-equipart',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component')
+    .then(c => c.ExternalRedirectComponent),
+  
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Lead_Time_Disfrio.aspx' }
+},
+{
+  path: 'logistica-registro-cantidad-min-pedido',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component')
+    .then(c => c.ExternalRedirectComponent),
+ 
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Registro_Cantidad_Pedidos.aspx' }
+},
+
+
 // 🔹 RUTAS EXTERNAS — MANTENIMIENTO
 {
   path: 'mantenimiento-solicitudes-de-mantenimiento',
@@ -514,117 +662,120 @@ export const routes: Routes = [
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Solicitudes_Mmto.aspx' }
 },
 {
-  path: 'mantenimiento-contenedor-solicitudes-de-mtto',
+  path: 'mantenimiento-contenedor-solicitudes',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Contenedor_Mtto.aspx' }
 },
 {
-  path: 'mantenimiento-seguimiento-solicitudes-de-mtto',
+  path: 'mantenimiento-seguimiento-solicitudes',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Solicitudes_X_Usuario.aspx' }
 },
 {
-  path: 'mantenimiento-ficha-tecnica-activos-mtto',
+  path: 'mantenimiento-ficha-tecnica-activos',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Ficha_Tecnica_Mtto.aspx' }
 },
 {
-  path: 'mantenimiento-bitacora-operacion-mantenimiento-medellin',
+  path: 'mantenimiento-bitacora-medellin',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Bitacora_Operacion_Mtto.aspx' }
 },
 {
-  path: 'mantenimiento-bitacora-operacion-mantenimiento-girardota',
+  path: 'mantenimiento-bitacora-girardota',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Bitacora_Mtto_Girardota.aspx' }
 },
 {
-  path: 'mantenimiento-plan-mantenimiento-preventivo',
+  path: 'mantenimiento-plan-preventivo',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Plan_Mtto.aspx' }
 },
 {
-  path: 'mantenimiento-informes-contenedor-mantenimiento',
+  path: 'mantenimiento-informes-contenedor',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Informes_Contenedor.aspx' }
 },
 {
-  path: 'mantenimiento-informe-de-encuestas',
+  path: 'mantenimiento-informe-encuestas',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Informes_Encuestas.aspx' }
 },
 {
-  path: 'mantenimiento-pronostico-mantenimiento-preventivo',
+  path: 'mantenimiento-pronostico-preventivo',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Pronostico_mtto_prev.aspx' }
 },
 {
-  path: 'mantenimiento-adelantar-mantenimiento-preventivo',
+  path: 'mantenimiento-adelantar-preventivo',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Adelantar_Mtto_Prevent.aspx' }
 },
 
+
 // 🔹 RUTAS EXTERNAS — TALENTO HUMANO
 {
-  path: 'tal-humano-comprob-de-pago-anteriores-a-2024',
+  path: 'th-comprobantes-de-pago-anteriores-2024',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Comprobantes_Pago/Frms/Frm_Comprobante.aspx' }
 },
 {
-  path: 'tal-humano-certificado-laboral',
+  path: 'th-certificado-laboral',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Certificado_Laboral.aspx' }
 },
 {
-  path: 'tal-humano-ficha-del-empleado',
+  path: 'th-ficha-del-empleado',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Ficha_Talento_V2.aspx' }
 },
 {
-  path: 'tal-humano-informe-ficha-del-empleado',
+  path: 'th-informe-ficha-del-empleado',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Informe_Ficha_Talento.aspx' }
 },
 {
-  path: 'tal-humano-perfil-del-cargo',
+  path: 'th-perfil-del-cargo',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Perfil_Cargo_V2.aspx' }
 },
 {
-  path: 'tal-humano-competencias',
+  path: 'th-competencias',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Competencias.aspx' }
 },
 {
-  path: 'tal-humano-proced-instruct-politicas-form',
+  path: 'th-procedimientos-instructivos-politicas-formularios',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Maestros_Pc.aspx' }
 },
 {
-  path: 'tal-humano-resp-seg-resp-sg-sst-res-amb',
+  path: 'th-responsabilidades-sst-ambiental',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Maestros_Pc_2.aspx' }
 },
 {
-  path: 'tal-humano-valores-corporativos',
+  path: 'th-valores-corporativos',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Maestros_Valores_Corp.aspx' }
 },
 {
-  path: 'tal-humano-informes-control-de-acceso',
+  path: 'th-informes-control-de-acceso',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/ReporteControlAcceso.aspx' }
 },
 {
-  path: 'tal-humano-solicitud-de-vacaciones',
+  path: 'th-solicitud-de-vacaciones',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Control_Vacaciones_Empleados.aspx' }
 },
 {
-  path: 'tal-humano-calendario-de-reuniones',
+  path: 'th-calendario-de-reuniones',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Calendario_Reuniones.aspx' }
 },
+
+
 {
   path: 'tal-humano-control-plan-de-bienestar',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
@@ -635,21 +786,24 @@ export const routes: Routes = [
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Informes_Pasaporte.aspx' }
 },
+
 {
-  path: 'tal-humano-gestion-del-conocimiento',
+  path: 'th-gestion-del-conocimiento',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Control_Capacitaciones.aspx' }
 },
 {
-  path: 'tal-humano-informes-gestion-conocimiento',
+  path: 'th-informes-gestion-conocimiento',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Informes_Control_Capacitaciones.aspx' }
 },
 {
-  path: 'tal-humano-informes-detallado-gc',
+  path: 'th-informes-detallado-gestion-conocimiento',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Informes_Capacit_Detallado.aspx' }
 },
+
+
 {
   path: 'tal-humano-evaluaciones-de-360',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
@@ -675,70 +829,86 @@ export const routes: Routes = [
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Analisis_Causas_Evaluac_360.aspx' }
 },
+
 {
-  path: 'tal-humano-control-de-empleados',
+  path: 'th-control-de-empleados',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Control_Empleados_Activos_V2.aspx' }
 },
 {
-  path: 'tal-humano-empleados-ctrl-acceso-vs-ofima',
+  path: 'th-empleados-control-acceso-vs-ofima',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Control_Empleados.aspx' }
 },
 {
-  path: 'tal-humano-informe-control-de-empleados',
+  path: 'th-informe-control-de-empleados',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Informes_Control_Empleados.aspx' }
 },
 {
-  path: 'tal-humano-plan-general-de-capacitaciones',
+  path: 'th-plan-general-de-capacitaciones',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/FrmPlanGeneralCapacitcionesaspx.aspx' }
 },
 {
-  path: 'tal-humano-maestro-plan-gral-capacitaciones',
+  path: 'th-maestro-plan-general-capacitaciones',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_MestroPlanGeneral_Capacita.aspx' }
 },
 {
-  path: 'tal-humano-plan-de-entrenamiento',
+  path: 'th-plan-de-entrenamiento',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Plan_Entrenamiento.aspx' }
 },
 {
-  path: 'tal-humano-rifa-canasta-laminaire',
+  path: 'th-rifa-canasta-laminaire',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Rifa.aspx' }
 },
 {
-  path: 'tal-humano-rifa-general',
+  path: 'th-rifa-general',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/RifaGeneral.aspx' }
 },
 {
-  path: 'tal-humano-registro-disponibilidad-empleados',
+  path: 'th-registro-disponibilidad-empleados',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Registro_Disponibilidad_Empleados.aspx' }
 },
 {
-  path: 'tal-humano-consulta-disponibilidad-empleados',
+  path: 'th-consulta-disponibilidad-empleados',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Consulta_Disponibilidad_Empleados.aspx' }
 },
 {
-  path: 'tal-humano-control-de-dotacion',
+  path: 'th-control-de-dotacion',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Control_Dotacion.aspx' }
 },
 {
-  path: 'tal-humano-dctos-firmados-electronicamente',
+  path: 'th-documentos-firmados-electronicamente',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Dctos_Firmados_Electr.aspx' }
 },
 {
-  path: 'tal-humano-encuesta-retiro-empleados',
+  path: 'th-encuesta-retiro-empleados',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Formulario_Retiro_Empleados.aspx' }
+},
+{
+  path: 'th-reconocimiento-a-empleados',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Reconocimiento_Empleados.aspx' }
+},
+{
+  path: 'th-informes-reconocimiento-empleados',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Informe_Reconocimiento_a_Empleados.aspx' }
+},
+{
+  path: 'th-motivos-de-reconocimiento',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Maestro_Reconocimiento_A-Empleados.aspx' }
 },
 
 // 🔹 RUTAS EXTERNAS — S.G.I.
@@ -768,47 +938,47 @@ export const routes: Routes = [
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Informes_Documentacion_SGI.aspx' }
 },
 {
-  path: 'sgi-sg-sst',
+  path: 'sgi-control-sgsst',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Control_SG-SST.aspx' }
 },
 {
-  path: 'sgi-informe-visitantes',
+  path: 'sgi-informe-acceso-visitantes',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Informe_Visitantes.aspx' }
 },
 {
-  path: 'sgi-control-acceso',
+  path: 'sgi-control-de-acceso',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Control_Acceso.aspx' }
 },
 {
-  path: 'sgi-extintores',
+  path: 'sgi-control-de-extintores',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Control_Extintores.aspx' }
 },
 {
-  path: 'sgi-matriz-riesgos',
+  path: 'sgi-matriz-de-riesgos',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Matriz_Riesgos.aspx' }
 },
 {
-  path: 'sgi-captura-lavado-manos',
+  path: 'sgi-captura-lavado-de-manos',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Control_Lavado_Manos.aspx' }
 },
 {
-  path: 'sgi-informe-lavado-manos',
+  path: 'sgi-informe-lavado-de-manos',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Informe_Lavado_Manos.aspx' }
 },
 {
-  path: 'sgi-dofa',
+  path: 'sgi-contexto-interno-externo-dofa',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Contexto_Int_Ext_DOFA.aspx' }
 },
 {
-  path: 'sgi-control-retal',
+  path: 'sgi-control-de-retal',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Control_Retal.aspx' }
 },
@@ -828,40 +998,41 @@ export const routes: Routes = [
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Indice_Lamina.aspx' }
 },
 {
-  path: 'sgi-gestion-ausentismos',
+  path: 'sgi-gestion-de-ausentismo',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Gestion_Ausentismos.aspx' }
 },
 {
-  path: 'sgi-informe-ausentismo',
+  path: 'sgi-informe-gestion-de-ausentismo',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Informes_Ausentismo.aspx' }
 },
 {
-  path: 'sgi-maestro-inspectores',
+  path: 'sgi-5s-maestro-inspectores',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Registro_Inspectores.aspx' }
 },
 {
-  path: 'sgi-banco-preguntas',
+  path: 'sgi-5s-banco-preguntas',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Banco_Preguntas.aspx' }
 },
 {
-  path: 'sgi-encuesta-5s',
+  path: 'sgi-5s-encuesta',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Encuestas_5S.aspx' }
 },
 {
-  path: 'sgi-gestion-mejoras',
+  path: 'sgi-5s-gestion-mejoras',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Mejoras_5S.aspx' }
 },
 {
-  path: 'sgi-informes-5s',
+  path: 'sgi-5s-informes',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Informes_5s.aspx' }
 },
+
 
 // 🔹 RUTAS EXTERNAS — PRODUCCIÓN
 {
@@ -880,7 +1051,7 @@ export const routes: Routes = [
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Control_Operacional.aspx' }
 },
 {
-  path: 'produccion-maestro-causas-tiempo-improduc',
+  path: 'produccion-maestro-causas-tiempo-improductivo',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Maestro_Causas_Improductivo.aspx' }
 },
@@ -900,7 +1071,7 @@ export const routes: Routes = [
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Captura_Produc_Pintado.aspx' }
 },
 {
-  path: 'produccion-captura-manual-prod-en-proceso',
+  path: 'produccion-captura-manual-proceso',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/DetalleCap_Manual_V2.aspx' }
 },
@@ -925,7 +1096,7 @@ export const routes: Routes = [
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Resumen_Eficiencias_Lineas.aspx' }
 },
 {
-  path: 'produccion-tablero-control-prod-en-proceso',
+  path: 'produccion-tablero-control-proceso',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Tablero_Control.aspx' }
 },
@@ -935,17 +1106,17 @@ export const routes: Routes = [
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Estado_Pedidos.aspx' }
 },
 {
-  path: 'produccion-maestro-lineas-de-produccion',
+  path: 'produccion-maestro-lineas',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Maestro_Lineas_Capturas.aspx' }
 },
 {
-  path: 'produccion-control-lotes-produccion',
+  path: 'produccion-control-lotes',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Control_Lotes_Prod.aspx' }
 },
 {
-  path: 'produccion-reimprimir-etiquetas-cajas-y-pallets',
+  path: 'produccion-reimprimir-etiquetas',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Reimprimir_Etiquetas_Cajas.aspx' }
 },
@@ -960,17 +1131,17 @@ export const routes: Routes = [
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Distribucion_Planta.aspx' }
 },
 {
-  path: 'produccion-informe-capturas-prod-en-proceso',
+  path: 'produccion-informe-capturas-proceso',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Capturas_Prod_Proc.aspx' }
 },
 {
-  path: 'produccion-informe-carga-de-produccion',
+  path: 'produccion-informe-carga',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Carga_USP.aspx' }
 },
 {
-  path: 'produccion-informe-entradas-prod-terminado',
+  path: 'produccion-informe-entradas-pt',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Entradas_PT.aspx' }
 },
@@ -1000,17 +1171,17 @@ export const routes: Routes = [
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Tiempo_Improductivo.aspx' }
 },
 {
-  path: 'produccion-informe-inspeccion-de-calidad',
+  path: 'produccion-informe-inspeccion-calidad',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Inspeccion_Calidad.aspx' }
 },
 {
-  path: 'produccion-informe-usp-acum-pedidos-pend',
+  path: 'produccion-informe-usp-acum-pedidos-pendientes',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Info_Usp_Acum_Pedidos_Pend.aspx' }
 },
 {
-  path: 'produccion-consulta-pend-empaque',
+  path: 'produccion-consulta-pendiente-empaque',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Inf_Pedido_Pend_Empaque.aspx' }
 },
@@ -1020,47 +1191,47 @@ export const routes: Routes = [
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Totales_EU.aspx' }
 },
 {
-  path: 'produccion-etiquetas-de-corte-mecanizado',
+  path: 'produccion-etiquetas-corte-mecanizado',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Etiquetas_Mecanizado.aspx' }
 },
 {
-  path: 'produccion-amazon',
+  path: 'produccion-codigos-amazon',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Maestro_Codigos_Amazon.aspx' }
 },
 {
-  path: 'produccion-easy',
+  path: 'produccion-codigos-easy',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Maestro_Codigos_Easy.aspx' }
 },
 {
-  path: 'produccion-homecenter',
+  path: 'produccion-codigos-homecenter',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Maestro_Codigos_Home.aspx' }
 },
 {
-  path: 'produccion-store-on',
+  path: 'produccion-codigos-storeon',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Maestro_Codigos_StoreOn.aspx' }
 },
 {
-  path: 'produccion-gestion-de-compromisos-pedidos',
+  path: 'produccion-gestion-compromisos-pedidos',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Gestion_Compromisos_Pedidos.aspx' }
 },
 {
-  path: 'produccion-maestro-motivos-de-cambio',
+  path: 'produccion-maestro-motivos-cambio',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Maestro_Motivos_Compr_Pedidos.aspx' }
 },
 {
-  path: 'produccion-informe-compromisos-de-pedidos',
+  path: 'produccion-informe-compromisos-pedidos',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Gestion_Compromisos_Pedidos.aspx' }
 },
 {
-  path: 'produccion-seguim-prog-mecanizado',
+  path: 'produccion-seguimiento-programacion-mecanizado',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Seguim_Prog_Mecan.aspx' }
 },
@@ -1090,9 +1261,69 @@ export const routes: Routes = [
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Tablero_Ctrl_Var_Pint.aspx' }
 },
 {
-  path: 'produccion-division-fechas-produccion',
+  path: 'produccion-division-fechas',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Programacion_Fechas_Entrega.aspx' }
+},
+{
+  path: 'produccion-permisos-modificacion-de-pedidos',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Permisos_Modificacion_Pedidos.aspx' }
+},
+{
+  path: 'produccion-operacion-maquinas-equipos',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Operacion_MaquinasEquipos.aspx' }
+},
+{
+  path: 'produccion-inventario-de-puntas',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Inventario_Puntas.aspx' }
+},
+{
+  path: 'produccion-consulta-documentos-por-usuarios',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Consultar_Documentos_Usuarios.aspx?proceso=PRODUCCION' }
+},
+{
+  path: 'produccion-asignacion-usp-por-producto',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/USP_x_Producto.aspx' }
+},
+{
+  path: 'produccion-programacion-pintura-accesorios',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Programacion_Pintura_Accesorios.aspx' }
+},
+{
+  path: 'produccion-programacion-accesorios',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Programacion_Lamiaccesorios.aspx' }
+},
+{
+  path: 'produccion-control-calidad-pedidos',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Control_Calidad_Pedidos.aspx' }
+},
+{
+  path: 'produccion-modificar-programacion',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Mod_Prog_Ensamble_Pint.aspx' }
+},
+{
+  path: 'produccion-inspeccion-calidad',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Inspeccion_Calidad.aspx' }
+},
+{
+  path: 'produccion-inventario-producto-en-proceso',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Inventario_Producto_Proceso.aspx' }
+},
+{
+  path: 'produccion-informe-inventario-en-proceso',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Inv_Producto_Proceso.aspx' }
 },
 
 // 🔹 RUTAS EXTERNAS — COMERCIAL
@@ -1122,7 +1353,7 @@ export const routes: Routes = [
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Cotizaciones_Construccion_V2_1.aspx' }
 },
 {
-  path: 'comercial-maestro-de-modelos-arquitectonicos',
+  path: 'comercial-maestro-modelos-arquitectonicos',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Maestro_Modelos_Arquitect.aspx' }
 },
@@ -1152,7 +1383,7 @@ export const routes: Routes = [
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Cotizaciones_Exportacion.aspx' }
 },
 {
-  path: 'comercial-maestro-de-clientes-exportacion',
+  path: 'comercial-maestro-clientes-exportacion',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Clientes_Exportacion.aspx' }
 },
@@ -1177,7 +1408,7 @@ export const routes: Routes = [
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Pedidos_Nuevo.aspx' }
 },
 {
-  path: 'comercial-control-de-cotizaciones-equipart',
+  path: 'comercial-control-cotizaciones-equipart',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Comercial/FRM/FrmCotizaciones.aspx' }
 },
@@ -1187,17 +1418,17 @@ export const routes: Routes = [
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Calendario_Seguimiento.aspx' }
 },
 {
-  path: 'comercial-informe-de-cotizaciones-ingenieria',
+  path: 'comercial-informe-cotizaciones-ingenieria',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Informes_Cotizaciones.aspx' }
 },
 {
-  path: 'comercial-informe-de-cotizaciones-ventas',
+  path: 'comercial-informe-cotizaciones-ventas',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Informe_Cotiz_Real.aspx' }
 },
 {
-  path: 'comercial-frecuencia-de-facturac-cotizac',
+  path: 'comercial-frecuencia-de-facturacion-cotizacion',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Informe_Frecuencia_Fac_Cot.aspx' }
 },
@@ -1217,7 +1448,7 @@ export const routes: Routes = [
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Pedidos_Mes_UEN.aspx' }
 },
 {
-  path: 'comercial-informe-de-clientes-nuevos',
+  path: 'comercial-informe-clientes-nuevos',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Informe_Clientes_Nuevos.aspx' }
 },
@@ -1316,7 +1547,7 @@ export const routes: Routes = [
 {
   path: 'ingenieria-ingreso-de-cotizaciones',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
-  data: { externalUrl: 'https://web.laminaire.net/S-irWeb/Comercial/FRM/FrmIngresoCot.aspx?Id=0' }
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Comercial/FRM/FrmIngresoCot.aspx?Id=0' }
 },
 {
   path: 'ingenieria-informe-resumen-de-cotizaciones',
@@ -1349,12 +1580,12 @@ export const routes: Routes = [
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Proyectos_Ingenieria.aspx' }
 },
 {
-  path: 'ingenieria-liberacion-pedidos-de-ingenieria',
+  path: 'ingenieria-liberacion-pedidos',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Cambiar_Prioridad_Pedidos.aspx' }
 },
 {
-  path: 'ingenieria-informe-pedidos-ing-liberados',
+  path: 'ingenieria-informe-pedidos-liberados',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Informe_Liberacion_Pedidos.aspx' }
 },
@@ -1374,12 +1605,12 @@ export const routes: Routes = [
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Ingenieria/FRM/Gestion_Proyectos.aspx' }
 },
 {
-  path: 'ingenieria-metricas-proyectos',
+  path: 'ingenieria-metricas-proyecto',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Ingenieria/FRM/Metricas_Proyecto.aspx' }
 },
 {
-  path: 'ingenieria-biblioteca-ingenieria',
+  path: 'ingenieria-biblioteca',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Ingenieria/FRM/Biblioteca_Ingenieria.aspx' }
 },
@@ -1392,6 +1623,11 @@ export const routes: Routes = [
   path: 'ingenieria-informe-codigos-sin-vigencia',
   loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
   data: { externalUrl: 'https://web.laminaire.net/SirWeb/Ingenieria/FRM/Informe_Codigos_Sin_Vigencia.aspx' }
+},
+{
+  path: 'ingenieria-proyectos-vendidos',
+  loadComponent: () => import('./modules/core/components/external-redirect/external-redirect.component').then(c => c.ExternalRedirectComponent),
+  data: { externalUrl: 'https://web.laminaire.net/SirWeb/Ingenieria/FRM/Proyectos_Vendidos.aspx' }
 },
 
 

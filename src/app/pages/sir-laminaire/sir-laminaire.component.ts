@@ -7,6 +7,7 @@ import { MatDialog, MatDialogModule, MatDialogRef }       from '@angular/materia
 import { MatExpansionModule }               from '@angular/material/expansion';
 import { MatListModule }                    from '@angular/material/list';
 import { MatIconModule }                    from '@angular/material/icon';
+
 import { Router } from '@angular/router';
 
 interface MenuItem {
@@ -97,34 +98,61 @@ export class SirLaminaireComponent {
   ]
 }
 ,
+{
+  title: 'Financiera',
+  icon: 'currency_exchange',
+  menuSections: [
+   
     {
-      title: 'Financiera',
-      icon:  'currency_exchange',
-      menuSections: [
-        {
-          title: '',
-          items: [
-            { label: 'Informe Resumen Bodegas CMV',    link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Costo_Mercancia_Vendida.aspx' },
-            { label: 'Verificación de TRM',            link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Verificacion_TRM.aspx' },
-            { label: 'Comisiones',                     link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Comisiones.aspx' },
-            { label: 'Cuentas y C. Costos Proveedores',link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Ctas_CC_Proveedores.aspx' },
-            { label: 'Control de Gastos',              link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Gastos.aspx' },
-            { label: 'Ingresos Operacionales',         link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Maestro_General_Ventas.aspx' },
-            { label: 'Flujo de Caja',                  link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Flujo_Caja.aspx' },
-            { label: 'Consulta Documentos por Usuarios',link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Consultar_Documentos_Usuarios.aspx?proceso=FINANCIERA' },
-            { label: 'Documentación Financiera',       link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Documentacion_Financiera.aspx' },
-            { label: 'Solicitud de Notas Crédito',     link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Solicitud_Notas_Credito.aspx' },
-             { label: 'Integración de Nómina', link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Integracion_Nomina.aspx' },
-            { label: 'Compras T.C',           link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Integracion_Fac_Compras.aspx' },
-            { label: 'Cierre CMV',       link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/CIERRE_CMV.aspx' },
-            { label: 'Ventas Laminaire', link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/VENTAS_LAMINAIRE.aspx' },
-             { label: 'Estado de Resultados', link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Informe_Simetrica.aspx' },
-            { label: 'Balance General',       link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Info_Estado_Financiero.aspx' },
-            { label: 'Parámetros',            link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Parametros_Simetrica.aspx' },
-          ]
-        }   
+      title: '',
+      items: [
+        { label: 'Informe Resumen Bodegas CMV',       link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Costo_Mercancia_Vendida.aspx' },
+        { label: 'Comisiones',                         link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Comisiones.aspx' },
+        { label: 'Control de Gastos',                  link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Gastos.aspx' },
+        { label: 'Consulta Documentos por Usuarios',   link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Consultar_Documentos_Usuarios.aspx?proceso=FINANCIERA' },
+        { label: 'Documentación Financiera',           link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Documentacion_Financiera.aspx' },
+
+        { label: 'Verificación de TRM',                link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Verificacion_TRM.aspx' },
+        { label: 'Cuentas y C. Costos Proveedores',    link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Ctas_CC_Proveedores.aspx' },
+        { label: 'Infor. Gral Ingresos Operacionales', link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Maestro_General_Ventas.aspx' },
+        { label: 'Flujo de Caja',                      link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Flujo_Caja.aspx' },
+        { label: 'Solicitud de Notas Crédito',         link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Solicitud_Notas_Credito.aspx' }
+       
       ]
     },
+
+   
+    {
+      title: 'Integración Contable',
+      items: [
+        { label: 'Integración de Nómina',              link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Integracion_Nomina.aspx' },
+        { label: 'Integración Compras T.C',            link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Integracion_Fac_Compras.aspx' },
+        
+      ]
+    },
+
+  
+    {
+      title: 'Tableros Power BI',
+      items: [
+        { label: 'Cierre CMV',                         link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/CIERRE_CMV.aspx' },
+        { label: 'Ventas Laminaire',                   link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/VENTAS_LAMINAIRE.aspx' },
+        { label: 'Perfileria Laminaire',               link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/PERFILERIA.aspx' } 
+      ]
+    },
+
+    
+    {
+      title: 'Informes Financieros',
+      items: [
+        { label: 'Estado de Resultados',               link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Informe_Simetrica.aspx' },
+        { label: 'Balance General',                    link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Info_Estado_Financiero.aspx' },
+        { label: 'Parámetros',                         link: 'https://web.laminaire.net/SirWeb/Financiera/Frm/Parametros_Simetrica.aspx' }
+      ]
+    }
+  ]
+}
+,
 {
   title: 'TI | BI',
   icon: 'devices',
@@ -132,7 +160,7 @@ export class SirLaminaireComponent {
     {
       title: '',
       items: [
-        { label: 'Tablero Power BI',                        link: 'https://app.powerbi.com/view?r=eyJrIjoiOGNkMjQwMzEtYzc2Mi00NDA4LWEwZWQtMmZiYjM3YjVlOTlhIiwidCI6IjVmYzZkYWUyLTg1NmMtNDUyNC05MGVjLWQ4N2IxNjE5ZjE1OSJ9' },
+        { label: 'Tablero Power BI',                         link: 'https://app.powerbi.com/view?r=eyJrIjoiOGNkMjQwMzEtYzc2Mi00NDA4LWEwZWQtMmZiYjM3YjVlOTlhIiwidCI6IjVmYzZkYWUyLTg1NmMtNDUyNC05MGVjLWQ4N2IxNjE5ZjE1OSJ9' },
         { label: 'Solicitudes a Sistemas',                   link: 'https://web.laminaire.net/SirWeb/Solicitudes_Sistemas/Frms/Solicitudes_Sistemas.aspx' },
         { label: 'Informe Encuestas',                        link: 'https://web.laminaire.net/SirWeb/Solicitudes_Sistemas/Frms/Informe_Encuestas_TI.aspx' },
         { label: 'Ficha Técnica Activos Informáticos',       link: 'https://web.laminaire.net/SirWeb/Solicitudes_Sistemas/Frms/Ficha_Tecnica_Activos.aspx' },
@@ -154,24 +182,21 @@ export class SirLaminaireComponent {
   title: 'Logística',
   icon: 'local_shipping',
   menuSections: [
+    
     {
       title: ' ',
       items: [
-      { label: 'Evaluación de Proveedores',           link: 'https://web.laminaire.net/SirWeb/Solicitudes_ControlDoc/Frms/Evaluacion_Proveedores.aspx' },
+        { label: 'Evaluación de Proveedores',           link: 'https://web.laminaire.net/SirWeb/Solicitudes_ControlDoc/Frms/Evaluacion_Proveedores.aspx' },
         { label: 'SRM Gestión de Proveedores',          link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Gestion_Proveedores.aspx' },
-        { label: 'O.C Proveedores Pedidos EQUIPART',     link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/OC_Proveedores_Disfrio.aspx' },
+        { label: 'O.C Proveedores Pedidos EQUIPART',    link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/OC_Proveedores_Disfrio.aspx' },
         { label: 'Estado Órdenes de Compra',            link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Informe_Estado_OC.aspx' },
         { label: 'Partidas Arancelarias x Contenedor',  link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Partidas_Arancelarias_Contenedores.aspx' },
-        { label: 'Control Importaciones y Anticipos',    link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Control_Impo_Anticipos.aspx' },
-        { label: 'Bloqueo de MP x Faltante',             link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Bloqueo_MP.aspx' },
-        { label: 'Seguimiento Cot. Arquitectónicos',     link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Gestion_MP_Arquitectonicos.aspx' },
+        { label: 'Control Importaciones y Anticipos',   link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Control_Impo_Anticipos.aspx' },
+        { label: 'Bloqueo de MP x Faltante',            link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Bloqueo_MP.aspx' },
+        { label: 'Seguimiento Cot. Arquitectónicos',    link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Gestion_MP_Arquitectonicos.aspx' },
         { label: 'Modificación Salidas (S3)',           link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Frm_Modificacion_Salidas_S3.aspx' },
-        { label: 'Conteos Físicos',                     link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Conteo_fisico.aspx' },
-        { label: 'Estadísticas de Inventario MP',       link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Control_Estadist_Invent.aspx' },
-        { label: 'Estadísticas Inventario EQUIPART',    link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Control_Estad_Inv_Disfrio.aspx' },
         { label: 'Lista Precios Stock EQUIPART',        link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Lista_Precios_Stock.aspx' },
         { label: 'Lista Stock Laminaire',               link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Lista_Stock_Laminaire.aspx' },
-        { label: 'Lista Stock Grandes Superficies',     link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Stock_Grandes_Superficies.aspx' },
         { label: 'Traslado de Pedidos',                 link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Traslado_Pedidos.aspx' },
         { label: 'Control de Cajas',                    link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Control_Cajas.aspx' },
         { label: 'Descripciones Mínimas',               link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Descripciones_Minimas.aspx' },
@@ -181,83 +206,206 @@ export class SirLaminaireComponent {
         { label: 'Administrar Bodegas',                 link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Administrar_Bodegas.aspx' },
         { label: 'Cargar Masivo Guías Pedidos',         link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Masivo_Guias_Pedidos.aspx' },
         { label: 'Control Pintura',                     link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Control_Pintura.aspx' },
-        { label: 'Consulta de Documentos',              link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Consulta_Documentos.aspx' },
-        { label: 'Informes',                            link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/vigencia_costos.aspx' },
         { label: 'Documentos Logística',                link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Repositorio_Logistica.aspx' }
       ]
+    },
+
+   
+    {
+      title: 'Conteos Físicos',
+      items: [
+        { label: 'Ingreso de Conteo Físico',           link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Conteo_fisico.aspx' },
+        { label: 'Informes Conteos Físicos',           link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Informe_Inventarios.aspx' },
+        { label: 'Administrador de Conteos Físicos',   link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Admin_Conteo.aspx' }
+      ]
+    },
+    {
+      title: 'Informes',
+      items: [
+        { label: 'Informes Vigencia de Costos',        link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/vigencia_costos.aspx' },
+        { label: 'Informe Salidas S3',                 link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Informe_Salidas_S3.aspx' },
+        { label: 'Informe Guías de Pedidos',           link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Informe_Guias_Pedidos.aspx' },
+        { label: 'Informe Recibo Órdenes de Compra',   link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Informe_OrdenesCompra.aspx' },
+        { label: 'Informe Traslados Móvil',            link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Informe_Traslados.aspx' },
+        { label: 'Informe Alistar Cajas',              link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Info_AlistarCajas.aspx' },
+        { label: 'Informe Ubicaciones WMS Girardota',  link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Info_Ubicaciones_WMS_Girardota.aspx' },
+        { label: 'Informe Log WMS Girardota',          link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Info_Log_WMS_Girardota.aspx' },
+        { label: 'Informe Reservas Pendientes',        link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Info_Reservas_Pendientes.aspx' },
+        { label: 'Informe Cajas Facturadas',           link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Informe_Cajas_Facturadas.aspx' },
+        { label: 'Informe Simulaciones CALMA',         link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Informe_Simulaciones_Calma.aspx' },
+        { label: 'Informe Movimientos WMS',            link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/INF_WMS_LOG.aspx' }
+      ]
+    },
+    {
+      title: 'Estadísticas de Inventario MP',
+      items: [
+        { label: 'Control Estadístico de Inventario',  link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Control_Estadist_Invent.aspx' },
+        { label: 'Parámetros Control Inventarios',     link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Tiempos_Entrega_Proveed.aspx' },
+        { label: 'Estadística para Pedir Contenedor',  link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Estadistica_Contenedor_V2.aspx' }
+      ]
+    },
+   
+    {
+      title: 'Consulta de Documentos',
+      items: [
+        { label: 'Consultas Documentos Reservas',      link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Consulta_Documentos.aspx' },
+        { label: 'Consulta O.C - Pedidos',             link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Consulta_OC_Pedidos.aspx' },
+        { label: 'Consulta Documentos por Usuarios',   link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Consultar_Documentos_Usuarios.aspx?proceso=LOGISTICA' }
+      ]
+    },
+     {
+      title: 'Estadísticas Inventario EQUIPART',
+      items: [
+        { label: 'Control Estadístico de Inventario',  link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Control_Estad_Inv_Disfrio.aspx' },
+        { label: 'Parámetros Control Inventarios',     link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Lead_Time_Disfrio.aspx' }
+      ]
+    },
+    {
+      title: 'Lista Stock Grandes Superficies',
+      items: [
+        { label: 'Lista Stock Grandes Superficies',    link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Stock_Grandes_Superficies.aspx' },
+        { label: 'Registro Cant. Min Pedido',          link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Registro_Cantidad_Pedidos.aspx' }
+      ]
     }
-  
   ]
 }
 ,
-   {
+{
   title: 'Mantenimiento',
-  icon: 'construction Mantenimiento',
+  icon: 'construction',
   menuSections: [
+   
     {
       title: '',
       items: [
-         { label: 'Solicitudes de Mantenimiento',                 link: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Solicitudes_Mmto.aspx' },
-        { label: 'Contenedor Solicitudes de MTTO',               link: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Contenedor_Mtto.aspx' },
-        { label: 'Seguimiento Solicitudes de MTTO',              link: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Solicitudes_X_Usuario.aspx' },
-        { label: 'Ficha Técnica Activos MTTO',                   link: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Ficha_Tecnica_Mtto.aspx' },
-        { label: 'Bitácora Operación Mantenimiento - Medellín',   link: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Bitacora_Operacion_Mtto.aspx' },
-        { label: 'Bitácora Operación Mantenimiento - Girardota',  link: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Bitacora_Mtto_Girardota.aspx' },
-        { label: 'Plan Mantenimiento Preventivo',                 link: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Plan_Mtto.aspx' },
-        { label: 'Informes Contenedor Mantenimiento',             link: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Informes_Contenedor.aspx' },
-        { label: 'Informe de Encuestas',                          link: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Informes_Encuestas.aspx' },
-        { label: 'Pronóstico Mantenimiento Preventivo',           link: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Pronostico_mtto_prev.aspx' },
-        { label: 'Adelantar Mantenimiento Preventivo',            link: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Adelantar_Mtto_Prevent.aspx' }
+        { label: 'Solicitudes de Mantenimiento',           link: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Solicitudes_Mmto.aspx' },
+        { label: 'Contenedor Solicitudes de MTTO',         link: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Contenedor_Mtto.aspx' },
+        { label: 'Seguimiento Solicitudes de MTTO',        link: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Solicitudes_X_Usuario.aspx' },
+        { label: 'Ficha Técnica Activos MTTO',             link: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Ficha_Tecnica_Mtto.aspx' },
+        { label: 'Plan Mantenimiento Preventivo',          link: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Plan_Mtto.aspx' },
+        { label: 'Pronóstico Mantenim. Preventivo',        link: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Pronostico_mtto_prev.aspx' },
+        { label: 'Adelantar Mantenimiento Preventivo',     link: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Adelantar_Mtto_Prevent.aspx' }
       ]
-    }   
+    },
+
+   
+    {
+      title: 'Bitácora Operación Mantenimiento',
+      items: [
+        { label: 'Medellín',   link: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Bitacora_Operacion_Mtto.aspx' },
+        { label: 'Girardota',  link: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Bitacora_Mtto_Girardota.aspx' }
+      ]
+    },
+
+   
+    {
+      title: 'Informes',
+      items: [
+        { label: 'Informes Contendor Mantenimiento',       link: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Informes_Contenedor.aspx' },
+        { label: 'Informe de Encuestas',                   link: 'https://web.laminaire.net/SirWeb/Solicitudes_Mmto/Frms/Informes_Encuestas.aspx' }
+      ]
+    }
   ]
 }
+
 ,
-  {
+{
   title: 'Tal. Humano',
   icon: 'group',
   menuSections: [
     {
-      title: '',
+      title: 'Autogestión del Empleado',
       items: [
-          { label: 'Comprob. de Pago Anteriores a 2024',                      link: 'https://web.laminaire.net/SirWeb/Comprobantes_Pago/Frms/Frm_Comprobante.aspx' },
-          { label: 'Certificado Laboral',                                    link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Certificado_Laboral.aspx' },
-          { label: 'Ficha del Empleado',                                     link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Ficha_Talento_V2.aspx' },
-          { label: 'Informe Ficha del Empleado',                              link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Informe_Ficha_Talento.aspx' },
-          { label: 'Perfil del Cargo',                                       link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Perfil_Cargo_V2.aspx' },
-          { label: 'Competencias',                                           link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Competencias.aspx' },
-          { label: 'Proced., Instruct., Políticas, Form.',                   link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Maestros_Pc.aspx' },
-          { label: 'Resp Seg, Resp SG-SST, Res Amb',                         link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Maestros_Pc_2.aspx' },
-          { label: 'Valores Corporativos',                                   link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Maestros_Valores_Corp.aspx' },
-          { label: 'Informes Control de Acceso',                             link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/ReporteControlAcceso.aspx' },
-          { label: 'Solicitud de vacaciones',                                link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Control_Vacaciones_Empleados.aspx' },
-          { label: 'Calendario de Reuniones',                                link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Calendario_Reuniones.aspx' },
-          { label: 'Control Plan de Bienestar',                              link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Pasaportes.aspx' },
-          { label: 'Informes Plan de Bienestar',                             link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Informes_Pasaporte.aspx' },
-          { label: 'Gestión del Conocimiento',                               link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Control_Capacitaciones.aspx' },
-          { label: 'Informes Gestión Conocimiento',                          link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Informes_Control_Capacitaciones.aspx' },
-          { label: 'Informes Detallado G. C',                                link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Informes_Capacit_Detallado.aspx' },
-          { label: 'Evaluaciones de 360°',                                   link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Evaluaciones_360.aspx' },
-          { label: 'Informes Evaluaciones de 360°',                         link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Informes_Evaluacion_360.aspx' },
-          { label: 'Maestro Evaluaciones de 360°',                           link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Maestros_Evaluaciones_360.aspx' },
-          { label: 'Revisión de Aspectos',                                   link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Revision_Aspectos.aspx' },
-          { label: 'Análisis de Causas',                                     link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Analisis_Causas_Evaluac_360.aspx' },
-          { label: 'Control de Empleados',                                   link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Control_Empleados_Activos_V2.aspx' },
-          { label: 'Empleados Ctrl_Acceso Vs Ofima',                         link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Control_Empleados.aspx' },
-          { label: 'Informe Control de Empleados',                           link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Informes_Control_Empleados.aspx' },
-          { label: 'Plan General de Capacitaciones',                         link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/FrmPlanGeneralCapacitcionesaspx.aspx' },
-          { label: 'Maestro Plan Gral Capacitaciones',                       link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_MestroPlanGeneral_Capacita.aspx' },
-          { label: 'Plan de Entrenamiento',                                 link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Plan_Entrenamiento.aspx' },
-          { label: 'Rifa Canasta Laminaire',                                link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Rifa.aspx' },
-          { label: 'Rifa General',                                           link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/RifaGeneral.aspx' },
-          { label: 'Registro Disponibilidad Empleados',                     link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Registro_Disponibilidad_Empleados.aspx' },
-          { label: 'Consulta Disponibilidad Empleados',                     link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Consulta_Disponibilidad_Empleados.aspx' },
-          { label: 'Control de Dotación',                                   link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Control_Dotacion.aspx' },
-          { label: 'Dctos Firmados Electrónicamente',                       link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Dctos_Firmados_Electr.aspx' },
-          { label: 'Encuesta Retiro Empleados',                             link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Formulario_Retiro_Empleados.aspx' }
+        { label: 'Comprob. de Pago Anteriores a 2024', link: 'https://web.laminaire.net/SirWeb/Comprobantes_Pago/Frms/Frm_Comprobante.aspx' },
+        { label: 'Certificado Laboral',                link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Certificado_Laboral.aspx' },
+        { label: 'Solicitud de Vacaciones',            link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Control_Vacaciones_Empleados.aspx' },
+        { label: 'Calendario de Reuniones',            link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Calendario_Reuniones.aspx' }
+      ]
+    },
+    {
+      title: 'Documentación y Dotación',
+      items: [
+        { label: 'Dctos Firmados Electrónicamente',     link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Dctos_Firmados_Electr.aspx' },
+        { label: 'Control de Dotación',                 link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Control_Dotacion.aspx' },
+        { label: 'Encuesta Retiro Empleados',           link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Formulario_Retiro_Empleados.aspx' }
+      ]
+    },
+
+    {
+      title: 'Ficha del Empleado',
+      items: [
+        { label: 'Ficha del Empleado',                  link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Ficha_Talento_V2.aspx' },
+        { label: 'Informe Ficha del Empleado',          link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Informe_Ficha_Talento.aspx' }
+      ]
+    },
+    {
+      title: 'Perfil del Cargo',
+      items: [
+        { label: 'Perfil del Cargo',                    link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Perfil_Cargo_V2.aspx' }
+      ]
+    },
+    {
+      title: 'Maestros del Perfil del Cargo',
+      items: [
+        { label: 'Competencias',                        link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Competencias.aspx' },
+        { label: 'Proced., Instruct., Políticas, Form.',link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Maestros_Pc.aspx' },
+        { label: 'Resp Seg, Resp SG-SST, Res Amb',      link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Maestros_Pc_2.aspx' },
+        { label: 'Valores Corporativos',                link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Maestros_Valores_Corp.aspx' }
+      ]
+    },
+
+    {
+      title: 'Control de Empleados',
+      items: [
+        { label: 'Control de Empleados',                link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Control_Empleados_Activos_V2.aspx' },
+        { label: 'Empleados Ctrl_Acceso Vs Ofima',      link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Control_Empleados.aspx' },
+        { label: 'Informe Control de Empleados',        link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Informes_Control_Empleados.aspx' },
+        { label: 'Informes Control de Acceso',          link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/ReporteControlAcceso.aspx' }
+      ]
+    },
+
+    {
+      title: 'Reconocimiento a Empleados',
+      items: [
+        { label: 'Reconocimiento a Empleados',          link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Reconocimiento_Empleados.aspx' },
+        { label: 'Informes Reconoc. Empleados',         link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Informe_Reconocimiento_a_Empleados.aspx' },
+        { label: 'Motivos de Reconocimiento',           link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Maestro_Reconocimiento_A-Empleados.aspx' }
+      ]
+    },
+
+    {
+      title: 'Gestión del Conocimiento',
+      items: [
+        { label: 'Gestión del Conocimiento',            link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Control_Capacitaciones.aspx' },
+        { label: 'Informes Gestión Conocimiento',       link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Informes_Control_Capacitaciones.aspx' },
+        { label: 'Informes Detallado G. C',             link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Informes_Capacit_Detallado.aspx' }
+      ]
+    },
+
+    {
+      title: 'Capacitación y Entrenamiento',
+      items: [
+        { label: 'Plan General de Capacitaciones',      link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/FrmPlanGeneralCapacitcionesaspx.aspx' },
+        { label: 'Maestro Plan Gral Capacitaciones',    link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_MestroPlanGeneral_Capacita.aspx' },
+        { label: 'Plan de Entrenamiento',               link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Plan_Entrenamiento.aspx' }
+      ]
+    },
+
+    {
+      title: 'Rifa Laminaire',
+      items: [
+        { label: 'Rifa Canasta Laminaire',              link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Rifa.aspx' },
+        { label: 'Rifa General',                        link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/RifaGeneral.aspx' }
+      ]
+    },
+
+    {
+      title: 'Disponibilidad de Empleados',
+      items: [
+        { label: 'Registro Disponibilidad Empleados',   link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Registro_Disponibilidad_Empleados.aspx' },
+        { label: 'Consulta Disponibilidad Empleados',   link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Consulta_Disponibilidad_Empleados.aspx' }
       ]
     }
-    
   ]
 }
 ,
@@ -265,180 +413,343 @@ export class SirLaminaireComponent {
   title: 'S.G.I',
   icon: 'dashboard',
   menuSections: [
+   
     {
       title: '',
       items: [
-        { label: 'Informe E.G.A',                                     link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Informe_EGA.aspx' },
-          { label: 'Mejoramiento Continuo',                            link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/GestionMejoramiento_continuo.aspx' },
-          { label: 'Informe Mejoramiento Continuo',                     link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Info_Gestion_Mejoramiento_Continuo.aspx' },
-          { label: 'Documentación S.G.I',                              link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Documentacion_SGI.aspx' },
-          { label: 'Informe Documentación S.G.I',                       link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Informes_Documentacion_SGI.aspx' },
-          { label: 'Control SG-SST',                                    link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Control_SG-SST.aspx' },
-          { label: 'Informe Acceso Visitantes',                        link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Informe_Visitantes.aspx' },
-          { label: 'Control de Acceso',                                link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Control_Acceso.aspx' },
-          { label: 'Control de Extintores',                            link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Control_Extintores.aspx' },
-          { label: 'Matriz de Riesgos',                                link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Matriz_Riesgos.aspx' },
-          { label: 'Captura Lavado de Manos',                           link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Control_Lavado_Manos.aspx' },
-          { label: 'Informe Lavado de Manos',                           link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Informe_Lavado_Manos.aspx' },
-          { label: 'Contexto Interno y Externo (DOFA)',                 link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Contexto_Int_Ext_DOFA.aspx' },
-          { label: 'Control de Retal',                                 link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Control_Retal.aspx' },
-          { label: 'Control Retal Mecanizado',                         link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Control_Retal_Mecanizado.aspx' },
-          { label: 'Monitoreo Precio Retal',                           link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Monitoreo_Precios_Retal.aspx' },
-          { label: 'Índice Producción de Láminas',                     link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Indice_Lamina.aspx' },
-          { label: 'Gestión de Ausentismo',                            link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Gestion_Ausentismos.aspx' },
-          { label: 'Informe Gestión de Ausentismo',                     link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Informes_Ausentismo.aspx' },
-          { label: 'Maestro Inspectores',                              link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Registro_Inspectores.aspx' },
-          { label: 'Banco Preguntas',                                  link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Banco_Preguntas.aspx' },
-          { label: 'Encuesta 5s',                                    link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Encuestas_5S.aspx' },
-          { label: 'Gestión Mejoras',                                  link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Mejoras_5S.aspx' },
-          { label: 'Informes 5S',                                      link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Informes_5s.aspx' }
+        { label: 'Informe E.G.A',                                   link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Informe_EGA.aspx' },
+        { label: 'Control SG-SST',                                  link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Control_SG-SST.aspx' },
+        { label: 'Informe Acceso Visitantes',                       link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Informe_Visitantes.aspx' },
+        { label: 'Control de Acceso',                               link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Control_Acceso.aspx' },
+        { label: 'Control de Extintores',                           link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Control_Extintores.aspx' },
+        { label: 'Matriz de Riesgos',                               link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Matriz_Riesgos.aspx' },
+        { label: 'Captura Lavado de Manos',                         link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Control_Lavado_Manos.aspx' },
+        { label: 'Informe Lavado de Manos',                         link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Informe_Lavado_Manos.aspx' },
+        { label: 'Contexto Interno y Externo (DOFA)',               link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Contexto_Int_Ext_DOFA.aspx' }
       ]
-    } 
+    },
+
+       {
+      title: 'Gestión de Ausentismo',
+      items: [
+        { label: 'Gestión de Ausentismo',                           link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Gestion_Ausentismos.aspx' },
+        { label: 'Informe Gestión de Ausentismo',                   link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Informes_Ausentismo.aspx' }
+      ]
+    },
+
+    {
+      title: 'Gestión Mejoramiento Continuo',
+      items: [
+        { label: 'Mejoramiento Continuo',                           link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/GestionMejoramiento_continuo.aspx' },
+        { label: 'Informe Mejoramiento Continuo',                   link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Info_Gestion_Mejoramiento_Continuo.aspx' },
+        { label: 'Documentación S.G.I',                             link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Documentacion_SGI.aspx' },
+        { label: 'Informe Documentación S.G.I',                     link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Informes_Documentacion_SGI.aspx' }
+      ]
+    },
+
    
+    {
+      title: 'Gestión de Retal',
+      items: [
+        { label: 'Control de Retal',                                link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Control_Retal.aspx' },
+        { label: 'Control Retal Mecanizado',                        link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Control_Retal_Mecanizado.aspx' },
+        { label: 'Monitoreo Precio Retal',                          link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Monitoreo_Precios_Retal.aspx' },
+        { label: 'Índice Producción de Láminas',                    link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Indice_Lamina.aspx' }
+      ]
+    },
+
+    
+ 
+  
+    {
+      title: "Control 5'S",
+      items: [
+        { label: 'Maestro Inspectores',                             link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Registro_Inspectores.aspx' },
+        { label: 'Banco Preguntas',                                 link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Banco_Preguntas.aspx' },
+        { label: "Encuesta 5'S",                                     link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Encuestas_5S.aspx' },
+        { label: 'Gestión Mejoras',                                  link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Mejoras_5S.aspx' },
+        { label: 'Informes 5s',                                      link: 'https://web.laminaire.net/SirWeb/S.G.I/FRM/Informes_5s.aspx' }
+      ]
+    }
   ]
-}
-,
- {
+},
+
+{
   title: 'Producción',
   icon: 'settings',
   menuSections: [
+    
     {
       title: '',
       items: [
- { label: 'Tablero Power BI', link: 'https://app.powerbi.com/view?r=eyJrIjoiOWY0YTRkYWMtZWM2MC00MDAyLThlMWQtNDBiYzc0ZjE1OWJjIiwidCI6ImMyZGQ3ZDBjLTQ1MWMtNDA3Mi1iN2YwLWE1NWJkOGVlODUyOSIsImMiOjR9' },
-        { label: 'Control de Piso', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/ControlPiso.aspx' },
-        { label: 'Control Operacional', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Control_Operacional.aspx' },
-        { label: 'Maestro Causas Tiempo Improduc.', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Maestro_Causas_Improductivo.aspx' },
-        { label: 'Captura Producto en Proceso', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/CapturaProdProc_V2.aspx' },
-        { label: 'Captura Producto Terminado', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/CapturaPT.aspx' },
-        { label: 'Captura Producto Pintado', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Captura_Produc_Pintado.aspx' },
-        { label: 'Captura Manual Prod. en Proceso', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/DetalleCap_Manual_V2.aspx' },
-        { label: 'Captura Accesorios', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Captura_LamiAccesorios.aspx' },
-        { label: 'Captura Cajas Tobogán', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Captura_Tobogan.aspx' },
-        { label: 'Programa de Producción', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Programacion_Prod.aspx' },
-        { label: 'Resumen Eficiciencias por Líneas', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Resumen_Eficiencias_Lineas.aspx' },
-        { label: 'Tablero Control Prod. en Proceso', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Tablero_Control.aspx' },
-        { label: 'Control de Pedidos', link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Estado_Pedidos.aspx' },
-        { label: 'Maestro Líneas de Producción', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Maestro_Lineas_Capturas.aspx' },
-        { label: 'Control Lotes Producción', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Control_Lotes_Prod.aspx' },
-        { label: 'Reimprimir Etiquetas Cajas y Pallets', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Reimprimir_Etiquetas_Cajas.aspx' },
-        { label: 'Ajuste Distribución', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Frm_Ajuste_Distribucion.aspx' },
-          { label: 'Informe Distribución Planta', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Distribucion_Planta.aspx' },
-            { label: 'Informe Capturas Prod. en Proceso', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Capturas_Prod_Proc.aspx' },
-            { label: 'Informe Carga de Producción', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Carga_USP.aspx' },
-            { label: 'Informe Entradas Prod. Terminado', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Entradas_PT.aspx' },
-            { label: 'Informe Eficiencias por Líneas', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Eficiencias_Lineas.aspx' },
-            { label: 'Informe Horario Operarios', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/InformeHorarioOperarios.aspx' },
-            { label: 'Informe DDMO', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_DDMO.aspx' },
-            { label: 'Informe Capturas Pendientes', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Prod_Pend_Capturar.aspx' },
-            { label: 'Informe Tiempos Improductivos', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Tiempo_Improductivo.aspx' },
-            { label: 'Informe Inspección de Calidad', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Inspeccion_Calidad.aspx' },
-            { label: 'Informe Usp Acum. Pedidos Pend.', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Info_Usp_Acum_Pedidos_Pend.aspx' },
-            { label: 'Consulta Pend. Empaque', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Inf_Pedido_Pend_Empaque.aspx' },
-        { label: 'Totales Entradas PT', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Totales_EU.aspx' },
-        { label: 'Etiquetas de Corte Mecanizado', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Etiquetas_Mecanizado.aspx' },
-        { label: 'Amazon', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Maestro_Codigos_Amazon.aspx' },
-            { label: 'Easy', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Maestro_Codigos_Easy.aspx' },
-            { label: 'HomeCenter', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Maestro_Codigos_Home.aspx' },
-            { label: 'Store_On', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Maestro_Codigos_StoreOn.aspx' },
-         { label: 'Gestión de Compromisos Pedidos', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Gestion_Compromisos_Pedidos.aspx' },
-        { label: 'Maestro Motivos de Cambio', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Maestro_Motivos_Compr_Pedidos.aspx' },
-        { label: 'Informe Compromisos de Pedidos', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Gestion_Compromisos_Pedidos.aspx' },
-        { label: 'Seguimiento Program. Mecanizado', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Seguim_Prog_Mecan.aspx' },
-        { label: 'Parámetros Pedidos Construcción', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Parametros_Construccion.aspx' },
-        { label: 'Gestión Captura Productos', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Frm_Modificacion_Capturas.aspx' },
-        { label: 'Control Láminas y Bobinas', link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Control_LaminasYBobinas.aspx' },
-        { label: 'Maestro de Áreas', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Maestro_Areas.aspx' },
-        { label: 'Control Variables Pintura', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Tablero_Ctrl_Var_Pint.aspx' },
-        { label: 'División Fechas Producción', link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Programacion_Fechas_Entrega.aspx' }
-      ]
-    }
- 
-  ]
-},
-  {
-  title: 'Comercial',
-  icon: 'sell',
-  menuSections: [
-    {
-      title: ' ',
-      items: [
-         { label: 'Cotizaciones HVAC | STOCK EYP', link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Cotizaciones_Laminaire.aspx' },
-        { label: 'Copiar Cotizaciones', link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Copiar_Cotizacion.aspx' },
-        { label: 'Convertir Cotización a Pedido', link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Convertir_Cotizacion.aspx' },
-        { label: 'Informe General de Cotizaciones', link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Informe_De_Cotizaciones.aspx' },
-        { label: 'Cotizaciones Arquitectónicos', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Cotizaciones_Construccion_V2_1.aspx' },
-        { label: 'Maestro de Modelos Arquitectónicos', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Maestro_Modelos_Arquitect.aspx' },
-        { label: 'Informe Cotizaciones Arquitectónicos', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Informe_Cotiz_Arquitectonicos.aspx' },
-        { label: 'Cotizaciones Equipart', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Cotizaciones_Equipart.aspx' },
-        { label: 'Maestro Marcas Equipart', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Maestro_Marcas_equipart.aspx' },
-        { label: 'Informe Cotizaciones Equipart', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Informe_Cotiz_Equipart.aspx' },
-        { label: 'Cotizaciones Exportación', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Cotizaciones_Exportacion.aspx' },
-        { label: 'Maestro de Clientes Exportación', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Clientes_Exportacion.aspx' },
-        { label: 'Copiar Cotización Exportación', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Copiar_Cotiz_Export.aspx' },
-        { label: 'Informe Cotización Exportación', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Informe_Cotiz_Exportacion.aspx' },
-        { label: 'Convertir Cotización de Exportación', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Convertir_Cotiz_Export.aspx' },
-        { label: 'Pedidos', link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Pedidos_Nuevo.aspx' },
-        { label: 'Control de Cotizaciones EQUIPART', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/FrmCotizaciones.aspx' },
-        { label: 'Calendario de Seguimiento', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Calendario_Seguimiento.aspx' },
-        { label: 'Informe de Cotizaciones Ingeniería', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Informes_Cotizaciones.aspx' },
-        { label: 'Informe de Cotizaciones Ventas', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Informe_Cotiz_Real.aspx' },
-        { label: 'Frecuencia de Facturac-Cotizac', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Informe_Frecuencia_Fac_Cot.aspx' },
-        { label: 'Ventas por Clientes', link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Ventas_Clientes_Rango_Fechas.aspx' },
-        { label: 'Clientes que No Compraron', link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Clientes_No_Compraron.aspx' },
-        { label: 'Cantidad de Pedidos', link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Pedidos_Mes_UEN.aspx' },
-        { label: 'Informe de Clientes Nuevos', link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Informe_Clientes_Nuevos.aspx' },
-        { label: 'Gestión de Clientes', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Gestion_Clientes.aspx' },
-        { label: 'Pedidos Pendientes', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Pedidos_Pendientes.aspx' },
-        { label: 'Criticidad Clientes SAGRILAFT', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Matriz_Criticidad.aspx' },
-        { label: 'Matriz Criticidad Clientes OEA', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Matriz_Criticidad_OEA.aspx' },
-        { label: 'Termómetro de Ventas', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Termometro_Ventas.aspx' },
-        { label: 'Maestro Presupuesto de Ventas', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Presupuesto_Ventas.aspx' },
-        { label: 'Campañas y Post Publicitarios', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Post_Publicitarios.aspx' },
-        { label: 'Formato Promotores de Ventas', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Promotores_Ventas.aspx' },
-        { label: 'Control de Souvenir', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Control_Suvenires.aspx' },
-        { label: 'Consulta Documentos por Usuarios', link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Consultar_Documentos_Usuarios.aspx?proceso=COMERCIAL' },
-        { label: 'Autorización de Pedidos', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Autorizaciones_Pedidos.aspx' },
-        { label: 'Material Mercadeo', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Area_Seleccion_Mercadeo.aspx' },
-        { label: 'Control de Muestras', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Control_Muestras.aspx' },
-        { label: 'Generador de Códigos PT', link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Generador_Codigos_PT.aspx' },
-        { label: 'Anular Pedidos', link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/AnularPedidos.aspx' },
-        { label: 'SIR Enterprise', link: 'https://web.laminaire.net/SirWeb/SIR_Enterprise_WEB/' }
+        { label: 'Tablero Power BI',                         link: 'https://app.powerbi.com/view?r=eyJrIjoiOWY0YTRkYWMtZWM2MC00MDAyLThlMWQtNDBiYzc0ZjE1OWJjIiwidCI6ImMyZGQ3ZDBjLTQ1MWMtNDA3Mi1iN2YwLWE1NWJkOGVlODUyOSIsImMiOjR9' },
+        { label: 'Control de Piso',                          link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/ControlPiso.aspx' },
+        { label: 'Programa de Producción',                   link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Programacion_Prod.aspx' },
+        { label: 'Resumen Eficiencias por Líneas',           link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Resumen_Eficiencias_Lineas.aspx' },
+        { label: 'Tablero Control Prod. en Proceso',         link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Tablero_Control.aspx' },
+        { label: 'Control de Pedidos',                       link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Estado_Pedidos.aspx' },
+        { label: 'Maestro Líneas de Producción',             link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Maestro_Lineas_Capturas.aspx' },
+        { label: 'Control Lotes Producción',                 link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Control_Lotes_Prod.aspx' },
+        { label: 'Reimprimir Etiquetas Cajas y Pallets',     link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Reimprimir_Etiquetas_Cajas.aspx' },
+        { label: 'Ajuste Distribución',                      link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Frm_Ajuste_Distribucion.aspx' },
+
+        { label: 'Totales Entradas PT',                      link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Totales_EU.aspx' },
+        { label: 'Etiquetas de Corte Mecanizado',            link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Etiquetas_Mecanizado.aspx' },
+        { label: 'Seguimiento Program. Mecanizado',          link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Seguim_Prog_Mecan.aspx' },
+        { label: 'Parámetros Pedidos Construcción',          link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Parametros_Construccion.aspx' },
+        { label: 'Gestión Captura Productos',                link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Frm_Modificacion_Capturas.aspx' },
+        { label: 'Control Láminas y Bobinas',                link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Control_LaminasYBobinas.aspx' },
+        { label: 'Maestro de Áreas',                         link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Maestro_Areas.aspx' },
+        { label: 'Control Variables Pintura',                link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Tablero_Ctrl_Var_Pint.aspx' },
+        { label: 'División Fechas Producción',               link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Programacion_Fechas_Entrega.aspx' },
+
+        { label: 'Permisos Modificación de Pedidos',         link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Permisos_Modificacion_Pedidos.aspx' },
+        { label: 'Operación de Máquinas y Equipos',          link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Operacion_MaquinasEquipos.aspx' },
+        { label: 'Inventario de Puntas',                     link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Inventario_Puntas.aspx' },
+        { label: 'Consulta Documentos por Usuarios',         link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Consultar_Documentos_Usuarios.aspx?proceso=PRODUCCION' },
+        { label: 'Asignación USP x Producto',                link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/USP_x_Producto.aspx' },
+        { label: 'Programación Pintura Accesorios',          link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Programacion_Pintura_Accesorios.aspx' },
+        { label: 'Programación Accesorios',                  link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Programacion_Lamiaccesorios.aspx' },
+        { label: 'Control Calidad Pedidos',                  link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Control_Calidad_Pedidos.aspx' },
+        { label: 'Modificar Programación Producción',        link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Mod_Prog_Ensamble_Pint.aspx' },
+        { label: 'Inspección Calidad',                       link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Inspeccion_Calidad.aspx' }
       ]
     },
+
+    
+    {
+      title: 'Control Operacional',
+      items: [
+        { label: 'Control Operacional',                       link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Control_Operacional.aspx' },
+        { label: 'Maestro Causas Tiempo Improduc.',           link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Maestro_Causas_Improductivo.aspx' }
+      ]
+    },
+
+    
+    {
+      title: 'Capturas',
+      items: [
+        { label: 'Captura Producto en Proceso',               link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/CapturaProdProc_V2.aspx' },
+        { label: 'Captura Producto Terminado',                link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/CapturaPT.aspx' },
+        { label: 'Captura Producto Pintado',                  link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Captura_Produc_Pintado.aspx' },
+        { label: 'Captura Manual Prod. en Proceso',           link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/DetalleCap_Manual_V2.aspx' },
+        { label: 'Captura Accesorios',                        link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Captura_LamiAccesorios.aspx' },
+        { label: 'Captura Cajas Tobogán',                     link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Captura_Tobogan.aspx' }
+      ]
+    },
+
+    
+    {
+      title: 'Maestros Códigos de Barras',
+      items: [
+        { label: 'Amazon',                                    link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Maestro_Codigos_Amazon.aspx' },
+        { label: 'Easy',                                      link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Maestro_Codigos_Easy.aspx' },
+        { label: 'HomeCenter',                                link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Maestro_Codigos_Home.aspx' },
+        { label: 'Store_On',                                  link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Maestro_Codigos_StoreOn.aspx' }
+      ]
+    },
+
+    
+    {
+      title: 'Gestión de Compromisos Pedidos',
+      items: [
+        { label: 'Gestión de Compromisos Pedidos',            link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Gestion_Compromisos_Pedidos.aspx' },
+        { label: 'Maestro Motivos de Cambio',                 link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Maestro_Motivos_Compr_Pedidos.aspx' },
+        { label: 'Informe Compromisos de Pedidos',            link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Gestion_Compromisos_Pedidos.aspx' }
+      ]
+    },
+
+    
+    {
+      title: 'Inventario Producto en Proceso',
+      items: [
+        { label: 'Inventario Producto en Proceso',            link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Inventario_Producto_Proceso.aspx' },
+        { label: 'Informe Inventario en Proceso',             link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Inv_Producto_Proceso.aspx' }
+      ]
+    },
+
   
+    {
+      title: 'Informes',
+      items: [
+        { label: 'Informe Distribución Planta',               link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Distribucion_Planta.aspx' },
+        { label: 'Informe Capturas Prod. en Proceso',         link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Capturas_Prod_Proc.aspx' },
+        { label: 'Informe Carga de Producción',               link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Carga_USP.aspx' },
+        { label: 'Informe Entradas Prod. Terminado',          link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Entradas_PT.aspx' },
+        { label: 'Informe Eficiencias por Líneas',            link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Eficiencias_Lineas.aspx' },
+        { label: 'Informe Horario Operarios',                 link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/InformeHorarioOperarios.aspx' },
+        { label: 'Informe DDMO',                              link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_DDMO.aspx' },
+        { label: 'Informe Capturas Pendientes',               link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Prod_Pend_Capturar.aspx' },
+        { label: 'Informe Tiempos Improductivos',             link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Tiempo_Improductivo.aspx' },
+        { label: 'Informe Inspección de Calidad',             link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Informe_Inspeccion_Calidad.aspx' },
+        { label: 'Informe Usp Acum. Pedidos Pend.',           link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Info_Usp_Acum_Pedidos_Pend.aspx' },
+        { label: 'Consulta Pend. Empaque',                    link: 'https://web.laminaire.net/SirWeb/Produccion/FRM/Inf_Pedido_Pend_Empaque.aspx' }
+      ]
+    }
   ]
 }
 ,
- {
-  title: 'Ingeniería',
-  icon: 'engineering',
+{
+  title: 'Comercial',
+  icon: 'sell',
   menuSections: [
+   
+    {
+      title: 'Cotizaciones',
+      items: [
+        { label: 'Cotizaciones HVAC | STOCK EYP',      link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Cotizaciones_Laminaire.aspx' },
+        { label: 'Copiar Cotizaciones',                link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Copiar_Cotizacion.aspx' },
+        { label: 'Convertir Cotización a Pedido',      link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Convertir_Cotizacion.aspx' },
+        { label: 'Informe General de Cotizaciones',    link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Informe_De_Cotizaciones.aspx' }
+      ]
+    },
+ 
     {
       title: '',
       items: [
-              { label: 'Maestro Diseñadores', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Maestro_Diseñadores.aspx' },
-        { label: 'Maestro de Marcas', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Maestro_Marcas.aspx' },
-        { label: 'Ingreso de Cotizaciones', link: 'https://web.laminaire.net/S-irWeb/Comercial/FRM/FrmIngresoCot.aspx?Id=0' },
-        { label: 'Informe Resumen de Cotizaciones', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Informe_Resumen_Cotiz_Por_Divis.aspx' },
-        { label: 'Parámetros Códigos PT', link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Parametros_Codigos_PT.aspx' },
-        { label: 'Maestro de Medidas', link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Maestro_Medidas.aspx' },
-        { label: 'Vincular Grupos - Líneas PT', link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Vincular_Grupos_Lineas_Inv.aspx' },
-        { label: 'Parámetros MP Arquitectónicos', link: 'https://web.laminaire.net/SirWeb/Ingenieria/FRM/Parametros_MP_Arquitectonicos.aspx' },
-        { label: 'Proyectos de Ingeniería', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Proyectos_Ingenieria.aspx' },
-        { label: 'Liberación Pedidos de Ingeniería', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Cambiar_Prioridad_Pedidos.aspx' },
-        { label: 'Informe Pedidos Ing. Liberados', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Informe_Liberacion_Pedidos.aspx' },
-        { label: 'Información Inicial', link: 'https://web.laminaire.net/SirWeb/Ingenieria/FRM/Informacion_Inicial.aspx' },
-        { label: 'Proyectos Asignados', link: 'https://web.laminaire.net/SirWeb/Ingenieria/FRM/Proyectos_Asignados.aspx' },
-        { label: 'Gestión de Proyectos', link: 'https://web.laminaire.net/SirWeb/Ingenieria/FRM/Gestion_Proyectos.aspx' },
-        { label: 'Métricas Proyectos', link: 'https://web.laminaire.net/SirWeb/Ingenieria/FRM/Metricas_Proyecto.aspx' },
-        { label: 'Biblioteca Ingeniería', link: 'https://web.laminaire.net/SirWeb/Ingenieria/FRM/Biblioteca_Ingenieria.aspx' },
-        { label: 'Parámetros Especiales Referencias', link: 'https://web.laminaire.net/SirWeb/Ingenieria/FRM/Parametros_Especiales_Referencias.aspx' },
-        { label: 'Informe Códigos sin Vigencia', link: 'https://web.laminaire.net/SirWeb/Ingenieria/FRM/Informe_Codigos_Sin_Vigencia.aspx' }
+        { label: 'Pedidos',                             link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Pedidos_Nuevo.aspx' },
+        { label: 'Gestión de Clientes',                 link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Gestion_Clientes.aspx' },
+        { label: 'Pedidos Pendientes',                  link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Pedidos_Pendientes.aspx' },
+
+        { label: 'Campañas y Post Publicitarios',       link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Post_Publicitarios.aspx' },
+        { label: 'Formato Promotores de Ventas',        link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Promotores_Ventas.aspx' },
+        { label: 'Control de Souvenir',                 link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Control_Suvenires.aspx' },
+        { label: 'Consulta Documentos por Usuarios',    link: 'https://web.laminaire.net/SirWeb/Logistica/Frm/Consultar_Documentos_Usuarios.aspx?proceso=COMERCIAL' },
+
+        { label: 'Autorización de Pedidos',             link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Autorizaciones_Pedidos.aspx' },
+        { label: 'Material Mercadeo',                   link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Area_Seleccion_Mercadeo.aspx' },
+        { label: 'Control de Muestras',                 link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Control_Muestras.aspx' },
+        { label: 'Generador de Códigos PT',             link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Generador_Codigos_PT.aspx' },
+        { label: 'Anular Pedidos',                      link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/AnularPedidos.aspx' },
+        { label: 'SIR Enterprise',                      link: 'https://web.laminaire.net/SirWeb/SIR_Enterprise_WEB/' }
+      ]
+    },
+   
+    {
+      title: 'Cotizaciones Arquitectónicos',
+      items: [
+        { label: 'Cotizaciones Arquitectónicos',       link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Cotizaciones_Construccion_V2_1.aspx' },
+        { label: 'Maestro de Modelos Arquitectónicos', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Maestro_Modelos_Arquitect.aspx' },
+        { label: 'Informe Cotizaciones Arquitectónicos', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Informe_Cotiz_Arquitectonicos.aspx' }
+      ]
+    },
+
+    
+    {
+      title: 'Cotizaciones Equipart',
+      items: [
+        { label: 'Cotizaciones Equipart',              link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Cotizaciones_Equipart.aspx' },
+        { label: 'Maestro Marcas Equipart',            link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Maestro_Marcas_equipart.aspx' },
+        { label: 'Informe Cotizaciones Equipart',      link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Informe_Cotiz_Equipart.aspx' }
+      ]
+    },
+
+  
+    {
+      title: 'Cotizaciones Exportación',
+      items: [
+        { label: 'Cotizaciones Exportación',           link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Cotizaciones_Exportacion.aspx' },
+        { label: 'Maestro de Clientes Exportación',    link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Clientes_Exportacion.aspx' },
+        { label: 'Copiar Cotización Exportación',      link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Copiar_Cotiz_Export.aspx' },
+        { label: 'Informe Cotización Exportación',     link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Informe_Cotiz_Exportacion.aspx' },
+        { label: 'Convertir Cotización de Exportación',link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Convertir_Cotiz_Export.aspx' }
+      ]
+    },
+
+    
+    {
+      title: 'Control Cotizaciones EQUIPART',
+      items: [
+        { label: 'Control de Cotizaciones EQUIPART',   link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/FrmCotizaciones.aspx' },
+        { label: 'Calendario de Seguimiento',          link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Calendario_Seguimiento.aspx' }
+      ]
+    },
+
+   
+    {
+      title: 'Informes',
+      items: [
+        { label: 'Informe de Cotizaciones Ingeniería', link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Informes_Cotizaciones.aspx' },
+        { label: 'Informe de Cotizaciones Ventas',     link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Informe_Cotiz_Real.aspx' },
+        { label: 'Frecuencia de Facturac-Cotizac',     link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Informe_Frecuencia_Fac_Cot.aspx' },
+        { label: 'Ventas por Clientes',                link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Ventas_Clientes_Rango_Fechas.aspx' },
+        { label: 'Clientes que No Compraron',          link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Clientes_No_Compraron.aspx' },
+        { label: 'Cantidad de Pedidos',                link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Pedidos_Mes_UEN.aspx' },
+        { label: 'Informe de Clientes Nuevos',         link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Informe_Clientes_Nuevos.aspx' }
+      ]
+    },
+
+    
+    {
+      title: 'Matriz de Criticidad Clientes',
+      items: [
+        { label: 'Criticidad Clientes SAGRILAFT',      link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Matriz_Criticidad.aspx' },
+        { label: 'Matriz Criticidad Clientes OEA',     link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Matriz_Criticidad_OEA.aspx' }
+      ]
+    },
+
+   
+    {
+      title: 'Termómetro de Ventas',
+      items: [
+        { label: 'Termómetro de Ventas',               link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Termometro_Ventas.aspx' },
+        { label: 'Maestro Presupuesto de Ventas',      link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Presupuesto_Ventas.aspx' }
+      ]
+    },
+
+ 
+  ]
+},
+{
+  title: 'Ingeniería',
+  icon: 'engineering',
+  menuSections: [
+    //
+    {
+      title: '',
+      items: [
+        { label: 'Maestro Diseñadores',                   link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Maestro_Diseñadores.aspx' },
+        { label: 'Maestro de Marcas',                     link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Maestro_Marcas.aspx' },
+        { label: 'Ingreso de Cotizaciones',               link: 'https://web.laminaire.net/S-irWeb/Comercial/FRM/FrmIngresoCot.aspx?Id=0' },
+        { label: 'Informe Resumen de Cotizaciones',       link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Informe_Resumen_Cotiz_Por_Divis.aspx' },
+
+        { label: 'Parámetros MP Arquitectónicos',         link: 'https://web.laminaire.net/SirWeb/Ingenieria/FRM/Parametros_MP_Arquitectonicos.aspx' },
+
+        { label: 'Proyectos de Ingeniería',               link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Proyectos_Ingenieria.aspx' },
+        { label: 'Liberación Pedidos de Ingeniería',      link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Cambiar_Prioridad_Pedidos.aspx' },
+        { label: 'Informe Pedidos Ing. Liberados',        link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Informe_Liberacion_Pedidos.aspx' },
+
+        { label: 'Informe Códigos sin Vigencia',          link: 'https://web.laminaire.net/SirWeb/Ingenieria/FRM/Informe_Codigos_Sin_Vigencia.aspx' }
+      ]
+    },  
+    {
+      title: 'Maestros Códigos PT',
+      items: [
+        { label: 'Parámetros Códigos PT',                 link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Parametros_Codigos_PT.aspx' },
+        { label: 'Maestro de Medidas',                    link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Maestro_Medidas.aspx' },
+        { label: 'Vincular Grupos - Líneas PT',           link: 'https://web.laminaire.net/SirWeb/Ofimatica/Frms/Vincular_Grupos_Lineas_Inv.aspx' }
+      ]
+    },   
+    {
+      title: 'Seguimiento Proyectos Ingeniería',
+      items: [
+        { label: 'Proyectos Vendidos',                    link: 'https://web.laminaire.net/SirWeb/Ingenieria/FRM/Proyectos_Vendidos.aspx' }, 
+        { label: 'Información Inicial',                   link: 'https://web.laminaire.net/SirWeb/Ingenieria/FRM/Informacion_Inicial.aspx' },
+        { label: 'Proyectos Asignados',                   link: 'https://web.laminaire.net/SirWeb/Ingenieria/FRM/Proyectos_Asignados.aspx' },
+        { label: 'Gestión de Proyectos',                  link: 'https://web.laminaire.net/SirWeb/Ingenieria/FRM/Gestion_Proyectos.aspx' },
+        { label: 'Métricas Proyectos',                    link: 'https://web.laminaire.net/SirWeb/Ingenieria/FRM/Metricas_Proyecto.aspx' }
+      ]
+    },   
+    {
+      title: 'Biblioteca Ingeniería',
+      items: [
+        { label: 'Biblioteca Ingeniería',                 link: 'https://web.laminaire.net/SirWeb/Ingenieria/FRM/Biblioteca_Ingenieria.aspx' },
+        { label: 'Parámetros Especiales Referencias',     link: 'https://web.laminaire.net/SirWeb/Ingenieria/FRM/Parametros_Especiales_Referencias.aspx' }
       ]
     }
   ]
 }
+
 
   ];
 
@@ -480,6 +791,10 @@ export class SirLaminaireComponent {
     items.forEach((item, i) => res[i % cols].push(item));
     return res;
   }
+/** Devuelve solo las secciones que SI tienen título (no vacío) */
+public sectionsWithTitle(sections: MenuSection[]): MenuSection[] {
+  return (sections || []).filter(s => !!(s.title && s.title.trim().length));
+}
 
 
 }

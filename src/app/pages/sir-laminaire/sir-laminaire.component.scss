@@ -153,16 +153,7 @@
   margin-top: 0 !important;
 }
 
-/* 3) Línea divisoria en el header */
-::ng-deep .mat-expansion-panel-header {
-  border-bottom: 0px solid #cccccc;
-}
 
-/* Quitar redondeo de panels y headers */
-::ng-deep .mat-expansion-panel,
-::ng-deep .mat-expansion-panel-header {
-  border-radius: 0 !important;
-}
 
 /* Si requieren que el contenedor interior (content) tampoco lo tenga: */
 ::ng-deep .mat-expansion-panel-content {
@@ -294,3 +285,290 @@
 .button-column { display:flex; flex-direction:column; gap:0.70rem; }
 @media(max-width:600px){ .nav-button-grid{grid-template-columns:1fr} }
  
+/* Botones del modal / listas */
+button.menu-btn,
+a.menu-btn,
+.menu-btn.mat-mdc-button {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  text-transform: none;
+  font-weight: 500;
+
+  background-color: #162750 !important;
+  border: 1px solid #162750;
+  color: #ffffff !important;
+
+  transition: background-color .15s ease, transform .05s ease;
+}
+
+.menu-btn:hover,
+.menu-btn:focus-visible {
+  background-color: #1f3366 !important; /* leve aclarado para hover/focus */
+}
+
+.menu-btn:active {
+  transform: translateY(1px);
+}
+
+.menu-btn:disabled {
+  background-color: #22335a !important; /* tono apagado */
+  border-color: #22335a;
+  color: #e0e0e0 !important;
+  cursor: not-allowed;
+}
+
+/* Botón “Ver Lista” dentro de las cards */
+.sir-ver-mas {
+  width: 100%;
+  background-color: #162750 !important;
+  border: 1px solid #162750;
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 0.25rem;
+}
+
+.sir-ver-mas:hover,
+.sir-ver-mas:focus-visible {
+  background-color: #1f3366 !important;
+}
+
+/* El acordeón se distribuye en columnas (los panels), conservando el orden */
+.custom-dialog-content .accordion-grid-rows {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .custom-dialog-content .accordion-grid-rows { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .custom-dialog-content .accordion-grid-rows { grid-template-columns: 1fr; }
+}
+
+/* ===== UX/UI para acordeones con look consistente ===== */
+$brand: #162750;
+$brand-hover: #1f3366;
+
+/* La grilla de panels (ya la usas) */
+.custom-dialog-content .accordion-grid-rows {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .custom-dialog-content .accordion-grid-rows { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .custom-dialog-content .accordion-grid-rows { grid-template-columns: 1fr; }
+}
+
+/* Panel como “card”, sin sombras raras del tema, con radios coherentes */
+.custom-dialog-content .accordion-grid-rows .mat-expansion-panel {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0.5rem;
+  overflow: hidden; /* evita desbordes cuando se expande */
+}
+
+/* HEADER: igual a botón azul */
+.custom-dialog-content .accordion-grid-rows .mat-expansion-panel-header {
+  background-color: $brand;
+  border: 1px solid $brand;
+  color: #fff;
+  height: 48px;
+  padding-inline: 1rem;
+  border-radius: 0.5rem;
+  transition: background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+.custom-dialog-content .accordion-grid-rows .mat-expansion-panel-header:hover,
+.custom-dialog-content .accordion-grid-rows .mat-expansion-panel-header:focus-visible {
+  background-color: $brand-hover;
+  border-color: $brand-hover;
+  box-shadow: 0 6px 16px rgba(0,0,0,.08);
+}
+
+/* Quita “diente” cuando está abierto: une header + body sin doble borde */
+.custom-dialog-content .accordion-grid-rows .mat-expansion-panel.mat-expanded .mat-expansion-panel-header {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  box-shadow: 0 6px 16px rgba(0,0,0,.08);
+}
+
+/* Texto del header en blanco */
+.custom-dialog-content .accordion-grid-rows
+  .mat-expansion-panel-header .mat-expansion-panel-header-title {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Flecha del header en blanco (MDC) */
+:host ::ng-deep .accordion-grid-rows .mat-expansion-panel-header .mat-expansion-indicator,
+:host ::ng-deep .accordion-grid-rows .mat-expansion-panel-header .mat-expansion-indicator svg {
+  color: #fff !important;
+  fill: currentColor !important;
+  opacity: .95;
+}
+
+/* Efecto ripple en blanco suave */
+:host ::ng-deep .accordion-grid-rows .mat-expansion-panel-header .mat-ripple-element {
+  background: rgba(255,255,255,.2) !important;
+}
+
+/* BODY: más aire arriba para que el 1er botón no quede pegado */
+.custom-dialog-content .accordion-grid-rows .mat-expansion-panel-body {
+  background: #fff;
+  padding: 1.25rem 0.75rem 0.75rem; /* ↑ subimos el top */
+  border: 1px solid #e6e8ee;
+  border-top: none;
+  border-radius: 0 0 .5rem .5rem;
+  margin-top: -1px;
+}
+/* Un pelín de espacio antes del primer botón */
+.custom-dialog-content .accordion-grid-rows .panel-button-list { padding-top: .25rem; }
+
+/* Alternativa: margen solo al primer botón */
+.custom-dialog-content .accordion-grid-rows .panel-button-list .menu-btn:first-child { margin-top: .25rem; }
+
+/* Lista vertical de botones dentro del panel (uno debajo del otro) */
+.panel-button-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.panel-button-list .menu-btn {
+  width: 100%;
+}
+
+/* Separación limpia entre panels contiguos dentro de la grilla */
+.custom-dialog-content .accordion-grid-rows .mat-expansion-panel + .mat-expansion-panel {
+  margin-top: 0;
+}
+
+/* Accesibilidad: foco visible con aro sutil */
+.custom-dialog-content .accordion-grid-rows
+  .mat-expansion-panel-header.cdk-keyboard-focused {
+  outline: 2px solid rgba(255,255,255,.6);
+  outline-offset: 2px;
+}
+
+/* ====== PATCH UX/UI: acordeón = botones + contenido blanco ====== */
+$brand: #162750;        // azul de tus botones
+$brand-hover: #1f3366;  // hover
+
+/* --- Panel como “card” limpia --- */
+.custom-dialog-content .accordion-grid-rows .mat-expansion-panel {
+  background: transparent;
+  border: none !important;
+  box-shadow: none;
+  border-radius: .5rem;
+  overflow: hidden;
+}
+
+/* --- HEADER: igual al botón azul externo --- */
+.custom-dialog-content .accordion-grid-rows .mat-expansion-panel-header {
+  background-color: $brand !important;
+  border: 1px solid $brand !important;
+  color: #fff !important;
+  height: 48px;
+  padding-inline: 1rem;
+  border-radius: .5rem;
+  transition: background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+.custom-dialog-content .accordion-grid-rows .mat-expansion-panel-header:hover,
+.custom-dialog-content .accordion-grid-rows .mat-expansion-panel-header:focus-visible {
+  background-color: $brand-hover !important;
+  border-color: $brand-hover !important;
+  box-shadow: 0 6px 16px rgba(0,0,0,.08);
+}
+/* Unir header con body al expandir */
+.custom-dialog-content .accordion-grid-rows .mat-expansion-panel.mat-expanded .mat-expansion-panel-header {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Chevron blanco */
+:host ::ng-deep .accordion-grid-rows .mat-expansion-panel-header .mat-expansion-indicator,
+:host ::ng-deep .accordion-grid-rows .mat-expansion-panel-header .mat-expansion-indicator svg {
+  color: #fff !important;
+  fill: currentColor !important;
+}
+
+/* --- BODY: blanco, pegado al header --- */
+.custom-dialog-content .accordion-grid-rows .mat-expansion-panel-body {
+  background: #fff;
+  padding: .75rem;
+  border: 1px solid #e6e8ee;
+  border-top: none;               /* se pega al header */
+  border-radius: 0 0 .5rem .5rem;
+  margin-top: -1px;               /* sin línea fantasma */
+}
+
+/* --- BOTONES DENTRO DEL PANEL: blancos con texto azul --- */
+/* (NO afecta a los botones fuera del acordeón) */
+.custom-dialog-content .accordion-grid-rows .panel-button-list .menu-btn {
+  background: #fff !important;
+  color: $brand !important;
+  border: 1px solid $brand !important;
+  font-weight: 600;
+}
+.custom-dialog-content .accordion-grid-rows .panel-button-list .menu-btn:hover,
+.custom-dialog-content .accordion-grid-rows .panel-button-list .menu-btn:focus-visible {
+  background: #f4f6fb !important;
+  color: $brand !important;
+  border-color: $brand-hover !important;
+}
+.custom-dialog-content .accordion-grid-rows .panel-button-list .menu-btn:active {
+  transform: translateY(1px);
+}
+
+/* === PATCH FINAL: expand con puntas redondeadas tipo botón === */
+
+/* El contenedor NO debe recortar el radio del header */
+:host ::ng-deep .custom-dialog-content .accordion-grid-rows .mat-expansion-panel {
+  overflow: visible !important;        /* <- clave */
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Header igual a tus botones */
+:host ::ng-deep .custom-dialog-content .accordion-grid-rows .mat-expansion-panel-header {
+  background-color: #162750 !important;
+  border: 1px solid #162750 !important;
+  color: #fff !important;
+  min-height: 48px;
+  padding: 0 1rem;
+  border-radius: .5rem !important;     /* <- redondeado visible */
+  font-weight: 600;
+
+  /* chevron en blanco */
+  --mat-expansion-header-indicator-color: #fff;
+  --mat-expansion-header-indicator-disabled-color: rgba(255,255,255,.6);
+}
+
+/* Al abrir: header solo arriba, body redondeado abajo */
+:host ::ng-deep .custom-dialog-content .accordion-grid-rows
+  .mat-expansion-panel.mat-expanded .mat-expansion-panel-header {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+:host ::ng-deep .custom-dialog-content .accordion-grid-rows .mat-expansion-panel-body {
+  background: #fff !important;
+  border: 1px solid #e6e8ee !important;
+  border-top: none !important;
+  border-radius: 0 0 .5rem .5rem !important;
+  padding: 1.25rem .75rem .75rem !important;  /* despega el 1º botón del top */
+  margin-top: -1px;
+}
+
+/* Refuerzo: chevron blanco */
+:host ::ng-deep .custom-dialog-content .accordion-grid-rows
+  .mat-expansion-panel-header .mat-expansion-indicator svg {
+  fill: #fff !important;
+}
+

@@ -15,10 +15,11 @@ import { INavbarData } from '@shared/models/layout/navbar-data.interface';
 import { ISidebarToggle } from '@shared/models/layout/sidebar-toggle.interface';
 import { SublevelMenuComponent } from '../sublevel-menu/sublevel-menu.component';
 
-// === NUEVO: filtro ===
+// Filtro / búsqueda
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, startWith } from 'rxjs/operators';
 import { HighlightPipe } from '@shared/pipes/highlight.pipe';
+
 @Component({
   standalone: true,
   selector: 'app-sidebar',
@@ -29,28 +30,27 @@ import { HighlightPipe } from '@shared/pipes/highlight.pipe';
     SublevelMenuComponent,
     MatIconModule,
     ReactiveFormsModule,
-    HighlightPipe, // para resaltar coincidencias
+    HighlightPipe,
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
   animations: [fadeInOutAnimation],
 })
 export class SidebarComponent {
-  [x: string]: any;
-
   private readonly router = inject(Router);
   private readonly menuService = inject(MenuService);
 
+  // datos crudos y árbol
   menu: MenuResponse[] = [];
-  menuArray: INavbarData[] = [];
-
-  @Output() onToggleSideNav: EventEmitter<ISidebarToggle> = new EventEmitter();
-  collapsed: boolean = false; // en tu UI "true" significa ancho expandido (texto visible)
-  screenWidth = 0;
   navData: INavbarData[] = [];
+
+  // estado UI
+  @Output() onToggleSideNav: EventEmitter<ISidebarToggle> = new EventEmitter();
+  collapsed: boolean = false;
+  screenWidth = 0;
   multiple: boolean = false;
 
-  // === Estado del filtro ===
+  // filtro
   searchCtrl = new FormControl<string>('', { nonNullable: true });
   filteredNavData: INavbarData[] = [];
   isFiltering = false;
@@ -79,7 +79,7 @@ export class SidebarComponent {
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
+  onResize(): void {
     this.screenWidth = window.innerWidth;
     if (this.screenWidth <= 768) {
       this.collapsed = false;
@@ -103,21 +103,20 @@ export class SidebarComponent {
     item.expanded = !item.expanded;
   }
 
-    getActiveClass(node: INavbarData): string {
-  const current = this.router.url;
+  getActiveClass(node: INavbarData): string {
+    const current = this.router.url;
 
-  const isActiveRoute = (route?: string | null) =>
-    !!route && (current === route || current.startsWith(route + '/'));
+    const isActiveRoute = (route?: string | null) =>
+      !!route && (current === route || current.startsWith(route + '/'));
 
-  const hasActiveDescendant = (n: INavbarData): boolean =>
-    (n.items ?? []).some(
-      ch => isActiveRoute(ch.route) || hasActiveDescendant(ch)
-    );
+    const hasActiveDescendant = (n: INavbarData): boolean =>
+      (n.items ?? []).some(
+        (ch) => isActiveRoute(ch.route) || hasActiveDescendant(ch)
+      );
 
-  // Si el nodo tiene ruta, evalúa por ruta; si no, por sus hijos
-  if (isActiveRoute(node.route)) return 'active';
-  return hasActiveDescendant(node) ? 'active' : '';
-}
+    if (isActiveRoute(node.route)) return 'active';
+    return hasActiveDescendant(node) ? 'active' : '';
+  }
 
   shrinkItems(item: INavbarData): void {
     if (!this.multiple) {
@@ -129,54 +128,85 @@ export class SidebarComponent {
     }
   }
 
-  // === Carga del menú desde backend y armado del árbol ===
+  // ===== Armado del árbol n-niveles desde lista plana =====
+
+  /** Convierte un MenuResponse en un INavbarData */
+  private toNode(m: MenuResponse): INavbarData {
+    return {
+      menuId: m.menuId,
+      route: m.path ?? '',
+      label: m.item ?? '',
+      icon: m.icon ?? '',
+      items: [],
+      // Si más adelante agregas "position" al DTO y al interface,
+      // puedes guardarlo aquí y ordenar por position en sortRec.
+      // position: m.position
+    };
+  }
+
+  /**
+   * Construye un árbol con soporte para:
+   *  - raíces clásicas (fatherId = 0)
+   *  - raíces self-parent (fatherId = menuId, p.ej. CEO)
+   *  - casos donde no exista el padre en la lista (caen como raíz)
+   */
+  private buildTreeFromFlat(flat: MenuResponse[]): INavbarData[] {
+    const map = new Map<number, INavbarData>();
+    flat.forEach((m) => map.set(m.menuId, this.toNode(m)));
+
+    const roots: INavbarData[] = [];
+
+    for (const m of flat) {
+      const node = map.get(m.menuId)!;
+      const fid = m.fatherId;
+
+      const isSelfRoot = fid === m.menuId; // raíz que se apunta a sí misma
+      const isZeroRoot = fid === 0;        // raíz clásica
+      const parent = fid != null ? map.get(fid) : undefined;
+
+      if (isSelfRoot || isZeroRoot || !parent) {
+        roots.push(node);
+      } else {
+        (parent.items ??= []).push(node);
+      }
+    }
+
+    // Orden recursivo: por label (alfabético). Si tuvieras "position", úsalo primero.
+    const sortRec = (nodes: INavbarData[]) => {
+      nodes.sort((a, b) =>
+        // ((a as any).position ?? 0) - ((b as any).position ?? 0) ||
+        (a.label || '').localeCompare(b.label || '')
+      );
+      nodes.forEach((n) => n.items && sortRec(n.items));
+    };
+    sortRec(roots);
+
+    return roots;
+  }
+
+  // ===== Carga desde backend y proyección al árbol =====
   getMenuByRole(): void {
     this.menuService.getMenuByRole().subscribe((resp) => {
-      this.menu = resp.data;
-      this.menuArray = [];
+      const flat = resp?.data ?? [];
+      this.menu = flat;
 
-      if (this.menu != null) {
-        // padres
-        this.menu.forEach((m: MenuResponse) => {
-          if (m.fatherId == 0) {
-            const obj: INavbarData = {
-              menuId: m.menuId,
-              route: m.path ?? '',
-              label: m.item ?? '',
-              icon: m.icon ?? '',
-              items: [],
-            };
-            this.menuArray.push(obj);
-          }
-        });
+      // 1) construir árbol
+      const tree = this.buildTreeFromFlat(flat);
 
-        // hijos
-        this.menu.forEach((m: MenuResponse) => {
-          if (m.fatherId != 0) {
-            const index = this.menuArray.findIndex(
-              (p) => p.menuId === m.fatherId
-            );
-
-            if (index !== -1) {
-              const obj: INavbarData = {
-                menuId: m.menuId,
-                route: m.path ?? '',
-                label: m.item ?? '',
-                icon: m.icon ?? '',
-                items: [],
-              };
-
-              (this.menuArray[index].items ??= []).push(obj);
-            } else {
-              console.warn(`No se encontró un padre con MenuId: ${m.fatherId}`);
-            }
-          }
-        });
+      // 2) si hay un único root y es self-parent (CEO), “desenvolverlo”:
+      //    mostramos sus hijos como nivel principal (Financiera, Comercial, etc.)
+      let nav: INavbarData[] = tree;
+      if (tree.length === 1) {
+        const root = tree[0];
+        const isSelfRoot = flat.some(
+          (x) => x.menuId === root.menuId && x.fatherId === x.menuId
+        );
+        if (isSelfRoot) nav = root.items ?? [];
       }
 
-      // refrescar fuentes del sidebar y el filtro
-      this.navData = this.menuArray;
+      this.navData = nav;
 
+      // 3) refrescar filtro
       const t = this.searchCtrl.value?.trim() ?? '';
       this.isFiltering = t.length > 0;
       this.filteredNavData = this.isFiltering
@@ -185,7 +215,7 @@ export class SidebarComponent {
     });
   }
 
-  // ========= utilidades de filtro =========
+  // ====== utilidades de filtro ======
   clearSearch(): void {
     this.searchCtrl.setValue('');
   }
