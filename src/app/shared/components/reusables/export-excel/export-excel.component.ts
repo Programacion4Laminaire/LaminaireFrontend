@@ -15,9 +15,12 @@ export class ExportExcelComponent {
   private readonly downloadXslxService = inject(DownloadXslxService);
   private readonly spinner = inject(NgxSpinnerService);
 
+  /** Ruta base del endpoint (ej: "User/Export", "Consumption/Export") */
   @Input() url: string = '';
+  /** Query string adicional generado por filtros (ej: "&stateFilter=1-2") */
   @Input() getInputs: string = '';
-  @Input() filename: string = '';
+  /** Nombre del archivo a descargar */
+  @Input() filename: string = 'export.xlsx';
 
   icCloudDownload = 'download';
   infoTooltip = 'Descargar resultados en formato Excel';
@@ -30,7 +33,7 @@ export class ExportExcelComponent {
       showCancelButton: true,
       focusCancel: true,
       confirmButtonColor: '#004A89',
-      cancelButtonColor: '#ce938b',
+      cancelButtonColor: '#c57e74ff',
       confirmButtonText: 'Aceptar',
       cancelButtonText: 'Cancelar',
       width: 430,
@@ -41,19 +44,30 @@ export class ExportExcelComponent {
     });
   }
 
-  executeDownload() {
-    // this.spinner.show();
-    // this.downloadXslxService
-    //   .executeDownload(this.url + this.getInputs)
-    //   .subscribe((excelData: Blob) => {
-    //     const fileName = this.filename;
-    //     const blobUrl = URL.createObjectURL(excelData);
-    //     const downloadLink = document.createElement('a');
-    //     downloadLink.href = blobUrl;
-    //     downloadLink.download = fileName;
-    //     downloadLink.click();
-    //     URL.revokeObjectURL(blobUrl);
-    //     this.spinner.hide();
-    //   });
+  private executeDownload() {
+    this.spinner.show('carga');
+
+    // 👉 Agregamos download=true y resolvemos si hay ? o no
+    const separator = this.url.includes('?') ? '&' : '?';
+    const fullUrl = `${this.url}${separator}download=true${this.getInputs}`;
+
+    this.downloadXslxService.executeDownload(fullUrl).subscribe({
+      next: (excelData: Blob) => {
+        const blobUrl = URL.createObjectURL(excelData);
+        const downloadLink = document.createElement('a');
+        downloadLink.href = blobUrl;
+        downloadLink.download = this.filename.endsWith('.xlsx')
+          ? this.filename
+          : `${this.filename}.xlsx`;
+        downloadLink.click();
+        URL.revokeObjectURL(blobUrl);
+        this.spinner.hide('carga');
+      },
+      error: (err) => {
+        console.error('❌ Error exportando Excel:', err);
+        Swal.fire('Error', 'No se pudo generar el archivo. Intenta de nuevo.', 'error');
+        this.spinner.hide('carga');
+      },
+    });
   }
 }

@@ -64,6 +64,13 @@ const childrenRoutes: Routes = [
         './modules/engineering/pages/product/product-form/product-form.component'
       ).then((c) => c.ProductFormComponent),
   },
+   {
+    path: 'consumption',
+    loadComponent: () =>
+      import(
+        './modules/sgi/pages/consumption/components/consumption-list/consumption-list.component'
+      ).then((c) => c.ConsumptionListComponent),
+  },
 ];
 
 export const routes: Routes = [
@@ -90,7 +97,8 @@ export const routes: Routes = [
       ).then((c) => c.ResetPasswordComponent),
   },
 
-
+   
+//----------------//----------------//----------------//----------------//
 
 // 🔹 RUTAS EXTERNAS — CEO
 {

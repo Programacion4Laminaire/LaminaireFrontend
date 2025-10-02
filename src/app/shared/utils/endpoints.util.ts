@@ -8,8 +8,7 @@ export const endpoint = {
   USER_BY_ID: 'User/',
   USER_CREATE: 'User/Create',
   USER_CREATE_WITH_IMAGE: 'User/CreateWithImage',
-  USER_UPDATE_WITH_IMAGE: 'User/UpdateWithImage', // 👈 Agrega esta línea
-  
+  USER_UPDATE_WITH_IMAGE: 'User/UpdateWithImage', 
   USER_UPDATE: 'User/Update',
   USER_DELETE: 'User/Delete/',
 
@@ -27,4 +26,17 @@ export const endpoint = {
   USER_ROLE_CREATE: 'UserRole/Create',
   USER_ROLE_UPDATE: 'UserRole/Update',
   USER_ROLE_DELETE: 'UserRole/Delete/',
+
+
+LIST_CONSUMPTIONS: 'Consumption',
+CONSUMPTION_BY_ID: 'Consumption/',
+CONSUMPTION_CREATE: 'Consumption/Create',
+CONSUMPTION_UPDATE: 'Consumption/Update',
+CONSUMPTION_DELETE: 'Consumption/Delete/',
+
+};
+
+// endpoints.util.ts
+export const legacyEndpoint = {
+  UPDATE_SIR_CREDENTIALS: 'ActualizarPasswordSirOfima', 
 };

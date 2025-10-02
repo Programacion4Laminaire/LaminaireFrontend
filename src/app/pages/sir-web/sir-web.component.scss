@@ -1,56 +1,68 @@
-/* 📌 Cards */
-.sir-web-grid {
-  margin: 2rem auto;
+/* ========== Tarjetas ========== */
+.sir-laminaire-wrapper {
   max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.sir-laminaire-grid {
+  margin-top: 2rem;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
   gap: 1rem;
 }
 
 .sir-card {
-  height: 200px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  height: 14rem;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.sir-card-icon {
-  font-size: 3rem;
+.sir-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+}
+
+.sir-card-header {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0.75rem;
+}
+
+.sir-card-title {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.sir-card-icon {
   flex: 1;
-}
-
-/* 📌 Modal con acordeones */
-.accordion-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-}
-
-.accordion-column {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-button {
-  width: 100%;
-  margin: 0.25rem 0;
-}
-
-/* 📌 Estilos del modal */
-.dialog-title {
-  display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 0.5rem;
-  font-weight: 600;
-  font-size: 1.2rem;
+
+  mat-icon {
+    font-size: 4rem !important;
+  }
 }
 
-.dialog-content {
+.sir-card-footer {
+  padding: 0.5rem 0.75rem 1rem;
+}
+
+.sir-ver-mas {
+  width: 100%;
+  background-color: #1d3664;
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 0.25rem;
+}
+
+/* ========== Modal con acordeones ========== */
+.custom-dialog-content {
   margin-top: 1rem;
 }
 
@@ -58,12 +70,16 @@ button {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .accordion-column {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .accordion-items {
@@ -75,9 +91,4 @@ button {
 .accordion-items button {
   width: 100%;
   justify-content: flex-start;
-}
-
-/* 📌 Botón salir */
-.dialog-actions {
-  margin-top: 1rem;
 }

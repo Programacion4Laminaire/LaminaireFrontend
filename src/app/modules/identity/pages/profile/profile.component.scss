@@ -149,3 +149,18 @@ form {
   border-bottom-right-radius: var(--mat-shape-small, 15px) !important;
 }
 
+/* ===== Centrar avatar y texto en móvil ===== */
+@media (max-width: 767px) {
+  .profile-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;   /* ← centra horizontalmente el avatar y todo el bloque */
+    text-align: center;    /* el texto queda centrado también */
+  }
+
+  /* Por si Tailwind no aplica mx-auto porque es inline-block,
+     el flex del padre ya lo centra. No cambiamos desktop. */
+  .image-container {
+    margin: 0 auto;
+  }
+}

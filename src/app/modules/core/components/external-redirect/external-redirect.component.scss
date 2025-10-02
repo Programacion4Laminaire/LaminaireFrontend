@@ -1,0 +1,25 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(245, 247, 255, .9);
+  z-index: 9999;
+}
+.box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 12px 30px rgba(0,0,0,.12);
+  text-align: center;
+  min-width: 280px;
+}
+.box mat-icon { color:#1d3664; font-size:36px; width:36px; height:36px; }
+.box p { margin:.5rem 0 1rem; color:#334155; }
+.btn {
+  display: inline-flex; align-items: center; gap:.5rem;
+  background:#1d3664; color:#fff; padding:.6rem 1rem;
+  border-radius: 10px; text-decoration: none; font-weight:600;
+}
+.btn:hover { filter: brightness(1.05); }
+.hint { display:block; margin-top:.75rem; color:#64748b; }

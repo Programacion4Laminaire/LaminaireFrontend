@@ -314,12 +314,23 @@ export class SirLaminaireComponent {
   icon: 'group',
   menuSections: [
     {
-      title: 'Autogestión del Empleado',
+      title: '',
       items: [
         { label: 'Comprob. de Pago Anteriores a 2024', link: 'https://web.laminaire.net/SirWeb/Comprobantes_Pago/Frms/Frm_Comprobante.aspx' },
         { label: 'Certificado Laboral',                link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Certificado_Laboral.aspx' },
         { label: 'Solicitud de Vacaciones',            link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Control_Vacaciones_Empleados.aspx' },
-        { label: 'Calendario de Reuniones',            link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Calendario_Reuniones.aspx' }
+        { label: 'Calendario de Reuniones',            link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Calendario_Reuniones.aspx' },
+        { label: 'Informe Control de Acceso',            link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/ReporteControlAcceso.aspx' }
+      ]
+    },
+        {
+      title: 'Evaluaciones de 360°',
+      items: [
+        { label: 'Evaluaciones de 360', link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Evaluaciones_360.aspx' },
+        { label: 'Informes Evaluaciones de 360°',                link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Informes_Evaluacion_360.aspx' },
+        { label: 'Maestro Evaluaciones de 360°',            link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Maestros_Evaluaciones_360.aspx' },
+        { label: 'Revisión de Aspectos',            link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Revision_Aspectos.aspx' },
+        { label: 'Análisis de Causas',            link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Analisis_Causas_Evaluac_360.aspx' }
       ]
     },
     {
@@ -330,12 +341,27 @@ export class SirLaminaireComponent {
         { label: 'Encuesta Retiro Empleados',           link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Formulario_Retiro_Empleados.aspx' }
       ]
     },
-
+  {
+      title: 'Plan de Bienestar Laminaire',
+      items: [
+        { label: 'Control Plan de Bienestar',     link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Pasaportes.aspx' },
+        { label: 'Informe Plan de Bienestar',     link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Informes_Pasaporte.aspx'}
+       
+      ]
+    },
     {
       title: 'Ficha del Empleado',
       items: [
         { label: 'Ficha del Empleado',                  link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Ficha_Talento_V2.aspx' },
         { label: 'Informe Ficha del Empleado',          link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Informe_Ficha_Talento.aspx' }
+      ]
+    },
+      {
+      title: 'Plan General de Capacitaciones',
+      items: [
+        { label: 'Plan General de Capacitaciones',     link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/FrmPlanGeneralCapacitcionesaspx.aspx' },
+        { label: 'Control de Dotación',                 link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_Control_Dotacion.aspx' },
+        { label: 'Maestro Plan Gral Capacitaciones',           link: 'https://web.laminaire.net/SirWeb/Solicitudes_Gh/Frms/Frm_MestroPlanGeneral_Capacita.aspx' }
       ]
     },
     {

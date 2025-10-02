@@ -7,28 +7,24 @@
         <!-- Nombre + rol -->
         <div class="text-right text-sm leading-tight hidden md:block">
           <div class="font-semibold">
-            {{ userName }}
+            {{ userName() }}
           </div>
           <div class="text-gray-500 text-sm italic">
-            {{ userRole }}
+            {{ userRole() }}
           </div>
         </div>
 
         <!-- Avatar -->
-        <!-- Avatar -->
-<div
-  class="head-user-avatar"
-  [cdkMenuTriggerFor]="userOverlay"
->
-  <img
-    [src]="userImage"
-    alt="user"
-    class="user-avatar"
-    (error)="userImage = 'public/default-user.png'"
-  />
-  <div class="circle-indicator pulse"></div>
-</div>
+        <div class="head-user-avatar" [cdkMenuTriggerFor]="userOverlay">
+          <img
+  [src]="userImage()"
+  alt="user"
+  class="user-avatar"
+  (error)="handleImageError()"
+/>
 
+          <div class="circle-indicator pulse"></div>
+        </div>
       </div>
     </div>
   </div>

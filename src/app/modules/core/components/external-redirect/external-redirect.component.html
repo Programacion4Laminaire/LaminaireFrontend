@@ -1,0 +1,24 @@
+<div class="overlay" *ngIf="url; else missing">
+  <div class="box">
+    <mat-icon>open_in_new</mat-icon>
+    <p>Este contenido se abre en una nueva pestaña.</p>
+
+    <!-- Enlace REAL => no lo bloquean los móviles -->
+    <a
+      class="btn"
+      [href]="url!"
+      target="_blank"
+      rel="noopener noreferrer"
+      (click)="backToAppSoon()"
+    >
+      <mat-icon>launch</mat-icon>
+      Abrir en nueva pestaña
+    </a>
+
+    <small class="hint">Si no se abre, revisa el bloqueador de ventanas emergentes.</small>
+  </div>
+</div>
+
+<ng-template #missing>
+  <div class="overlay"><div class="box">No se encontró la URL.</div></div>
+</ng-template>

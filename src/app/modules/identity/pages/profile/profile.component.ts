@@ -91,44 +91,53 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  save(): void {
-    if (!this.form || this.form.invalid) {
-      this.form.markAllAsTouched();
-      return;
-    }
-
-    this.loading = true;
-    const raw = this.form.getRawValue();
-
-    const birth = typeof raw.birthDate === 'string'
-      ? raw.birthDate
-      : new Date(raw.birthDate).toISOString().substring(0, 10);
-
-    const fd = new FormData();
-    fd.append('userId', String(raw.userId));
-    fd.append('identification', raw.identification ?? '');
-    fd.append('firstName', raw.firstName ?? '');
-    fd.append('lastName', raw.lastName ?? '');
-    fd.append('userName', raw.userName ?? '');
-    fd.append('email', raw.email ?? '');
-    fd.append('birthDate', birth);
-    fd.append('state', '1');
-
-    if (raw.password) fd.append('password', raw.password);
-    if (this.imageFile) fd.append('image', this.imageFile, this.imageFile.name);
-
-    this.userService.userUpdateWithImage(fd).subscribe({
-      next: (resp: BaseApiResponse<boolean>) => {
-        if (resp.isSuccess) {
-          this.alertService.success('Excelente', 'Perfil actualizado correctamente');
-        } else {
-          this.alertService.warn('Atención', resp.message);
-        }
-      },
-      error: () => this.alertService.error('Error', 'No se pudo actualizar el perfil'),
-      complete: () => (this.loading = false),
-    });
+save(): void {
+  if (!this.form || this.form.invalid) {
+    this.form.markAllAsTouched();
+    return;
   }
+
+  this.loading = true;
+  const raw = this.form.getRawValue();
+
+  const birth = typeof raw.birthDate === 'string'
+    ? raw.birthDate
+    : new Date(raw.birthDate).toISOString().substring(0, 10);
+
+  const fd = new FormData();
+  fd.append('userId', String(raw.userId));
+  fd.append('identification', raw.identification ?? '');
+  fd.append('firstName', raw.firstName ?? '');
+  fd.append('lastName', raw.lastName ?? '');
+  fd.append('userName', raw.userName ?? '');
+  fd.append('email', raw.email ?? '');
+  fd.append('birthDate', birth);
+  fd.append('state', '1');
+
+  if (raw.password) fd.append('password', raw.password);
+  if (this.imageFile) fd.append('image', this.imageFile, this.imageFile.name);
+
+  this.userService.userUpdateWithImage(fd).subscribe({
+    next: (resp: BaseApiResponse<boolean>) => {
+      if (resp.isSuccess) {
+        this.alertService.success('Excelente', 'Perfil actualizado correctamente');
+
+        // 🔥 Aquí actualizamos el signal para refrescar el header
+        const userId = this.authService.getUserIdFromToken();
+        if (userId) {
+          this.userService.userWithRoleAndPermissions(userId).subscribe((user) => {
+            this.userService.setUser(user); // 👈 actualiza el signal
+          });
+        }
+      } else {
+        this.alertService.warn('Atención', resp.message);
+      }
+    },
+    error: () => this.alertService.error('Error', 'No se pudo actualizar el perfil'),
+    complete: () => (this.loading = false),
+  });
+}
+
 
   resetForm(): void {
     this.form.reset();

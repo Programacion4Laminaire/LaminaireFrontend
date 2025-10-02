@@ -1,23 +1,60 @@
+/* Base: sin márgenes laterales; solo padding para respirar el contenido */
 .body {
-  width: calc(100% - 2rem);
-  height: 100vh;
-  margin-left: 2rem;
-  z-index: 0;
+  width: 100%;
+  min-height: 100vh;
   position: relative;
-  top: 0;
-  transition: all 0.5s ease;
-  // background: #f4f6ff;
-  // background: #F8F7FA;
+  z-index: 0;
   background: #eeeeee;
-  padding: 3rem 0 3rem 3rem;
+  /* deja espacio vertical para el header fijo (ajusta si tu header es otro) */
+  padding: 3.5rem 1rem 2rem 1rem;
+  transition: all 0.5s ease;
 }
 
+/* Desktop: sidebar ANCHO (collapsed = true) */
 .body-origin {
-  width: calc(100% - 13.5rem);
-  margin-left: 13.5rem;
+  width: calc(100% - 16.5625rem);
+  margin-left: 16.5625rem;
+  /* un poco más de aire a la izquierda si quieres */
+  padding-left: 2rem;
 }
 
+/* Desktop: sidebar ANGOSTO (collapsed = false) */
 .body-md {
   width: calc(100% - 5rem);
   margin-left: 5rem;
+  padding-left: 1.5rem;
+}
+
+/* Móvil: SIEMPRE ancho completo */
+.body-full {
+  width: 100% !important;
+  margin-left: 0 !important;
+  /* padding cómodo en móvil + espacio para header fijo */
+  padding: 3.5rem 1rem 1.25rem 1rem;
+}
+
+/* Por si algún estilo externo deja márgenes al body en móvil */
+@media (max-width: 768px) {
+  .body { margin-left: 0 !important; }
+}
+
+/* ——— Móvil: que el contenido aproveche casi todo el ancho ——— */
+@media (max-width: 768px) {
+  /* ancho total y sin margen izquierdo */
+  .body,
+  .body-full {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+
+  /* ↓ reduce los márgenes laterales (antes 1rem) */
+  .body-full {
+    /* top deja espacio al header fijo; ajusta 3.25rem si tu header es distinto */
+    padding: 3.25rem .5rem 1rem .5rem;  /* ← aquí está la “ampliación” */
+  }
+
+  
+  @media (max-width: 420px) {
+    .body-full { padding-left: .25rem; padding-right: .25rem; }
+  }
 }

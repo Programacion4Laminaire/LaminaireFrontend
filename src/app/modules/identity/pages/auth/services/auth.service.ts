@@ -10,17 +10,15 @@ import { ResetPasswordByIdentityRequest } from '../models/reset-password.interfa
 import { jwtDecode } from 'jwt-decode';
 
 export interface JwtPayload {
-  sub?: string;           // 👈 aquí viene el userId en tu token
-  given_name?: string;    // nombre
-  family_name?: string;   // apellidos
+  sub?: string;
+  given_name?: string;
+  family_name?: string;
   email?: string;
   exp?: number;
   iat?: number;
 }
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly http = inject(HttpClient);
 
@@ -37,6 +35,15 @@ export class AuthService {
     );
   }
 
+  // 👉 Notificación cross-tab (logout / token actualizado)
+  private notify(channelMsg: 'logout' | 'token-updated') {
+    try {
+      const bc = new BroadcastChannel('auth');
+      bc.postMessage(channelMsg);
+      bc.close();
+    } catch { /* no-op */ }
+  }
+
   /**
    * 🔹 Login contra el backend
    */
@@ -47,8 +54,17 @@ export class AuthService {
       .pipe(
         map((response: BaseApiResponse<string>) => {
           if (response.isSuccess) {
+            // Guarda token
             localStorage.setItem('token', JSON.stringify(response.accessToken));
             this.user.next(response.accessToken);
+
+            // 👇 Mantén tu lógica de cookie tal como la tienes en el login component:
+            // - si desde el backend te llega `cookieDatos`, tú ya la escribes:
+            //   document.cookie = `Datos=${dataCookie}; path=/;`
+            //   localStorage.setItem('cookieDatos', response.cookieDatos ?? '');
+
+            // Aviso cross-tab
+            this.notify('token-updated');
           }
           return response;
         })
@@ -64,11 +80,7 @@ export class AuthService {
 
     try {
       const decoded = jwtDecode<JwtPayload>(JSON.parse(token));
-
-      if (decoded.sub) {
-        return Number(decoded.sub);
-      }
-
+      if (decoded.sub) return Number(decoded.sub);
       console.warn('⚠️ No se encontró userId en el token');
       return null;
     } catch (e) {
@@ -106,17 +118,25 @@ export class AuthService {
   }
 
   /**
-   * 🔹 Logout
+   * 🔹 Logout (sin recargar por defecto)
    */
-  logout() {
+  logout(shouldReload: boolean = false) {
     localStorage.removeItem('token');
     this.user.next('');
-    
-  // Asegúrate que el domain y path coincidan exactamente con los usados al crear la cookie
-  document.cookie = "Datos=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=web.laminaire.net;";
-  document.cookie = "Datos=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; // fallback sin domain
-  document.cookie = "DatosPretty=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=web.laminaire.net;";
-  document.cookie = "DatosPretty=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"; // fallback sin domain
-    window.location.reload();
+
+    // 👇 Mantén tu limpieza de cookies (exactamente como la tenías)
+    document.cookie = "Datos=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=web.laminaire.net;";
+    document.cookie = "Datos=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "DatosPretty=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=web.laminaire.net;";
+    document.cookie = "DatosPretty=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+    localStorage.removeItem('cookieDatos');
+
+    // Aviso cross-tab
+    this.notify('logout');
+
+    if (shouldReload) {
+      window.location.reload();
+    }
   }
 }

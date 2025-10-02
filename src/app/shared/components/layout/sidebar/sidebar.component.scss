@@ -192,3 +192,53 @@ mark{ background:#ffe08a; color:#1d1d1d; padding:0 .1rem; border-radius:.2rem; }
   max-height: 60px; /* ajusta según tu altura */
   opacity: 1;
 }
+
+/* ===== MODO MÓVIL: ocultar TODO el sidebar y dejar solo el botón ===== */
+@media (max-width: 768px) {
+
+  /* Asegura que el botón se vea aunque el contenedor tenga ancho 0 */
+  .sidebar { overflow: visible; }
+
+  /* Sidebar cerrado (collapsed = false) → ancho 0 y oculta todo menos el botón */
+  .sidebar:not(.sidebar-collapsed) {
+    width: 0 !important;
+  }
+  .sidebar:not(.sidebar-collapsed) > *:not(.menu-btn) {
+    display: none !important;
+  }
+
+  /* Sidebar abierto (collapsed = true) → se muestra completo como siempre */
+  .sidebar.sidebar-collapsed {
+    width: 16.5625rem; /* tu ancho abierto */
+  }
+}
+
+/* Móvil: oculta todo el panel cuando está "cerrado" (collapsed = false),
+   pero deja visible el botón toggle, bien colocado. */
+@media (max-width: 768px) {
+
+  /* Que el contenedor no recorte al botón */
+  .sidebar { overflow: visible; }
+
+  /* Cerrado → ancho 0 y ocultar todo excepto el botón */
+  .sidebar:not(.sidebar-collapsed) {
+    width: 0 !important;
+  }
+  .sidebar:not(.sidebar-collapsed) > *:not(.menu-btn) {
+    display: none !important;
+  }
+
+  /* Reposicionar el botón para que no quede cortado al borde */
+  .sidebar:not(.sidebar-collapsed) .menu-btn {
+    position: fixed;     /* se “despega” del ancho 0 del sidebar */
+    left: 2px;           /* pegado al borde izq. */
+    right: auto;         /* anulamos el right:-14px original */
+    top: 3.5%;
+    z-index: 1001;       /* por encima del contenido */
+  }
+
+  /* Abierto → se muestra normal con tu ancho expandido */
+  .sidebar.sidebar-collapsed {
+    width: 16.5625rem;   /* tu ancho abierto */
+  }
+}

@@ -21,7 +21,7 @@
     }
   </div>
 
-  <!-- === Buscador del menú === -->
+  <!-- Buscador -->
   <div class="sidebar-search">
     <input
       type="search"
@@ -42,10 +42,12 @@
     <ul class="sidebar-nav" @fadeInOut>
       @for (data of (isFiltering ? filteredNavData : navData); track $index) {
         <li class="sidebar-nav-item">
+
+          <!-- NODO CON HIJOS -->
           @if(data.items && data.items.length > 0){
             <a
               class="sidebar-nav-link"
-              (click)="handleClick(data)"
+              (click)="onRootClick(data, $event)"
               [ngClass]="getActiveClass(data)"
             >
               <mat-icon class="sidebar-link-icon" [fontIcon]="data.icon"></mat-icon>
@@ -61,13 +63,16 @@
               }
             </a>
           }
+
+          <!-- NODO HOJA (link) -->
           @if(!data.items || (data.items && data.items.length === 0)){
             <a
               class="sidebar-nav-link"
               [routerLink]="[data.route]"
               routerLinkActive="active"
               [routerLinkActiveOptions]="{ exact: true }"
-              (click)="shrinkItems(data)"
+              (click)="onLeafClick(data, $event)"
+              [class.active]="tempActiveRoute === data.route"
             >
               <mat-icon class="sidebar-link-icon" [fontIcon]="data.icon"></mat-icon>
               @if (collapsed) {
@@ -76,6 +81,7 @@
               }
             </a>
           }
+
           @if(collapsed && data.items && data.items.length > 0){
             <div>
               <app-sublevel-menu

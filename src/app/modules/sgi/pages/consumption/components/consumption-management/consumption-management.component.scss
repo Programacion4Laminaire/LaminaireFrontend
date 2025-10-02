@@ -1,0 +1,8 @@
+.dialog-body { padding: 16px 32px 8px; }
+.form-container { display: flex; flex-direction: column; gap: 16px; }
+.form-fields {
+  display: grid; gap: 16px; grid-template-columns: 1fr 1fr;
+  @media (max-width: 768px) { grid-template-columns: 1fr; }
+}
+.col-span-2 { grid-column: span 2; }
+::ng-deep .mat-form-field { width: 100%; }

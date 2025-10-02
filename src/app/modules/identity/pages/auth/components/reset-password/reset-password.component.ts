@@ -13,6 +13,12 @@ import { ResetPasswordByIdentityRequest } from '../../models/reset-password.inte
 import { AlertService } from '@app/modules/core/services/alert.service';
 import { SpinnerComponent } from '@shared/components/reusables/spinner/spinner.component';
 
+// 👉 NUEVO: servicio que llama al legacy
+import { LegacySirService } from '@app/modules/core/services/legacy-sir.service';
+
+// RxJS
+import { switchMap, catchError, finalize, throwError, of } from 'rxjs';
+
 @Component({
   standalone: true,
   selector: 'app-reset-password',
@@ -36,6 +42,7 @@ export class ResetPasswordComponent implements OnInit {
   private cd      = inject(ChangeDetectorRef);
   private spinner = inject(NgxSpinnerService);
   private alert   = inject(AlertService);
+  private legacy  = inject(LegacySirService); // 👈 inyectamos el legacy
 
   form!: FormGroup;
   inputType = 'password';
@@ -77,6 +84,7 @@ export class ResetPasswordComponent implements OnInit {
       return;
     }
 
+    // payload para tu API
     const rawBirth = this.form.value.birthDate;
     const formattedBirth = rawBirth
       ? new Date(rawBirth).toISOString().substring(0, 10)
@@ -89,20 +97,34 @@ export class ResetPasswordComponent implements OnInit {
       newPassword:    this.form.value.newPassword,
     };
 
+    // 1) primero LEGACY (POST JSON {User, Password} sin credenciales)
+    // 2) si 2xx → continúa con reset en tu API
+    const user = this.form.value.userName;
+    const pwd  = this.form.value.newPassword;
+
     this.spinner.show('spinnerxxx');
-    this.auth.resetPasswordByIdentity(req).subscribe({
-      next: res => {
-        this.spinner.hide('spinnerxxx');
-        if (res.isSuccess) {
-          this.alert.success('Éxito', res.message);
-          this.router.navigate(['/login']);
-        } else {
-          this.alert.warn('Atención', res.message);
+
+    this.legacy.updatePassword(user, pwd).pipe(
+      switchMap(ok => {
+        if (!ok) {
+          return throwError(() => new Error('No se pudo actualizar la contraseña en el sistema legado.'));
         }
-      },
-      error: () => {
-        this.spinner.hide('spinnerxxx');
-        this.alert.error('Error', 'Inténtalo de nuevo más tarde.');
+        return this.auth.resetPasswordByIdentity(req);
+      }),
+      catchError(err => {
+        console.error('Reset error:', err);
+        this.alert.error('Error', err?.message ?? 'No se pudo actualizar la contraseña.');
+        return of(null);
+      }),
+      finalize(() => this.spinner.hide('spinnerxxx'))
+    ).subscribe(res => {
+      if (!res) return; // ya se notificó error
+
+      if (res.isSuccess) {
+        this.alert.success('Éxito', res.message);
+        this.router.navigate(['/login']);
+      } else {
+        this.alert.warn('Atención', res.message);
       }
     });
   }

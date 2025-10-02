@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core'; // 👈 añadimos signal
 import { BaseApiResponse } from '@app/shared/models/commons/base-api-response.interface';
 import { AlertService } from '@app/modules/core/services/alert.service';
 import { endpoint } from '@app/shared/utils/endpoints.util';
 import { getIcon, getStateBadge } from '@app/shared/utils/functions.util';
-import { environment as env } from '@env/environment.development';
+import { environment as env } from '@env/environment';
 import { map, Observable } from 'rxjs';
 import {
   UserCreateRequest,
@@ -23,6 +23,29 @@ export class UserService {
   private readonly httpClient = inject(HttpClient);
   private readonly alertService = inject(AlertService);
 
+  // 👇 NUEVO: Signal para mantener el usuario logueado en memoria reactiva
+  currentUser = signal<UserWithRoleAndPermissionsResponse | null>(null);
+
+  /** Setea el usuario completo */
+  setUser(user: UserWithRoleAndPermissionsResponse) {
+    this.currentUser.set(user);
+  }
+
+  /** Solo actualiza la foto de perfil */
+  updateProfileImage(path: string) {
+    const user = this.currentUser();
+    if (user) {
+      this.currentUser.set({
+        ...user,
+        profileImagePath: path,
+      });
+    }
+  }
+
+  // -------------------------------------------------
+  // 🔽 Métodos que ya tenías (no se pierden) 🔽
+  // -------------------------------------------------
+
   getAll(
     size: number,
     sort: string,
@@ -40,18 +63,18 @@ export class UserService {
       .get<BaseApiResponse<UserResponse[]>>(requestUrl)
       .pipe(
         map((resp) => {
-         resp.data.forEach((user: UserResponse) => {
-  user.fullName = user.firstName + ' ' + user.lastName;
-  user.stateDescription = getStateBadge(user.stateDescription);
-  user.icEdit = getIcon('edit', 'Actualizar usuario', true);
-  user.icDelete = getIcon('delete', 'Eliminar usuario', true);
+          resp.data.forEach((user: UserResponse) => {
+            user.fullName = user.firstName + ' ' + user.lastName;
+            user.stateDescription = getStateBadge(user.stateDescription);
+            user.icEdit = getIcon('edit', 'Actualizar usuario', true);
+            user.icDelete = getIcon('delete', 'Eliminar usuario', true);
 
-  // Nueva propiedad para mostrar imagen circular
-  user.avatar = {
-    text: '', // o puedes usar user.fullName si quieres texto junto a la imagen
-    image: user.profileImagePath || 'public/default-user.png',
-  };
-});
+            // Avatar auxiliar
+            user.avatar = {
+              text: '',
+              image: user.profileImagePath || 'public/default-user.png',
+            };
+          });
 
           return resp;
         })
@@ -62,11 +85,7 @@ export class UserService {
     const requestUrl = `${env.apiIdentity}${endpoint.USER_BY_ID}${userId}`;
     return this.httpClient
       .get<BaseApiResponse<UserByIdResponse>>(requestUrl)
-      .pipe(
-        map((resp) => {
-          return resp.data;
-        })
-      );
+      .pipe(map((resp) => resp.data));
   }
 
   userCreate(user: UserCreateRequest): Observable<BaseApiResponse<boolean>> {
@@ -75,9 +94,9 @@ export class UserService {
   }
 
   userCreateWithImage(formData: FormData): Observable<BaseApiResponse<boolean>> {
-  const requestUrl = `${env.apiIdentity}${endpoint.USER_CREATE_WITH_IMAGE}`;
-  return this.httpClient.post<BaseApiResponse<boolean>>(requestUrl, formData);
-}
+    const requestUrl = `${env.apiIdentity}${endpoint.USER_CREATE_WITH_IMAGE}`;
+    return this.httpClient.post<BaseApiResponse<boolean>>(requestUrl, formData);
+  }
 
   userUpdate(user: UserUpdateRequest): Observable<BaseApiResponse<boolean>> {
     const requestUrl = `${env.apiIdentity}${endpoint.USER_UPDATE}`;
@@ -85,10 +104,9 @@ export class UserService {
   }
 
   userUpdateWithImage(formData: FormData): Observable<BaseApiResponse<boolean>> {
-  const requestUrl = `${env.apiIdentity}${endpoint.USER_UPDATE_WITH_IMAGE}`;
-  return this.httpClient.put<BaseApiResponse<boolean>>(requestUrl, formData);
-}
-
+    const requestUrl = `${env.apiIdentity}${endpoint.USER_UPDATE_WITH_IMAGE}`;
+    return this.httpClient.put<BaseApiResponse<boolean>>(requestUrl, formData);
+  }
 
   userDelete(userId: number): Observable<void> {
     const requestUrl = `${env.apiIdentity}${endpoint.USER_DELETE}${userId}`;
@@ -100,14 +118,13 @@ export class UserService {
       })
     );
   }
-  
-userWithRoleAndPermissions(userId: number): Observable<UserWithRoleAndPermissionsResponse> {
-  const requestUrl = `${env.apiIdentity}${endpoint.USER_WITH_ROLE_AND_PERMISSIONS}${userId}`;
-  return this.httpClient
-    .get<BaseApiResponse<UserWithRoleAndPermissionsResponse>>(requestUrl)
-    .pipe(map((resp) => resp.data));
-}
 
-
-
+  userWithRoleAndPermissions(
+    userId: number
+  ): Observable<UserWithRoleAndPermissionsResponse> {
+    const requestUrl = `${env.apiIdentity}${endpoint.USER_WITH_ROLE_AND_PERMISSIONS}${userId}`;
+    return this.httpClient
+      .get<BaseApiResponse<UserWithRoleAndPermissionsResponse>>(requestUrl)
+      .pipe(map((resp) => resp.data));
+  }
 }

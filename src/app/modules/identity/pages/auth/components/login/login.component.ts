@@ -22,6 +22,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from '../../services/auth.service';
 import { AlertService } from '@app/modules/core/services/alert.service';
 import { MatSelectModule } from '@angular/material/select';
+import { encrypt, decrypt } from '@app/shared/utils/encryption.util';
 
 @Component({
   standalone: true,
@@ -59,61 +60,80 @@ export class LoginComponent implements OnInit {
   icVisibilityOff = 'visibility_off';
   icUsername = 'account_circle';
 
-  ngOnInit(): void {
-    this.initForm();
+ngOnInit(): void {
+  this.initForm();
+
+  // 👇 Línea de seguridad: oculta el spinner por si quedó abierto de una sesión anterior
+  this.spinner.hide('spinnerxxx');
+
+  // 🔹 Recuperar credenciales encriptadas si existen
+  const savedCreds = localStorage.getItem('rememberCreds');
+  if (savedCreds) {
+    const decrypted = decrypt(savedCreds);
+    if (decrypted) {
+      const { email, password } = JSON.parse(decrypted);
+      this.form.patchValue({
+        email,
+        password,
+        remember: true,
+      });
+    }
   }
+}
+
 
   initForm(): void {
     this.form = this.fb.group({
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
+      remember: [false], // 👈 checkbox
     });
   }
 
-login(): void {
-  if (this.form.invalid) {
-    return Object.values(this.form.controls).forEach((controls) =>
-      controls.markAllAsTouched()
-    );
+  login(): void {
+    if (this.form.invalid) {
+      return this.form.markAllAsTouched();
+    }
+
+    const { email, password, remember } = this.form.value;
+
+    this.spinner.show('spinnerxxx');
+    this.authService.login({ email, password }).subscribe({
+      next: (response: BaseApiResponse<string>) => {
+        if (response.isSuccess) {
+          if (remember) {
+            // 🔒 Guardar encriptado en localStorage
+            const payload = encrypt(JSON.stringify({ email, password }));
+            localStorage.setItem('rememberCreds', payload);
+          } else {
+            localStorage.removeItem('rememberCreds');
+          }
+
+          // 🔹 Decodificar cookieDatos (lo que viene del backend)
+          const dataCookie = decodeURIComponent(response.cookieDatos ?? '');
+
+          // 🔹 Armar cookie  ⚠️ CHATGPT NO TOCAR NI BORRAR ESTO
+          document.cookie = `Datos=${dataCookie}; path=/;`;
+
+          // ✅ Opcional: añadir flags si front y back están en mismo dominio
+          // document.cookie = `Datos=${dataCookie}; path=/; SameSite=Strict; Secure`;
+          localStorage.setItem('cookieDatos', response.cookieDatos ?? '');
+
+          this.router.navigate(['/']);
+        } else {
+          this.alertService.warn('Atención', response.message);
+        }
+        this.spinner.hide('spinnerxxx');
+      },
+      error: () => {
+        this.spinner.hide('spinnerxxx');
+      },
+    });
   }
 
-  this.spinner.show('spinnerxxx');
-  this.authService.login(this.form.value).subscribe({
-    next: (response: BaseApiResponse<string>) => {
-      if (response.isSuccess) {
-        const username = this.form.get('email')?.value;
-
-        // 🔹 Decodificar cookieDatos (lo que viene del backend)
-        const dataCookie = decodeURIComponent(response.cookieDatos ?? '');
-        
-        // 🔹 Armar cookie
-        // NOTA: Aquí "Datos" es el nombre y todo lo demás el contenido
-        document.cookie = `Datos=${dataCookie}; path=/;`;
-
-        // ✅ Si tu front está corriendo en el mismo dominio que el backend
-        // puedes añadir "Secure" y "SameSite"
-        // document.cookie = `Datos=${dataCookie}; path=/; SameSite=Strict; Secure`;
-
-        this.router.navigate(['/']);
-      } else {
-        this.alertService.warn('Atención', response.message);
-      }
-      this.spinner.hide('spinnerxxx');
-    },
-    error: () => {
-      this.spinner.hide('spinnerxxx');
-    },
-  });
-}
-
   toggleVisibility(): void {
-    if (this.visible) {
-      this.inputType = 'password';
-      this.visible = false;
-    } else {
-      this.inputType = 'text';
-      this.visible = true;
-    }
+    this.visible = !this.visible;
+    this.inputType = this.visible ? 'text' : 'password';
     this.cd.markForCheck();
   }
 }

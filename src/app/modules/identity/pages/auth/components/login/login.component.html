@@ -53,9 +53,10 @@
   <!-- resto del formulario igual -->
   <div class="flex items-center justify-between text-sm text-gray-600">
     <label class="inline-flex items-center space-x-2">
-      <input type="checkbox" class="accent-am-main-blue-dark" />
-      <span>Recuérdame</span>
-    </label>
+  <input type="checkbox" class="accent-am-main-blue-dark" formControlName="remember" />
+  <span>Recuérdame</span>
+</label>
+
     <a [routerLink]="['/reset-password']" class="hover:underline text-am-main-blue-dark">¿Has olvidado tu contraseña?</a>
   </div>
 

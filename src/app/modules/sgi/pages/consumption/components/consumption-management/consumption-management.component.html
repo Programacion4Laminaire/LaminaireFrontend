@@ -1,0 +1,66 @@
+<ngx-spinner *ngIf="loading" [fullScreen]="true"
+             bdColor="rgba(70,84,153,0.3)" size="medium"
+             name="carga" color="#ffffff" type="ball-atom">
+</ngx-spinner>
+
+<h2 mat-dialog-title>
+  <strong class="text-am-main-blue-dark">
+    {{ mode === 'create' ? 'Nuevo consumo' : 'Actualizar consumo' }}
+    <span *ngIf="resourceTypeCode"> de {{ resourceLabel }}</span>
+    <span *ngIf="form.get('unit')?.value" class="ml-2 text-gray-500">
+      (Unidad: {{ form.get('unit')?.value }})
+    </span>
+  </strong>
+</h2>
+
+
+<mat-dialog-content class="dialog-body">
+  <form [formGroup]="form" class="form-container">
+    <div class="form-fields">
+      <mat-form-field appearance="outline" style="display: none;">
+        <mat-label>Recurso</mat-label>
+        <mat-select formControlName="resourceType" [disabled]="lockType">
+          <mat-option value="ENERGY">Energía</mat-option>
+          <mat-option value="GAS">Gas</mat-option>
+          <mat-option value="WATER">Agua</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('resourceType')?.hasError('required')">Campo requerido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Valor de consumo</mat-label>
+        <input matInput type="number" formControlName="value" />
+        <mat-error *ngIf="form.get('value')?.hasError('required')">Campo requerido</mat-error>
+        <mat-error *ngIf="form.get('value')?.hasError('min')">Debe ser ≥ 0</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline"  style="display: none;" >
+        <mat-label>Unidad</mat-label>
+        <mat-select formControlName="unit">
+          <mat-optgroup *ngFor="let group of unitOptions" [label]="group.label">
+            <mat-option *ngFor="let u of group.options" [value]="u.value">
+              {{ u.label }}
+            </mat-option>
+          </mat-optgroup>
+        </mat-select>
+        <mat-error *ngIf="form.get('unit')?.hasError('required')">Campo requerido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha de lectura</mat-label>
+        <input matInput type="date" formControlName="readingDate" />
+        <mat-error *ngIf="form.get('readingDate')?.hasError('required')">Campo requerido</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-span-2">
+        <mat-label>Nota</mat-label>
+        <textarea matInput rows="2" formControlName="note"></textarea>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" style="padding: 0 32px 24px;">
+  <button mat-stroked-button mat-dialog-close>Cancelar</button>
+  <button mat-flat-button color="primary" [disabled]="loading" (click)="save()">Guardar</button>
+</mat-dialog-actions>

@@ -4,7 +4,7 @@ import { BaseApiResponse } from '@app/shared/models/commons/base-api-response.in
 import { AlertService } from '@app/modules/core/services/alert.service';
 import { endpoint } from '@app/shared/utils/endpoints.util';
 import { getIcon, getStateBadge } from '@app/shared/utils/functions.util';
-import { environment as env } from '@env/environment.development';
+import { environment as env } from '@env/environment';
 import { map, Observable } from 'rxjs';
 import {
   RoleCreateRequest,

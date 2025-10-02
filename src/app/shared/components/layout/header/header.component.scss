@@ -131,6 +131,7 @@
             }
           }
         }
+        
       }
     }
   }
@@ -334,4 +335,18 @@
   display: inline-flex;         /* corrige el box-model */
   align-items: center;
   justify-content: center;
+}
+
+/* Header ocupa todo el ancho cuando no hay sidebar visible */
+.head-full {
+  width: 100%;
+  margin-left: 0;
+}
+
+/* Por si alguna otra clase quedara aplicada, forzamos en móvil */
+@media (max-width: 768px) {
+  .head {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
 }

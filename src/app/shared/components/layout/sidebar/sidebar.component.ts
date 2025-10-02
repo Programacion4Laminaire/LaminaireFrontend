@@ -7,7 +7,12 @@ import {
   inject,
 } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import {
+  Router,
+  RouterLink,
+  RouterLinkActive,
+  NavigationEnd,
+} from '@angular/router';
 import { MenuResponse } from '@app/shared/models/layout/menu.interface';
 import { MenuService } from '@app/modules/core/services/menu.service';
 import { fadeInOutAnimation } from '@shared/animations/fade-in-out.animation';
@@ -17,7 +22,12 @@ import { SublevelMenuComponent } from '../sublevel-menu/sublevel-menu.component'
 
 // Filtro / búsqueda
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, startWith } from 'rxjs/operators';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  startWith,
+  filter,
+} from 'rxjs/operators';
 import { HighlightPipe } from '@shared/pipes/highlight.pipe';
 
 @Component({
@@ -46,39 +56,53 @@ export class SidebarComponent {
 
   // estado UI
   @Output() onToggleSideNav: EventEmitter<ISidebarToggle> = new EventEmitter();
-  collapsed: boolean = false;
+  collapsed: boolean = false; // false=angosto (cerrado), true=ancho (abierto)
   screenWidth = 0;
   multiple: boolean = false;
+
+  // activación manual (grupos) y temporal (hojas)
+  manualActiveId: number | null = null;
+  tempActiveRoute: string | null = null;
 
   // filtro
   searchCtrl = new FormControl<string>('', { nonNullable: true });
   filteredNavData: INavbarData[] = [];
   isFiltering = false;
 
-  ngOnInit(): void {
-    this.screenWidth = window.innerWidth;
+ngOnInit(): void {
+  this.screenWidth = window.innerWidth;
+
+  // ✅ Abre por defecto solo en desktop. En móvil queda oculto.
+  if (this.screenWidth > 768) {
     this.toggleCollapsed();
-    this.getMenuByRole();
-
-    // stream del filtro
-    this.searchCtrl.valueChanges
-      .pipe(
-        startWith(this.searchCtrl.value),
-        debounceTime(120),
-        distinctUntilChanged()
-      )
-      .subscribe((term) => {
-        const t = term?.trim() ?? '';
-        this.isFiltering = t.length > 0;
-
-        const base = this.navData ?? [];
-        this.filteredNavData = this.isFiltering
-          ? this.filterMenuTree(base, t)
-          : base;
-      });
   }
 
-  @HostListener('window:resize', ['$event'])
+  this.getMenuByRole();
+
+  this.router.events
+    .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+    .subscribe(() => {
+      this.manualActiveId = null;
+      this.tempActiveRoute = null;
+    });
+
+  this.searchCtrl.valueChanges
+    .pipe(
+      startWith(this.searchCtrl.value),
+      debounceTime(120),
+      distinctUntilChanged()
+    )
+    .subscribe((term) => {
+      const t = term?.trim() ?? '';
+      this.isFiltering = t.length > 0;
+
+      const base = this.navData ?? [];
+      this.filteredNavData = this.isFiltering ? this.filterMenuTree(base, t) : base;
+    });
+}
+
+
+  @HostListener('window:resize')
   onResize(): void {
     this.screenWidth = window.innerWidth;
     if (this.screenWidth <= 768) {
@@ -104,6 +128,11 @@ export class SidebarComponent {
   }
 
   getActiveClass(node: INavbarData): string {
+    // activación manual (para grupos)
+    if (this.manualActiveId != null && node.menuId === this.manualActiveId) {
+      return 'active';
+    }
+
     const current = this.router.url;
 
     const isActiveRoute = (route?: string | null) =>
@@ -129,8 +158,6 @@ export class SidebarComponent {
   }
 
   // ===== Armado del árbol n-niveles desde lista plana =====
-
-  /** Convierte un MenuResponse en un INavbarData */
   private toNode(m: MenuResponse): INavbarData {
     return {
       menuId: m.menuId,
@@ -138,18 +165,9 @@ export class SidebarComponent {
       label: m.item ?? '',
       icon: m.icon ?? '',
       items: [],
-      // Si más adelante agregas "position" al DTO y al interface,
-      // puedes guardarlo aquí y ordenar por position en sortRec.
-      // position: m.position
     };
   }
 
-  /**
-   * Construye un árbol con soporte para:
-   *  - raíces clásicas (fatherId = 0)
-   *  - raíces self-parent (fatherId = menuId, p.ej. CEO)
-   *  - casos donde no exista el padre en la lista (caen como raíz)
-   */
   private buildTreeFromFlat(flat: MenuResponse[]): INavbarData[] {
     const map = new Map<number, INavbarData>();
     flat.forEach((m) => map.set(m.menuId, this.toNode(m)));
@@ -160,8 +178,8 @@ export class SidebarComponent {
       const node = map.get(m.menuId)!;
       const fid = m.fatherId;
 
-      const isSelfRoot = fid === m.menuId; // raíz que se apunta a sí misma
-      const isZeroRoot = fid === 0;        // raíz clásica
+      const isSelfRoot = fid === m.menuId;
+      const isZeroRoot = fid === 0;
       const parent = fid != null ? map.get(fid) : undefined;
 
       if (isSelfRoot || isZeroRoot || !parent) {
@@ -171,12 +189,8 @@ export class SidebarComponent {
       }
     }
 
-    // Orden recursivo: por label (alfabético). Si tuvieras "position", úsalo primero.
     const sortRec = (nodes: INavbarData[]) => {
-      nodes.sort((a, b) =>
-        // ((a as any).position ?? 0) - ((b as any).position ?? 0) ||
-        (a.label || '').localeCompare(b.label || '')
-      );
+      nodes.sort((a, b) => (a.label || '').localeCompare(b.label || ''));
       nodes.forEach((n) => n.items && sortRec(n.items));
     };
     sortRec(roots);
@@ -184,17 +198,15 @@ export class SidebarComponent {
     return roots;
   }
 
-  // ===== Carga desde backend y proyección al árbol =====
+  // ===== Carga desde backend =====
   getMenuByRole(): void {
     this.menuService.getMenuByRole().subscribe((resp) => {
       const flat = resp?.data ?? [];
       this.menu = flat;
 
-      // 1) construir árbol
       const tree = this.buildTreeFromFlat(flat);
 
-      // 2) si hay un único root y es self-parent (CEO), “desenvolverlo”:
-      //    mostramos sus hijos como nivel principal (Financiera, Comercial, etc.)
+      // si hay un único root self-parent (CEO), mostrar sus hijos como raíz
       let nav: INavbarData[] = tree;
       if (tree.length === 1) {
         const root = tree[0];
@@ -206,7 +218,6 @@ export class SidebarComponent {
 
       this.navData = nav;
 
-      // 3) refrescar filtro
       const t = this.searchCtrl.value?.trim() ?? '';
       this.isFiltering = t.length > 0;
       this.filteredNavData = this.isFiltering
@@ -215,7 +226,7 @@ export class SidebarComponent {
     });
   }
 
-  // ====== utilidades de filtro ======
+  // ===== utilidades de filtro =====
   clearSearch(): void {
     this.searchCtrl.setValue('');
   }
@@ -248,5 +259,44 @@ export class SidebarComponent {
     };
 
     return (nodes ?? []).map(visit).filter(Boolean) as INavbarData[];
+  }
+
+  // ===== handlers de click =====
+  onRootClick(item: INavbarData, ev: MouseEvent): void {
+    // activar visualmente el grupo
+    this.manualActiveId = item.menuId ?? null;
+
+    // Si está cerrado (angosto), abrir y expandir
+    if (!this.collapsed) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      this.toggleCollapsed();
+      setTimeout(() => {
+        this.shrinkItems(item);
+        item.expanded = true;
+      }, 0);
+      return;
+    }
+
+    // Si ya está abierto, comportamiento normal
+    this.handleClick(item);
+  }
+
+  onLeafClick(item: INavbarData, ev: MouseEvent): void {
+    // Si está cerrado, abrir y navegar
+    if (!this.collapsed) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      this.tempActiveRoute = item.route ?? null; // activa inmediato
+      const route = item.route;
+      this.toggleCollapsed();
+      setTimeout(() => {
+        if (route) this.router.navigate([route]);
+      }, 0);
+      return;
+    }
+
+    // Si ya está abierto, mantiene single-open
+    this.shrinkItems(item);
   }
 }

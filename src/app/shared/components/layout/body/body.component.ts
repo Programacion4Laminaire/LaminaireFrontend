@@ -10,22 +10,14 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './body.component.scss',
 })
 export class BodyComponent {
-  @Input() collapsed = false;
+  @Input() collapsed = false;  // true = sidebar ancho (16.5625rem)
   @Input() screenWidth = 0;
 
   getBodyClass(): string {
-    let styleClass = '';
+    // Móvil: el body SIEMPRE a 100% (sidebar se superpone o está oculto)
+    if (this.screenWidth <= 768) return 'body-full';
 
-    if (this.collapsed && this.screenWidth > 768) {
-      styleClass = 'body-origin';
-    } else if (
-      this.collapsed &&
-      this.screenWidth <= 768 &&
-      this.screenWidth > 0
-    ) {
-      styleClass = 'body-md';
-    }
-
-    return styleClass;
+    // Desktop: ancho depende del estado del sidebar
+    return this.collapsed ? 'body-origin' : 'body-md';
   }
 }

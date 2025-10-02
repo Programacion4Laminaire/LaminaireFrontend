@@ -17,10 +17,11 @@ export class ExternalRedirectComponent implements OnInit {
       window.open(url, '_blank');
 
       // opcional: redirigir la app a home para no dejar /sir-laminaire cargado
-      //window.location.href = '/sir-enterprise/sir-laminaire';
-      window.location.href = '/sir-laminaire';
+      window.location.href = '/sir-enterprise/sir-laminaire';
+     //window.location.href = '/sir-laminaire';
     } else {
-      window.location.href = '/';
+      //window.location.href = '/';
+      window.location.href = '/sir-enterprise';
     }
   }
 }
