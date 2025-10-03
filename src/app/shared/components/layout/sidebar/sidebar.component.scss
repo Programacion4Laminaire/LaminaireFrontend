@@ -107,7 +107,6 @@ mark{ background:#ffe08a; color:#1d1d1d; padding:0 .1rem; border-radius:.2rem; }
       .sidebar-link-text{
         font-size:13px; margin-right:.25rem;
         flex:1 1 auto; min-width:0; max-width:100%;
-        /* ⇒ 1 línea si cabe; si no, se parte de forma normal */
         white-space: normal;
         word-break: normal;
         overflow-wrap: break-word;
@@ -161,7 +160,7 @@ mark{ background:#ffe08a; color:#1d1d1d; padding:0 .1rem; border-radius:.2rem; }
   }
 }
 
-/* scroll */
+/* scroll general */
 .scrollwrap{ overflow-y:auto; visibility:hidden; height:calc(100% - 3.65rem - 3rem); }
 .sidebar-nav, .scrollwrap:hover, .scrollwrap:focus{ visibility:visible; }
 .scrollwrap_delayed{ transition:visibility .5s .2s; }
@@ -175,70 +174,257 @@ mark{ background:#ffe08a; color:#1d1d1d; padding:0 .1rem; border-radius:.2rem; }
 .sublevel-nav .sublevel-nav-item .sublevel-nav-link .sublevel-link-icon{
   display: none !important;
 }
-
-/* (opcional) asegúrate de no introducir padding extra en el enlace */
 .sublevel-nav .sublevel-nav-item .sublevel-nav-link{
-  padding-left: .25rem;   /* o lo que uses; no más indent aquí */
+  padding-left: .25rem;
 }
 
+/* animación buscador */
 .sidebar-search {
   max-height: 0;
   opacity: 0;
   overflow: hidden;
   transition: all 0.3s ease;
 }
-
 .sidebar.sidebar-collapsed .sidebar-search {
-  max-height: 60px; /* ajusta según tu altura */
+  max-height: 60px;
   opacity: 1;
 }
 
-/* ===== MODO MÓVIL: ocultar TODO el sidebar y dejar solo el botón ===== */
+/* ===== MODO MÓVIL ===== */
 @media (max-width: 768px) {
-
-  /* Asegura que el botón se vea aunque el contenedor tenga ancho 0 */
   .sidebar { overflow: visible; }
-
-  /* Sidebar cerrado (collapsed = false) → ancho 0 y oculta todo menos el botón */
   .sidebar:not(.sidebar-collapsed) {
     width: 0 !important;
   }
   .sidebar:not(.sidebar-collapsed) > *:not(.menu-btn) {
     display: none !important;
   }
-
-  /* Sidebar abierto (collapsed = true) → se muestra completo como siempre */
+  .sidebar:not(.sidebar-collapsed) .menu-btn {
+    position: fixed;
+    left: 2px;
+    right: auto;
+    top: 3.5%;
+    z-index: 1001;
+  }
   .sidebar.sidebar-collapsed {
-    width: 16.5625rem; /* tu ancho abierto */
+    width: 16.5625rem;
   }
 }
 
-/* Móvil: oculta todo el panel cuando está "cerrado" (collapsed = false),
-   pero deja visible el botón toggle, bien colocado. */
-@media (max-width: 768px) {
+/* ==== FAVORITOS ==== */
+.favorites-section {
+  padding: .5rem .75rem;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  margin-bottom: .5rem;
+  display: flex;
+  flex-direction: column;
 
-  /* Que el contenedor no recorte al botón */
-  .sidebar { overflow: visible; }
-
-  /* Cerrado → ancho 0 y ocultar todo excepto el botón */
-  .sidebar:not(.sidebar-collapsed) {
-    width: 0 !important;
-  }
-  .sidebar:not(.sidebar-collapsed) > *:not(.menu-btn) {
-    display: none !important;
-  }
-
-  /* Reposicionar el botón para que no quede cortado al borde */
-  .sidebar:not(.sidebar-collapsed) .menu-btn {
-    position: fixed;     /* se “despega” del ancho 0 del sidebar */
-    left: 2px;           /* pegado al borde izq. */
-    right: auto;         /* anulamos el right:-14px original */
-    top: 3.5%;
-    z-index: 1001;       /* por encima del contenido */
+  .favorites-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 .25rem .5rem;
+    text-transform: uppercase;
+    letter-spacing: .5px;
   }
 
-  /* Abierto → se muestra normal con tu ancho expandido */
-  .sidebar.sidebar-collapsed {
-    width: 16.5625rem;   /* tu ancho abierto */
+  .sidebar-nav-item .sidebar-nav-link {
+    background: rgba(255, 214, 79, 0.055);
   }
+  .sidebar-nav-item .sidebar-nav-link:hover {
+    background: rgba(255, 214, 79, 0.075);
+  }
+}
+
+/* ================================
+   🎨 Favoritos - Sidebar
+   ================================ */
+
+/* ===== Tokens (configurables) ===== */
+.sidebar {
+  --fav-visible-rows: 7;   /* 👈 cambia a 8 si prefieres el límite en 8 */
+  --fav-item-h: 32px;       /* alto de cada fila */
+  --fav-gap-y: 6px;         /* separación vertical entre filas */
+}
+
+/* ===== Encabezado ===== */
+.sidebar .favorites-section {
+  padding-bottom: 6px;
+
+  .favorites-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 6px 10px 4px;
+  }
+
+  .favorites-title {
+    margin: 0;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    opacity: .75;
+  }
+
+  .uxui-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    line-height: 1;
+    padding: 3px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.18);
+    opacity: .8;
+    white-space: nowrap;
+    user-select: none;
+  }
+}
+
+/* ===== Lista con scroll ===== */
+.sidebar .favorites-section .favorites-list {
+  list-style: none;
+  padding: 0 8px 6px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fav-gap-y);
+
+  max-height: calc(
+    var(--fav-visible-rows) * var(--fav-item-h) +
+    (var(--fav-visible-rows) - 1) * var(--fav-gap-y)
+  );
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Scrollbar estilizada */
+.sidebar .favorites-section .favorites-list::-webkit-scrollbar { width: 6px; }
+.sidebar .favorites-section .favorites-list::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.25);
+  border-radius: 4px;
+}
+.sidebar .favorites-section .favorites-list:hover::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.4);
+}
+
+/* ===== Ítems de favoritos arriba ===== */
+.sidebar .favorite-item {
+  margin: 0;
+  position: relative;
+}
+
+.sidebar .favorite-item .sidebar-nav-link {
+  min-height: var(--fav-item-h);
+  padding: 6px 10px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sidebar .favorite-item .sidebar-link-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+}
+
+.sidebar .favorite-item .sidebar-link-text {
+  font-size: 12.5px;
+  line-height: 1.15;
+  letter-spacing: .01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===== Botón "X" SOLO en favoritos ===== */
+.sidebar .favorite-item .remove-fav {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%) translateX(4px);
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+
+  /* Oculto por defecto */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 120ms ease, transform 120ms ease, visibility 0s linear 120ms;
+
+  mat-icon {
+    font-size: 16px;
+    width: 16px; height: 16px; line-height: 16px;
+    color: #e57373;
+  }
+
+  &:hover mat-icon {
+    color: #ef5350;
+    transform: scale(1.1);
+  }
+}
+
+/* Mostrar solo en hover/focus */
+.sidebar .favorite-item:hover .remove-fav,
+.sidebar .favorite-item:focus-within .remove-fav {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(-50%) translateX(0);
+  transition: opacity 120ms ease, transform 120ms ease, visibility 0s;
+}
+
+/* Siempre visible en táctiles */
+@media (hover: none) {
+  .sidebar .favorite-item .remove-fav {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(-50%);
+    transition: none;
+  }
+}
+
+/* ================================
+   ⭐ Estrellas en menú normal (subniveles)
+   ================================ */
+.sublevel-leaf {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fav-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0 .25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  mat-icon {
+    font-size: 15px;
+    line-height: 1;
+    color: #c0c8d6;
+    transition: transform .15s ease, color .15s ease;
+  }
+
+  &:hover mat-icon {
+    color: #ffd54f;
+    transform: scale(1.1);
+  }
+}
+
+.active-sublevel .fav-btn mat-icon {
+  color: #ffd54f;
 }

@@ -5,6 +5,8 @@ export interface INavbarData {
   label: string;
   expanded?: boolean;
   items?: INavbarData[];
-    isNew?: boolean;
+  isNew?: boolean;
+    // ⭐ NUEVO
+  favorite?: boolean;
 }
 

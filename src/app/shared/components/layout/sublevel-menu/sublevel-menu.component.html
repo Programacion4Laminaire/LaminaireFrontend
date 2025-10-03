@@ -21,6 +21,8 @@
   >
     @for (item of data.items; track $index) {
       <li class="sublevel-nav-item">
+
+        <!-- 📂 GRUPO CON HIJOS -->
         @if(item.items && item.items.length > 0){
           <a
             class="sublevel-nav-link"
@@ -39,21 +41,7 @@
               </mat-icon>
             }
           </a>
-        }
-        @if (!item.items || (item.items && item.items.length === 0)) {
-          <a
-            class="sublevel-nav-link"
-            [routerLink]="[item.route]"
-            routerLinkActive="active-sublevel"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            @if(collapsed){
-              <span class="sublevel-link-text" @fadeInOut
-                    [innerHTML]="item.label | hl:term"></span>
-            }
-          </a>
-        }
-        @if (item.items && item.items.length > 0) {
+
           <div>
             <app-sublevel-menu
               [data]="item"
@@ -64,6 +52,35 @@
               [term]="term" />
           </div>
         }
+
+        <!-- 📄 HOJA (link + favorito) -->
+        @if (!item.items || (item.items && item.items.length === 0)) {
+          <div class="sublevel-leaf">
+            <a
+              class="sublevel-nav-link"
+              [routerLink]="[item.route]"
+              routerLinkActive="active-sublevel"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              @if(collapsed){
+                <span class="sublevel-link-text" @fadeInOut
+                      [innerHTML]="item.label | hl:term"></span>
+              }
+            </a>
+
+            <!-- ⭐ Botón de favorito -->
+            <button
+              type="button"
+              class="fav-btn"
+              (click)="toggleFavorite(item); $event.stopPropagation();"
+            >
+              <mat-icon>
+                {{ item.favorite ? 'star' : 'star_border' }}
+              </mat-icon>
+            </button>
+          </div>
+        }
+
       </li>
     }
   </ul>

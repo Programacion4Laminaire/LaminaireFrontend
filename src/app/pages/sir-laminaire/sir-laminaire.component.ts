@@ -741,7 +741,7 @@ export class SirLaminaireComponent {
 
         { label: 'Parámetros MP Arquitectónicos',         link: 'https://web.laminaire.net/SirWeb/Ingenieria/FRM/Parametros_MP_Arquitectonicos.aspx' },
 
-        { label: 'Proyectos de Ingeniería',               link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Proyectos_Ingenieria.aspx' },
+        //{ label: 'Proyectos de Ingeniería',               link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Proyectos_Ingenieria.aspx' },
         { label: 'Liberación Pedidos de Ingeniería',      link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Cambiar_Prioridad_Pedidos.aspx' },
         { label: 'Informe Pedidos Ing. Liberados',        link: 'https://web.laminaire.net/SirWeb/Comercial/FRM/Informe_Liberacion_Pedidos.aspx' },
 

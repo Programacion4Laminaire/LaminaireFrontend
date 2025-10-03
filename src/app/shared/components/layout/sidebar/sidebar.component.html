@@ -21,7 +21,7 @@
     }
   </div>
 
-  <!-- Buscador -->
+  <!-- 🔎 Buscador -->
   <div class="sidebar-search">
     <input
       type="search"
@@ -39,11 +39,54 @@
   </div>
 
   <div class="scrollwrap scrollwrap_delayed">
+
+ <!-- ⭐ FAVORITOS ARRIBA -->
+@if(getFavorites().length > 0){
+  <div class="favorites-section">
+    <div class="favorites-title-row">
+      <h4 class="favorites-title">Favoritos</h4>
+      
+    </div>
+
+    <!-- añadimos la clase favorites-list -->
+    <ul class="sidebar-nav favorites-list">
+      @for(fav of getFavorites(); track fav.menuId){
+        <li class="sidebar-nav-item favorite-item">
+          <a
+            class="sidebar-nav-link"
+            [routerLink]="[fav.route]"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <mat-icon class="sidebar-link-icon" [fontIcon]="fav.icon"></mat-icon>
+            @if (collapsed) {
+              <span class="sidebar-link-text" @fadeInOut>
+                {{ fav.label }}
+              </span>
+            }
+          </a>
+
+          <button
+            type="button"
+            class="remove-fav"
+            (click)="toggleFavorite(fav); $event.stopPropagation();"
+            aria-label="Quitar de favoritos"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </li>
+      }
+    </ul>
+  </div>
+}
+
+
+    <!-- 📂 MENÚ NORMAL -->
     <ul class="sidebar-nav" @fadeInOut>
       @for (data of (isFiltering ? filteredNavData : navData); track $index) {
         <li class="sidebar-nav-item">
 
-          <!-- NODO CON HIJOS -->
+          <!-- 📁 NODO CON HIJOS -->
           @if(data.items && data.items.length > 0){
             <a
               class="sidebar-nav-link"
@@ -64,7 +107,7 @@
             </a>
           }
 
-          <!-- NODO HOJA (link) -->
+          <!-- 🔗 NODO HOJA -->
           @if(!data.items || (data.items && data.items.length === 0)){
             <a
               class="sidebar-nav-link"
@@ -82,6 +125,7 @@
             </a>
           }
 
+          <!-- 📂 SUBNIVELES -->
           @if(collapsed && data.items && data.items.length > 0){
             <div>
               <app-sublevel-menu

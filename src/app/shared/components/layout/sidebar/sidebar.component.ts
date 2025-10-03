@@ -69,38 +69,35 @@ export class SidebarComponent {
   filteredNavData: INavbarData[] = [];
   isFiltering = false;
 
-ngOnInit(): void {
-  this.screenWidth = window.innerWidth;
+  // ⭐ favoritos (IDs en memoria)
+  private FAVORITES_KEY = 'menu_favorites';
+  private favoriteIds = new Set<number>();
 
-  // ✅ Abre por defecto solo en desktop. En móvil queda oculto.
-  if (this.screenWidth > 768) {
-    this.toggleCollapsed();
+  ngOnInit(): void {
+    this.screenWidth = window.innerWidth;
+
+    // ✅ Abre por defecto solo en desktop. En móvil queda oculto.
+    if (this.screenWidth > 768) {
+      this.toggleCollapsed();
+    }
+
+    this.getMenuByRole();
+
+    this.router.events
+      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+      .subscribe(() => {
+        this.manualActiveId = null;
+        this.tempActiveRoute = null;
+      });
+
+    this.searchCtrl.valueChanges
+      .pipe(
+        startWith(this.searchCtrl.value),
+        debounceTime(120),
+        distinctUntilChanged()
+      )
+      .subscribe(() => this.refreshFilteringView());
   }
-
-  this.getMenuByRole();
-
-  this.router.events
-    .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
-    .subscribe(() => {
-      this.manualActiveId = null;
-      this.tempActiveRoute = null;
-    });
-
-  this.searchCtrl.valueChanges
-    .pipe(
-      startWith(this.searchCtrl.value),
-      debounceTime(120),
-      distinctUntilChanged()
-    )
-    .subscribe((term) => {
-      const t = term?.trim() ?? '';
-      this.isFiltering = t.length > 0;
-
-      const base = this.navData ?? [];
-      this.filteredNavData = this.isFiltering ? this.filterMenuTree(base, t) : base;
-    });
-}
-
 
   @HostListener('window:resize')
   onResize(): void {
@@ -218,11 +215,12 @@ ngOnInit(): void {
 
       this.navData = nav;
 
-      const t = this.searchCtrl.value?.trim() ?? '';
-      this.isFiltering = t.length > 0;
-      this.filteredNavData = this.isFiltering
-        ? this.filterMenuTree(this.navData, t)
-        : this.navData;
+      // ⭐ restaurar favoritos desde storage al árbol real
+      this.loadFavorites();       // llena favoriteIds (Set)
+      this.applyFavorites(this.navData);
+
+      // pintar vista (filtrada o no)
+      this.refreshFilteringView();
     });
   }
 
@@ -253,12 +251,77 @@ ngOnInit(): void {
         .filter(Boolean) as INavbarData[];
 
       if (selfMatch || prunedChildren.length) {
+        // OJO: esto crea un clon visual; el estado real vive en navData
         return { ...n, items: prunedChildren };
       }
       return null;
     };
 
     return (nodes ?? []).map(visit).filter(Boolean) as INavbarData[];
+  }
+
+  /** Recalcula la vista (lista filtrada o completa) según el término actual */
+  private refreshFilteringView(): void {
+    const t = this.searchCtrl.value?.trim() ?? '';
+    this.isFiltering = t.length > 0;
+    this.filteredNavData = this.isFiltering
+      ? this.filterMenuTree(this.navData, t)
+      : this.navData;
+  }
+
+  // ===== Favoritos =====
+  private loadFavorites(): void {
+    this.favoriteIds.clear();
+    const raw = localStorage.getItem(this.FAVORITES_KEY);
+    if (!raw) return;
+    try {
+      const ids: number[] = JSON.parse(raw) ?? [];
+      ids.forEach(id => this.favoriteIds.add(id));
+    } catch { /* ignore parse errors */ }
+  }
+
+  /** Marca favorite=true en el árbol real según favoriteIds */
+  private applyFavorites(nodes: INavbarData[]): void {
+    const walk = (arr: INavbarData[]) => {
+      for (const n of arr) {
+        const id = n.menuId!;
+        n.favorite = typeof id === 'number' && this.favoriteIds.has(id);
+        if (n.items?.length) walk(n.items);
+      }
+    };
+    walk(nodes);
+  }
+
+  /** Alterna favorito por ID real, persiste y refresca la vista filtrada */
+  toggleFavorite(item: INavbarData): void {
+    const id = item.menuId;
+    if (typeof id !== 'number') return;
+
+    if (this.favoriteIds.has(id)) this.favoriteIds.delete(id);
+    else this.favoriteIds.add(id);
+
+    // persistir
+    localStorage.setItem(
+      this.FAVORITES_KEY,
+      JSON.stringify(Array.from(this.favoriteIds))
+    );
+
+    // aplicar al árbol real y refrescar la vista (para que el clon filtrado se regenere)
+    this.applyFavorites(this.navData);
+    this.refreshFilteringView();
+  }
+
+  /** Obtiene favoritos desde el árbol real (para sección superior) */
+  getFavorites(): INavbarData[] {
+    const favs: INavbarData[] = [];
+    const walk = (arr: INavbarData[]) => {
+      for (const n of arr) {
+        if (n.favorite) favs.push(n);
+        if (n.items?.length) walk(n.items);
+      }
+    };
+    walk(this.navData);
+    return favs;
   }
 
   // ===== handlers de click =====
