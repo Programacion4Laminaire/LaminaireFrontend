@@ -428,3 +428,93 @@ mark{ background:#ffe08a; color:#1d1d1d; padding:0 .1rem; border-radius:.2rem; }
 .active-sublevel .fav-btn mat-icon {
   color: #ffd54f;
 }
+
+//* === Badge NEW encima alineado al texto (subniveles) === */
+/* ====== Badge NEW arriba-derecha alineado con el texto ====== */
+
+/* Contenedor relativo que envuelve el label y el badge.
+   Le damos el margen que antes tenía .sublevel-link-text para
+   que el badge y el texto compartan el mismo origen horizontal. */
+.text-wrap {
+  position: relative;
+  display: inline-block;   /* se ajusta al ancho real del texto */
+  margin-left: .8rem;      /* 👉 mismo desplazamiento que el label original */
+  line-height: 1.2;
+}
+
+/* Anula el margen del label dentro del wrapper para no duplicar */
+.text-wrap .sublevel-link-text {
+  margin-left: 0 !important;
+}
+
+/* Badge base */
+.badge-new {
+  background-color: #e53935;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 12px;
+  
+  line-height: 1;
+  pointer-events: none;  /* no bloquea el click del enlace */
+  white-space: nowrap;
+}
+
+/* Posición arriba-derecha del bloque de texto (flotante) */
+.badge-over-right {
+  position: absolute;
+  right: 0;            /* alineado al final del texto */
+  top: -10px;          /* ajusta entre -8 y -12 según tu gusto */
+  z-index: 1;
+  box-shadow: 0 1px 2px rgba(0,0,0,.15);
+}
+
+/* Seguridad: el enlace de subnivel tiene contexto propio */
+.sublevel-nav-link { position: relative; }
+
+/* Highlight del buscador, sin romper la línea */
+mark {
+  line-height: inherit;
+  padding: 0 .12rem;
+  border-radius: .2rem;
+}
+
+/* Ajuste fino del NEW: más abajo y un poco más a la derecha */
+.badge-over-right {
+  top: -1px;   /* antes -10px  → baja el badge */
+  right: -12px; /* antes 0     → lo mueve a la derecha */
+}
+
+/* Punto rojo para nodos con hijos que contienen NEW */
+.label-wrap{
+  position: relative;
+  flex: 1 1 auto;      /* mantiene el layout del texto */
+  min-width: 0;
+  display: inline-block;
+}
+
+.badge-dot{
+  position: absolute;
+  top: -2px;           /* ↓ baja o sube el punto según prefieras */
+  right: -12px;        /* → muévelo un poco más a la derecha si hace falta */
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #d32f2f;
+  box-shadow: 0 1px 2px rgba(0,0,0,.18);
+  pointer-events: none;
+}
+
+/* Dot específico de subniveles (ubicado antes del chevron) */
+.badge-dot--sub {
+  position: absolute;
+  top: 6px;           /* ajusta 4–8px según tu tipografía */
+  right: 1rem;      /* chevron está en right:.5rem → dejamos aire */
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d32f2f;
+  box-shadow: 0 1px 2px rgba(0,0,0,.18);
+  pointer-events: none;
+}
+

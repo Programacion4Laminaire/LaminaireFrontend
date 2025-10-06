@@ -23,3 +23,23 @@
 }
 .btn:hover { filter: brightness(1.05); }
 .hint { display:block; margin-top:.75rem; color:#64748b; }
+
+
+/* Variables locales para poder afinar rápido */
+.text-wrap {
+  /* ↓ Baja el badge (menos negativo = más abajo). Prueba -2px / 0 / 2px */
+  --badge-top: -2px;
+
+  /* → Empuja el badge a la derecha del borde del texto.
+     Valor NEGATIVO lo tira a la derecha; -10px suele verse bien. */
+  --badge-right: -10px;
+}
+
+/* Aplica los offsets al badge */
+.badge-over-right {
+  position: absolute;
+  top: var(--badge-top);
+  right: var(--badge-right);
+  z-index: 1;
+  box-shadow: 0 1px 2px rgba(0,0,0,.15);
+}

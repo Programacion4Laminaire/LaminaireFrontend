@@ -111,12 +111,37 @@ export class SidebarComponent {
     }
   }
 
+  // Cerrar el sidebar con tecla ESC
+  @HostListener('document:keydown.escape')
+  onEsc(): void {
+    if (this.collapsed) this.toggleCollapsed();
+  }
+
   toggleCollapsed(): void {
     this.collapsed = !this.collapsed;
+
+    // ✅ si estamos CERRANDO (sidebar angosto), contrae todos los subniveles y limpia estados
+    if (!this.collapsed) {
+      this.collapseAllGroups();
+      this.manualActiveId = null;
+      this.tempActiveRoute = null;
+    }
+
     this.onToggleSideNav.emit({
       collapsed: this.collapsed,
       screenWidth: this.screenWidth,
     });
+  }
+
+  /** Colapsa todos los grupos abiertos del árbol real */
+  private collapseAllGroups(): void {
+    const walk = (arr: INavbarData[]) => {
+      for (const n of arr) {
+        if ((n as any).expanded) (n as any).expanded = false;
+        if (n.items?.length) walk(n.items);
+      }
+    };
+    walk(this.navData);
   }
 
   handleClick(item: INavbarData): void {
@@ -156,12 +181,16 @@ export class SidebarComponent {
 
   // ===== Armado del árbol n-niveles desde lista plana =====
   private toNode(m: MenuResponse): INavbarData {
+    // Tolerante a JSON con IsNew/ isNew (por si el backend estuviera en PascalCase)
+    const isNew = Boolean((m as any)?.isNew ?? (m as any)?.IsNew ?? false);
+
     return {
       menuId: m.menuId,
       route: m.path ?? '',
       label: m.item ?? '',
       icon: m.icon ?? '',
       items: [],
+      isNew, // 👈 pasa el flag al árbol
     };
   }
 
@@ -276,8 +305,10 @@ export class SidebarComponent {
     if (!raw) return;
     try {
       const ids: number[] = JSON.parse(raw) ?? [];
-      ids.forEach(id => this.favoriteIds.add(id));
-    } catch { /* ignore parse errors */ }
+      ids.forEach((id) => this.favoriteIds.add(id));
+    } catch {
+      /* ignore parse errors */
+    }
   }
 
   /** Marca favorite=true en el árbol real según favoriteIds */
@@ -361,5 +392,17 @@ export class SidebarComponent {
 
     // Si ya está abierto, mantiene single-open
     this.shrinkItems(item);
+  }
+
+  /** True si el nodo tiene al menos un descendiente con isNew = true */
+  hasNewDescendant(node: INavbarData | null | undefined): boolean {
+    if (!node?.items?.length) return false;
+    const stack: INavbarData[] = [...node.items];
+    while (stack.length) {
+      const n = stack.pop()!;
+      if (n.isNew) return true;
+      if (n.items?.length) stack.push(...n.items);
+    }
+    return false;
   }
 }
