@@ -116,20 +116,28 @@ const actionButtonUserRole: GenericButton = {
 
 const searchOptions = [
   {
-    label: 'Usuario',
-    value: UserRoleFilters.ByUser,
-    placeholder: 'Buscar por usuario',
+    label: 'Nombre completo del usuario',
+    value: UserRoleFilters.ByFullName, // 1
+    placeholder: 'Buscar por nombre y apellido',
     validation: [GenericValidators.defaultDescription],
-    validation_desc: 'Permite búsqueda por las primeras tres letras.',
-    icon: 'tune',
+    validation_desc: 'Busca por nombre completo del usuario.',
+    icon: 'person_search',
+  },
+  {
+    label: 'Usuario (UserName)',
+    value: UserRoleFilters.ByUserName, // 2
+    placeholder: 'Buscar por username',
+    validation: [GenericValidators.defaultDescription],
+    validation_desc: 'Busca por nombre de usuario (UserName).',
+    icon: 'account_circle',
   },
   {
     label: 'Rol',
-    value: UserRoleFilters.ByRole,
-    placeholder: 'Buscar por rol',
+    value: UserRoleFilters.ByRole, // 3
+    placeholder: 'Buscar por rol asignado',
     validation: [GenericValidators.defaultDescription],
-    validation_desc: 'Permite búsqueda por las primeras tres letras.',
-    icon: 'tune',
+    validation_desc: 'Busca por nombre del rol.',
+    icon: 'security',
   },
 ];
 
@@ -139,19 +147,20 @@ const menuItems: MenuFilterTable = {
   tooltip: 'Estados',
   menuItems: [
     {
-      label: 'Enabled',
+      label: 'Activo',
       icon: 'label',
       cssIcon: ['text-am-main-custom4-dark'],
       value: STATUS.ENABLED,
     },
     {
-      label: 'Disabled',
+      label: 'Inactivo',
       icon: 'label',
       cssIcon: ['text-am-gray-light'],
       value: STATUS.DISABLED,
     },
   ],
 };
+
 
 const filterButtons: SplitButton[] = [
   {

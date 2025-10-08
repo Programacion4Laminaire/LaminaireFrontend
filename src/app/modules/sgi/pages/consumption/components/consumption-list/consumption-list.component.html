@@ -8,60 +8,79 @@
         </div>
       </div>
 
- <div class="flex flex-wrap gap-2 items-center justify-end w-full sm:w-auto">
+<div class="flex flex-wrap items-center justify-end gap-3 w-full sm:w-auto mt-[16px]">
 
-  <!-- RANGO DE FECHAS DE LECTURA -->
-  <mat-form-field
-    appearance="outline"
-    style="--mdc-outlined-text-field-outline-color: transparent;
-           --mdc-outlined-text-field-hover-outline-color: transparent;
-           --mdc-outlined-text-field-focus-outline-color: transparent;"
-     class="w-40 mt-[18px]" 
-  >
-    <mat-label>Desde</mat-label>
-    <input matInput type="date"
-           [value]="component$.filters.startReadingDate"
-           (change)="startDateChange($event)" />
-  </mat-form-field>
+  <!-- 🔹 RANGO DE FECHAS -->
+  <div class="flex flex-wrap items-center gap-2">
+    <!-- Campo Desde -->
+    <mat-form-field
+      appearance="outline"
+      class="w-40"
+      style="--mdc-outlined-text-field-outline-color: transparent;
+             --mdc-outlined-text-field-hover-outline-color: transparent;
+             --mdc-outlined-text-field-focus-outline-color: transparent;">
+      <mat-label>Desde</mat-label>
+      <input
+        matInput
+        type="date"
+        [value]="component$.filters.startReadingDate"
+        (blur)="startDateChange($event, false)" />
+    </mat-form-field>
 
-  <mat-form-field
-    appearance="outline"
-    style="--mdc-outlined-text-field-outline-color: transparent;
-           --mdc-outlined-text-field-hover-outline-color: transparent;
-           --mdc-outlined-text-field-focus-outline-color: transparent;"
-     class="w-40 mt-[18px]" 
-  >
-    <mat-label>Hasta</mat-label>
-    <input matInput type="date"
-           [value]="component$.filters.endReadingDate"
-           (change)="endDateChange($event)" />
-  </mat-form-field>
+    <!-- Campo Hasta -->
+    <mat-form-field
+      appearance="outline"
+      class="w-40"
+      style="--mdc-outlined-text-field-outline-color: transparent;
+             --mdc-outlined-text-field-hover-outline-color: transparent;
+             --mdc-outlined-text-field-focus-outline-color: transparent;">
+      <mat-label>Hasta</mat-label>
+      <input
+        matInput
+        type="date"
+        [value]="component$.filters.endReadingDate"
+        (blur)="endDateChange($event, false)" />
+    </mat-form-field>
 
-  
-  
+    <!-- Botón Consultar -->
+    <button
+      mat-flat-button
+      color="primary"
+      class="h-[56px] rounded-full px-5 flex items-center justify-center"
+      (click)="applyDateFilter()">
+      
+      Consultar
+    </button>
+  </div>
 
-  <!-- BÚSQUEDA -->
+  <!-- 🔹 BÚSQUEDA -->
   <app-search-box
     [searchOptions]="component$.searchOptions"
     [currentValue]="component$.filters.textFilter"
-    (search)="search($event)"
-  />
- <div class="flex gap-2 flex-wrap items-end">
-        <app-split-button
-          [configButtons]="component$.filterButtons"
-          (doThisFunction)="resetButton($event)"
-        />
-      </div>
-  <!-- EXPORTACIÓN -->
+    (search)="search($event)">
+  </app-search-box>
+
+  <!-- 🔹 BOTONES DE ACCIÓN -->
+  <div class="flex gap-2 flex-wrap items-center">
+    <app-split-button
+      [configButtons]="component$.filterButtons"
+      (doThisFunction)="resetButton($event)">
+    </app-split-button>
+  </div>
+
+  <!-- 🔹 EXPORTACIÓN -->
   <div>
     <app-export-excel
       [url]="getDownloadUrl"
       [getInputs]="component$.getInputs"
-      [filename]="exportFilename"
-    ></app-export-excel>
+      [filename]="exportFilename">
+    </app-export-excel>
   </div>
-  
+
 </div>
+
+
+
 
 
     </div>

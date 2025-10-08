@@ -175,19 +175,42 @@ private validateRange() {
   }
 
   // Cambios en fechas
-  startDateChange(ev: Event) {
-    const val = (ev.target as HTMLInputElement).value || '';
-    this.component$.filters.startReadingDate = this.sanitizeDate(val);
+startDateChange(ev: Event, auto = true) {
+  const val = (ev.target as HTMLInputElement).value || '';
+  this.component$.filters.startReadingDate = this.sanitizeDate(val);
+  if (auto) {
     this.markRefresh();
     this.formatGetInputs();
+  }
+}
+
+endDateChange(ev: Event, auto = true) {
+  const val = (ev.target as HTMLInputElement).value || '';
+  this.component$.filters.endReadingDate = this.sanitizeDate(val);
+  if (auto) {
+    this.markRefresh();
+    this.formatGetInputs();
+  }
+}
+
+applyDateFilter() {
+  const s = this.component$.filters.startReadingDate;
+  const e = this.component$.filters.endReadingDate;
+
+  if (!s || !e) {
+    Swal.fire({
+      icon: 'info',
+      title: 'Fechas requeridas',
+      text: 'Debes seleccionar las fechas "Desde" y "Hasta" antes de consultar.',
+      confirmButtonColor: '#004A89'
+    });
+    return;
   }
 
-  endDateChange(ev: Event) {
-    const val = (ev.target as HTMLInputElement).value || '';
-    this.component$.filters.endReadingDate = this.sanitizeDate(val);
-    this.markRefresh();
-    this.formatGetInputs();
-  }
+  this.validateRange();
+  this.markRefresh();
+  this.formatGetInputs();
+}
 
   clearDateRange() {
     this.component$.filters.startReadingDate = '';

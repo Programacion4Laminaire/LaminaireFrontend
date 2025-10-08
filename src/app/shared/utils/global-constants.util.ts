@@ -156,21 +156,24 @@ export const jurisdictions: SelectResponse[] = [
 
 ];
 
-export enum UsersFilters {
-  ByFullName = 1,
-  ByIdentification = 2, // ← Nuevo filtro
-  
-}
+export const UsersFilters = {
+  ByFullName: 1,
+  ByIdentification: 2,
+  ByUsername: 3,
+};
+
 
 export enum RoleFilters {
   ByName = 1,
   ByDescription = 2,
 }
 
-export enum UserRoleFilters {
-  ByUser = 1,
-  ByRole = 2,
-}
+export const UserRoleFilters = {
+  ByFullName: 1,
+  ByUserName: 2,
+  ByRole: 3,
+};
+
 
 export const ValidationTypes = {
   RUC: 'rucNumberValidator',

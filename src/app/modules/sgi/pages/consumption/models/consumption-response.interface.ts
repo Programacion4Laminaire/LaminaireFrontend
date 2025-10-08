@@ -5,14 +5,15 @@ export interface ConsumptionResponse {
   resourceType: ResourceType;
   value: number;
   unit: string;
-  readingDate: string;       // ISO
+  readingDate: string;
   note?: string | null;
+  sede: string;
+  dailyConsumption?: number | null;
   auditCreateDate: string;
 
   icEdit: string;
   icDelete: string;
   avatar?: { text: string; image: string };
 }
-
 export type ConsumptionByIdResponse =
   Omit<ConsumptionResponse, 'icEdit' | 'icDelete' | 'avatar'>;

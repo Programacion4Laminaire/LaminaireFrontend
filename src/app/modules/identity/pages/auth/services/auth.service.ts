@@ -30,9 +30,8 @@ export class AuthService {
   }
 
   constructor() {
-    this.user = new BehaviorSubject<string>(
-      JSON.parse(localStorage.getItem('token')!)
-    );
+    // ⛑️ Compatibilidad: lee 'token' sin romperse aunque esté en otro formato
+    this.user = new BehaviorSubject<string>(this.readTokenCompat());
   }
 
   // 👉 Notificación cross-tab (logout / token actualizado)
@@ -54,7 +53,7 @@ export class AuthService {
       .pipe(
         map((response: BaseApiResponse<string>) => {
           if (response.isSuccess) {
-            // Guarda token
+            // ⚠️ Se mantiene tal cual lo tenías: guardas JSON.stringify(accessToken)
             localStorage.setItem('token', JSON.stringify(response.accessToken));
             this.user.next(response.accessToken);
 
@@ -75,11 +74,11 @@ export class AuthService {
    * 🔹 Extraer el userId real desde el token JWT
    */
   getUserIdFromToken(): number | null {
-    const token = localStorage.getItem('token');
+    const token = this.readTokenCompat();  // ⛑️ usa lectura compatible
     if (!token) return null;
 
     try {
-      const decoded = jwtDecode<JwtPayload>(JSON.parse(token));
+      const decoded = jwtDecode<JwtPayload>(token);
       if (decoded.sub) return Number(decoded.sub);
       console.warn('⚠️ No se encontró userId en el token');
       return null;
@@ -93,11 +92,11 @@ export class AuthService {
    * 🔹 Extraer nombre completo desde el token JWT
    */
   getFullNameFromToken(): string | null {
-    const token = localStorage.getItem('token');
+    const token = this.readTokenCompat();  // ⛑️ usa lectura compatible
     if (!token) return null;
 
     try {
-      const decoded = jwtDecode<JwtPayload>(JSON.parse(token));
+      const decoded = jwtDecode<JwtPayload>(token);
       return `${decoded.given_name ?? ''} ${decoded.family_name ?? ''}`.trim();
     } catch (e) {
       console.error('❌ Error decodificando token:', e);
@@ -137,6 +136,31 @@ export class AuthService {
 
     if (shouldReload) {
       window.location.reload();
+    }
+  }
+
+  // =========================
+  // 🔒 Compatibilidad de lectura
+  // =========================
+  /**
+   * Lee el token desde localStorage en formato **robusto**:
+   * - Si está como JSON.stringify(string) → devuelve el string
+   * - Si está como objeto con accessToken  → devuelve accessToken
+   * - Si está como string plano (eyJ...)   → devuelve el string
+   * - Si no hay token o es inválido        → devuelve ''
+   */
+  private readTokenCompat(): string {
+    const raw = localStorage.getItem('token');
+    if (!raw) return '';
+    try {
+      const parsed = JSON.parse(raw);
+      if (typeof parsed === 'string') return parsed;                 // caso JSON.stringify('eyJ...')
+      if (parsed && typeof parsed.accessToken === 'string') return parsed.accessToken; // por si otra app guarda objeto
+      // si es otro tipo, regrésalo vacío para no romper
+      return '';
+    } catch {
+      // si no es JSON, probablemente es el JWT en texto plano
+      return raw;
     }
   }
 }

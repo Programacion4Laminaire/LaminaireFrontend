@@ -6,6 +6,7 @@ export interface ConsumptionCreateRequest {
   unit: string;
   readingDate: string;     // ISO: yyyy-MM-dd
   note?: string | null;
+  sede: string;            // 👈 NUEVO
 }
 
 export interface ConsumptionUpdateRequest {
@@ -13,6 +14,7 @@ export interface ConsumptionUpdateRequest {
   resourceType: ResourceType;
   value: number;
   unit: string;
-  readingDate?: string | null; // opcional para permitir no cambiarla
+  readingDate?: string | null;
   note?: string | null;
+  sede: string;            // 👈 NUEVO
 }

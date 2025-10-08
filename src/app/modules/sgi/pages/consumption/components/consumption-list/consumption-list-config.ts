@@ -24,13 +24,29 @@ export const buildColumns = (): TableColumns<ConsumptionResponse>[] => ([
     type: 'text',
     sticky: false, sort: true, sortProperty: 'resourceType', visible: true, download: true,
   },
+   {
+  label: 'Sede',
+  cssLabel: ['font-bold','text-sm','text-am-main-blue-dark'],
+  property: 'sede',
+  cssProperty: ['text-xs','font-bold','whitespace-normal','max-w-120'],
+  type: 'text',
+  sticky: false, sort: true, sortProperty: 'sede', visible: true, download: true,
+},
   {
-    label: 'Consumo',
+    label: 'Lectura',
     cssLabel: ['font-bold','text-sm','text-am-main-blue-dark'],
     property: 'value',
     cssProperty: ['text-xs','font-bold'],
     type: 'text', sticky: false, sort: true, sortProperty: 'value', visible: true, download: true,
   },
+  {
+  label: 'Consumo Diario',
+  cssLabel: ['font-bold','text-sm','text-am-main-blue-dark'],
+  property: 'dailyConsumption',
+  cssProperty: ['text-xs','font-bold'],
+  type: 'text',sticky: false, sort: true, visible: true, download: true,
+},
+
   {
     label: 'Unidad',
     cssLabel: ['font-bold','text-sm','text-am-main-blue-dark'],
@@ -52,6 +68,8 @@ export const buildColumns = (): TableColumns<ConsumptionResponse>[] => ([
     cssProperty: ['text-xs','whitespace-normal','max-w-160'],
     type: 'text', sticky: false, sort: false, visible: true, download: true,
   },
+ 
+
   {
     label: 'Creado',
     cssLabel: ['font-bold','text-sm','text-am-main-blue-dark'],
@@ -59,7 +77,7 @@ export const buildColumns = (): TableColumns<ConsumptionResponse>[] => ([
     cssProperty: ['text-xs','uppercase','font-bold','whitespace-normal','max-w-120'],
     type: 'datetime', sticky: false, sort: true, sortProperty: 'auditCreateDate', visible: true, download: true,
   },
-  { label: '', cssLabel: [], property: 'icEdit',   cssProperty: [], type: 'icon', sticky: true, sort: false, visible: true, action: 'edit'   },
+  /*{ label: '', cssLabel: [], property: 'icEdit',   cssProperty: [], type: 'icon', sticky: true, sort: false, visible: true, action: 'edit'   },*/
   { label: '', cssLabel: [], property: 'icDelete', cssProperty: [], type: 'icon', sticky: true, sort: false, visible: true, action: 'delete' },
 ]);
 

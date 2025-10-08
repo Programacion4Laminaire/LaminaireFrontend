@@ -140,22 +140,31 @@ const actionButtonUser: GenericButton = {
 
 const searchOptions = [
   {
-    label: 'Nombre',
-    value: UsersFilters.ByFullName,
-    placeholder: 'Buscar por nombre',
+    label: 'Nombre completo',
+    value: UsersFilters.ByFullName,  // 👈 1
+    placeholder: 'Buscar por nombre completo',
     validation: [GenericValidators.defaultDescription],
-    validation_desc: 'Permite búsqueda por las primeras tres letras.',
-    icon: 'tune',
+    validation_desc: 'Busca por nombre y apellido.',
+    icon: 'person_search',
   },
-    {
+  {
     label: 'Identificación',
-    value: UsersFilters.ByIdentification,
+    value: UsersFilters.ByIdentification, // 👈 2
     placeholder: 'Buscar por identificación',
-    validation: [GenericValidators.defaultDescription], // Puedes crear una nueva si lo deseas
-    validation_desc: 'Permite buscar por número de identificación.',
-    icon: 'tune',
+    validation: [GenericValidators.defaultDescription],
+    validation_desc: 'Busca por número de identificación.',
+    icon: 'badge',
+  },
+  {
+    label: 'Usuario',
+    value: UsersFilters.ByUsername, // 👈 3 nuevo
+    placeholder: 'Buscar por nombre de usuario',
+    validation: [GenericValidators.defaultDescription],
+    validation_desc: 'Busca por username.',
+    icon: 'account_circle',
   },
 ];
+
 
 const menuItems: MenuFilterTable = {
   label: 'Estados',

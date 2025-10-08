@@ -89,6 +89,8 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     unit:          [{ value: initialUnit, disabled: true }, Validators.required],
     readingDate:   [detail?.readingDate ? detail.readingDate.split('T')[0] : null],
     note:          [detail?.note ?? null],
+    sede: [detail?.sede ?? null, Validators.required]
+
   });
 
   // Fecha requerida solo en create
@@ -131,6 +133,7 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
       unit: raw.unit,
       readingDate: raw.readingDate ? new Date(raw.readingDate).toISOString() : null,
       note: raw.note ?? null,
+      sede: raw.sede                   // 👈 NUEVO
     };
 
     const req$ = this.mode === 'create'
