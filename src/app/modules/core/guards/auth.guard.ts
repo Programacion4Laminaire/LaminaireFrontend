@@ -8,7 +8,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const authService = inject(AuthService);
 
-  const tokenStr = localStorage.getItem('token');
+  const tokenStr = localStorage.getItem('sir-enterprise-token');
   if (!tokenStr) {
     router.navigate(['/login'], { replaceUrl: true });
     return false;

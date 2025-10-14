@@ -1,0 +1,102 @@
+<h2 mat-dialog-title>
+  <strong class="text-am-main-blue-dark">
+    {{ mode === 'create' ? 'Nueva equivalencia' : 'Actualizar equivalencia' }}
+  </strong>
+</h2>
+
+<mat-dialog-content class="dialog-body">
+  <form [formGroup]="form" class="form-fields">
+    <!-- CÓDIGO PT (>= 15 dígitos) -->
+    <mat-form-field appearance="outline">
+      <mat-label>Código PT</mat-label>
+      <input
+        matInput
+        cdkFocusInitial
+        formControlName="codigoPT"
+        inputmode="numeric"
+        pattern="[0-9]*"
+        (input)="onDigitsOnly('codigoPT', $event)"
+        [matAutocomplete]="autoPT"
+        (blur)="buscarDescripcion('codigoPT')"
+      />
+      <mat-hint align="end">{{ lenPT }} dígitos</mat-hint>
+      <mat-error *ngIf="hasError('codigoPT','required')">Campo requerido</mat-error>
+      <mat-error *ngIf="hasError('codigoPT','pattern')">Solo dígitos</mat-error>
+      <mat-error *ngIf="hasError('codigoPT','minlength')">Mínimo 15 dígitos</mat-error>
+    </mat-form-field>
+
+    <mat-autocomplete
+      #autoPT="matAutocomplete"
+      [autoActiveFirstOption]="true"
+      (optionSelected)="selectPT($event)"
+    >
+      <!-- SIN *ngIf de loading para evitar NG0100 -->
+      <mat-option *ngFor="let opt of (optionsPT$ | async)" [value]="opt.code">
+        <div class="flex flex-col">
+          <span class="font-bold">{{ opt.code }}</span>
+          <small class="opacity-80">{{ opt.description }}</small>
+        </div>
+      </mat-option>
+    </mat-autocomplete>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Descripción PT</mat-label>
+      <input matInput formControlName="descripcionPT" />
+    </mat-form-field>
+
+    <!-- CÓDIGO MP (exactamente 5 dígitos) -->
+    <mat-form-field appearance="outline">
+      <mat-label>Código MP</mat-label>
+      <input
+        matInput
+        formControlName="codigoMP"
+        inputmode="numeric"
+        pattern="[0-9]*"
+        maxlength="5"
+        (input)="onDigitsOnly('codigoMP', $event)"
+        [matAutocomplete]="autoMP"
+        (blur)="buscarDescripcion('codigoMP')"
+      />
+      <mat-hint align="end">{{ lenMP }} / 5 dígitos</mat-hint>
+      <mat-error *ngIf="hasError('codigoMP','required')">Campo requerido</mat-error>
+      <mat-error *ngIf="hasError('codigoMP','pattern')">Solo dígitos</mat-error>
+      <mat-error *ngIf="hasError('codigoMP','minlength') || hasError('codigoMP','maxlength')">
+        Debe tener exactamente 5 dígitos
+      </mat-error>
+    </mat-form-field>
+
+    <mat-autocomplete
+      #autoMP="matAutocomplete"
+      [autoActiveFirstOption]="true"
+      (optionSelected)="selectMP($event)"
+    >
+      <!-- SIN *ngIf de loading para evitar NG0100 -->
+      <mat-option *ngFor="let opt of (optionsMP$ | async)" [value]="opt.code">
+        <div class="flex flex-col">
+          <span class="font-bold">{{ opt.code }}</span>
+          <small class="opacity-80">{{ opt.description }}</small>
+        </div>
+      </mat-option>
+    </mat-autocomplete>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Descripción MP</mat-label>
+      <input matInput formControlName="descripcionMP" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Costo</mat-label>
+      <input matInput type="number" formControlName="costo" />
+      <mat-error *ngIf="hasError('costo','required')">Campo requerido</mat-error>
+      <mat-error *ngIf="hasError('costo','min')">Debe ser ≥ 0</mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" style="padding: 0 32px 24px;">
+  <button mat-stroked-button mat-dialog-close>Cancelar</button>
+  <!-- Botón NO se bloquea por duplicado; solo por loading o form inválido -->
+  <button mat-flat-button color="primary" [disabled]="loading || form.invalid" (click)="save()">
+    Guardar
+  </button>
+</mat-dialog-actions>

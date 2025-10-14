@@ -58,7 +58,7 @@ export class TokenExpiryService {
     }
 
     // 2) TOKEN
-    const tokenStr = localStorage.getItem('token');
+    const tokenStr = localStorage.getItem('sir-enterprise-token');
     if (!tokenStr) return this.forceLogin();
 
     let decoded: any;

@@ -1,0 +1,22 @@
+.dialog-body {
+  padding: 16px 32px 8px;
+}
+
+.form-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .form-fields {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+::ng-deep .mat-form-field { width: 100%; }
+::ng-deep .mat-form-field-infix { padding: 0.2em 0 0.4em 0 !important; min-height: 36px !important; }
+::ng-deep .mat-input-element { height: 28px !important; padding: 0 !important; font-size: 14px !important; line-height: 1.2 !important; }
+::ng-deep .mat-form-field-wrapper { padding-bottom: 0px !important; margin: 0 !important; }
+::ng-deep .mat-form-field-outline { height: 36px !important; }

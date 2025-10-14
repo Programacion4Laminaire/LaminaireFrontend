@@ -34,6 +34,18 @@ CONSUMPTION_CREATE: 'Consumption/Create',
 CONSUMPTION_UPDATE: 'Consumption/Update',
 CONSUMPTION_DELETE: 'Consumption/Delete/',
 
+ACCESSORY_EQUIVALENCE: 'AccessoryEquivalence',
+  LIST_ACCESSORY_EQUIVALENCE: 'AccessoryEquivalence',
+
+  // CRUD
+  ACCESSORY_EQUIVALENCE_BY_ID: 'AccessoryEquivalence/',
+  ACCESSORY_EQUIVALENCE_CREATE: 'AccessoryEquivalence/Create',
+  ACCESSORY_EQUIVALENCE_UPDATE: 'AccessoryEquivalence/Update',
+  ACCESSORY_EQUIVALENCE_DELETE: 'AccessoryEquivalence/Delete/',
+
+  // Utilidad: traer descripción desde MTMERCIA por código
+  ACCESSORY_EQUIVALENCE_DESCRIPCION: 'AccessoryEquivalence/Descripcion/',
+   ACCESSORY_EQUIVALENCE_SELECT: 'AccessoryEquivalence/Select',
 };
 
 // endpoints.util.ts

@@ -1,0 +1,56 @@
+<div class="h-screen flex flex-col px-6 py-6 gap-6 overflow-hidden">
+
+  <div class="bg-white rounded-2xl shadow-xl p-6 flex flex-col gap-4">
+    <div class="flex items-center justify-between flex-wrap gap-4">
+      <div class="flex items-center">
+        <mat-icon @scaleIn class="text-xl text-am-main-blue-dark mb-1" [fontIcon]="icon$"></mat-icon>
+        <div @fadeInRight class="ml-2 text-xl font-semibold italic text-am-main-blue-dark">
+          Equivalencias
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-2 items-center justify-end w-full sm:w-auto">
+        <app-search-box
+          [searchOptions]="component$.searchOptions"
+          [currentValue]="component$.filters.textFilter"
+          (search)="search($event)"
+        />
+        <div>
+          <app-export-excel
+            [url]="getDownloadUrl"
+            [getInputs]="component$.getInputs"
+            [filename]="component$.filename"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-between flex-wrap gap-4">
+      <div class="flex gap-2 flex-wrap items-end">
+        <app-split-button
+          [configButtons]="component$.filterButtons"
+          (doThisFunction)="resetButton($event)"
+        />
+      </div>
+      <div class="flex items-end">
+        <app-generic-button
+          [infoButton]="component$.actionButtonEquivalence"
+          (clickButton)="newEquivalence()"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-2xl shadow-xl p-6 flex flex-col gap-4 overflow-hidden mb-12">
+    <div class="h-full overflow-auto">
+      <app-list-table
+        (rowClick)="rowClick($event)"
+        [service]="service"
+        [columns]="component$.tableColumns"
+        [sortBy]="component$.initialSort"
+        [sortDir]="component$.initialSortDir"
+        [getInputs]="component$.getInputs"
+      />
+    </div>
+  </div>
+</div>

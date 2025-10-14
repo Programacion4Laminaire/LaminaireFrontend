@@ -71,6 +71,13 @@ const childrenRoutes: Routes = [
         './modules/sgi/pages/consumption/components/consumption-list/consumption-list.component'
       ).then((c) => c.ConsumptionListComponent),
   },
+   {
+    path: 'accessoryequivalence',
+    loadComponent: () =>
+      import(
+        './modules/logistics/pages/equivalence/components/equivalence-list/equivalence-list.component'
+      ).then((c) => c.EquivalenceListComponent),
+  },
 ];
 
 export const routes: Routes = [

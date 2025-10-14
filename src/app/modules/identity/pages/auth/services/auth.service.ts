@@ -54,7 +54,7 @@ export class AuthService {
         map((response: BaseApiResponse<string>) => {
           if (response.isSuccess) {
             // ⚠️ Se mantiene tal cual lo tenías: guardas JSON.stringify(accessToken)
-            localStorage.setItem('token', JSON.stringify(response.accessToken));
+            localStorage.setItem('sir-enterprise-token', JSON.stringify(response.accessToken));
             this.user.next(response.accessToken);
 
             // 👇 Mantén tu lógica de cookie tal como la tienes en el login component:
@@ -120,7 +120,7 @@ export class AuthService {
    * 🔹 Logout (sin recargar por defecto)
    */
   logout(shouldReload: boolean = false) {
-    localStorage.removeItem('token');
+    localStorage.removeItem('sir-enterprise-token');
     this.user.next('');
 
     // 👇 Mantén tu limpieza de cookies (exactamente como la tenías)
@@ -150,7 +150,7 @@ export class AuthService {
    * - Si no hay token o es inválido        → devuelve ''
    */
   private readTokenCompat(): string {
-    const raw = localStorage.getItem('token');
+    const raw = localStorage.getItem('sir-enterprise-token');
     if (!raw) return '';
     try {
       const parsed = JSON.parse(raw);
